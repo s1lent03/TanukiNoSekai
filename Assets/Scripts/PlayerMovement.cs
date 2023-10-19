@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,12 +15,14 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
 
     private CharacterController controller;
+    private PlayerInput playerInput;
     private Vector3 velocity;
     private bool isGrounded;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     void Update()
@@ -31,9 +34,9 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        Vector3 direction = transform.right * horizontal + transform.forward * vertical;
+        Vector2 move = playerInput.actions["Move"].ReadValue<Vector2>();
+        Vector3 direction = transform.right * move.x + transform.forward * move.y;
+        Debug.Log(direction);
 
         controller.Move(direction * speed * Time.deltaTime);
 
