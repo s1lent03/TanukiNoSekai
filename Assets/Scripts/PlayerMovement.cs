@@ -15,14 +15,11 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
-    private CharacterController controller;
     private PlayerInput playerInput;
-    private float height;
     private bool isGrounded;
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
     }
 
@@ -33,12 +30,6 @@ public class PlayerMovement : MonoBehaviour
         Vector2 move = playerInput.actions["Move"].ReadValue<Vector2>();
         Vector3 direction = new Vector3(move.x, 0, move.y);
         direction.Normalize();
-
-        if (!isGrounded)
-        {
-            height += gravity * Time.deltaTime;
-            direction.y = height;
-        }
 
         transform.Translate(direction * speed * Time.deltaTime, Space.World);
         
