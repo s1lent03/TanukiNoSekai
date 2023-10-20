@@ -22,6 +22,8 @@ public class DayNightCycle : MonoBehaviour
     {
         sunLightData = Sun.GetComponent<HDAdditionalLightData>();
         moonLightData = Moon.GetComponent<HDAdditionalLightData>();
+
+        TimeHours = 17;
     }
 
     void Update()
