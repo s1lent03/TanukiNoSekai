@@ -28,8 +28,17 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         Vector2 move = playerInput.actions["Move"].ReadValue<Vector2>();
-        Vector3 direction = new Vector3(move.x, 0, move.y);
-        direction.Normalize();
+
+        Vector3 forward = Camera.main.transform.forward;
+        Vector3 right = Camera.main.transform.right;
+
+        forward.y = 0;
+        right.y = 0;
+
+        forward = forward.normalized;
+        right = right.normalized;
+
+        Vector3 direction = (move.x * right) + (move.y * forward);
 
         transform.Translate(direction * speed * Time.deltaTime, Space.World);
         
