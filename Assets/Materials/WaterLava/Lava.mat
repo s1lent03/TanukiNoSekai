@@ -172,6 +172,7 @@ Material:
     - _EnableFogOnTransparent: 1
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
+    - _ExcludeFromTUAndAA: 0
     - _FoamAmount: 2
     - _FoamCutoff: 2
     - _FoamScale: 1
@@ -227,10 +228,10 @@ Material:
     - _StencilRefGBuffer: 10
     - _StencilRefMV: 40
     - _StencilWriteMask: 6
-    - _StencilWriteMaskDepth: 8
+    - _StencilWriteMaskDepth: 9
     - _StencilWriteMaskDistortionVec: 4
-    - _StencilWriteMaskGBuffer: 14
-    - _StencilWriteMaskMV: 40
+    - _StencilWriteMaskGBuffer: 15
+    - _StencilWriteMaskMV: 41
     - _SubsurfaceMask: 1
     - _SupportDecals: 1
     - _SurfaceType: 0
@@ -251,7 +252,7 @@ Material:
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
     - _VoronoiAngle: 102.1
-    - _VoronoiDensity: 6
+    - _VoronoiDensity: 21.6
     - _WaveAmplitude: 0.03
     - _WaveSpeed: 2.5
     - _ZTestDepthEqualForOpaque: 3
@@ -270,9 +271,9 @@ Material:
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _Layer1Color: {r: 1, g: 0.8098252, b: 0, a: 0}
+    - _Layer1Color: {r: 1, g: 0.46264234, b: 0, a: 0}
     - _Layer1Speed: {r: 0.005, g: 0.005, b: 0, a: 0}
-    - _Layer2Color: {r: 1, g: 0.47424722, b: 0, a: 0}
+    - _Layer2Color: {r: 1, g: 0.70388687, b: 0, a: 0}
     - _Layer2Speed: {r: 0.01, g: 0.01, b: 0, a: 0}
     - _OutlineColor: {r: 95.87451, g: 0, b: 0, a: 0}
     - _RefractionScale: {r: 3, g: 10, b: 0, a: 0}
