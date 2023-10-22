@@ -16,11 +16,13 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
 
     private PlayerInput playerInput;
+    private CharacterController characterController;
     private float height = 0f;
     private bool isGrounded;
 
     private void Awake()
     {
+        characterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -48,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
             direction.y = height;
         }
 
-        transform.Translate(direction * speed * Time.deltaTime, Space.World);
+        characterController.Move(direction * speed * Time.deltaTime);
 
         Quaternion toRotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
         transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
