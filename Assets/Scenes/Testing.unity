@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2013.7278, g: 1702.719, b: 1735.2346, a: 1}
+  m_IndirectSpecularColor: {r: 2013.592, g: 1702.6487, b: 1735.1174, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -608,11 +608,11 @@ GameObject:
   - component: {fileID: 280140638}
   - component: {fileID: 280140637}
   - component: {fileID: 280140636}
-  - component: {fileID: 280140634}
   - component: {fileID: 280140640}
+  - component: {fileID: 280140634}
   - component: {fileID: 280140641}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -721,7 +721,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.7, z: 0.69}
-  m_LocalScale: {x: 1, y: 1.7, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.7, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1780306773}
@@ -786,12 +786,8 @@ MonoBehaviour:
     m_ActionName: Player/Move
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: e44a3006-fb1a-4915-b41a-69525fd6625b
-    m_ActionName: Player/Mouse Y
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4871ec8b-8817-4e73-a2f9-633c46d5f9cf
-    m_ActionName: Player/Mouse X
+    m_ActionId: b35d64f6-4ddd-45db-b65b-d3fae778e0eb
+    m_ActionName: Player/Look[/Mouse/delta,/XInputControllerWindows/rightStick]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -908,7 +904,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 657202035}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20985314, y: -0.004437426, z: 0.00095242565, w: 0.9777224}
+  m_LocalRotation: {x: 0.20985313, y: -0.0044373833, z: 0.00095241633, w: 0.9777224}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1571,7 +1567,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1230166997}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20985313, y: -0.004437445, z: 0.0009524296, w: 0.9777224}
+  m_LocalRotation: {x: 0.20985313, y: -0.0044373833, z: 0.00095241633, w: 0.9777224}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1846,7 +1842,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705670152}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20985314, y: -0.004437426, z: 0.00095242565, w: 0.9777224}
+  m_LocalRotation: {x: 0.20985313, y: -0.0044373833, z: 0.00095241633, w: 0.9777224}
   m_LocalPosition: {x: 0.09076857, y: 6.2, z: -9.309588}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
