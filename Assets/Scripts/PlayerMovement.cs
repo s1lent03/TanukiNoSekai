@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
 
     private PlayerInput playerInput;
+    private float height = 0f;
     private bool isGrounded;
 
     private void Awake()
@@ -40,6 +41,12 @@ public class PlayerMovement : MonoBehaviour
         right = right.normalized;
 
         Vector3 direction = (move.x * right) + (move.y * forward);
+
+        if (!isGrounded)
+        {
+            height += gravity * Time.deltaTime;
+            direction.y = height;
+        }
 
         transform.Translate(direction * speed * Time.deltaTime, Space.World);
 
