@@ -18,12 +18,13 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInput playerInput;
     private bool isGrounded;
 
-    void Start()
+    private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void Update()
+    private void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
@@ -41,11 +42,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = (move.x * right) + (move.y * forward);
 
         transform.Translate(direction * speed * Time.deltaTime, Space.World);
-        
-        if (direction != Vector3.zero)
-        {
-            Quaternion toRotation = Quaternion.LookRotation(direction, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-        }
+
+        Quaternion toRotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+        transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
     }
 }
