@@ -18,6 +18,12 @@ public class DayNightCycle : MonoBehaviour
 
     public LensFlareDataSRP FlareData;
 
+    [Header("Shaders")]
+    public Vector3 daySkyMultiplier;
+    public Vector3 nightSkyMultiplier;
+    public Material waterMaterial;
+    public Material riverMaterial;
+
     void Start()
     {
         sunLightData = Sun.GetComponent<HDAdditionalLightData>();
@@ -51,8 +57,12 @@ public class DayNightCycle : MonoBehaviour
             moonLightData.EnableShadows(true);
             moonLightData.intensity = 0.5f;
             moonLightData.SetColor(SunColor, 20000f);
-            
+
             //gameObject.GetComponent<Exposure>().active = true;
+
+            //Alterar valores do shader da água para não ficar demasiado ou pouco brilhante a mais
+            waterMaterial.SetVector("_SkyMultiplier", nightSkyMultiplier);
+            riverMaterial.SetVector("_SkyMultiplier", nightSkyMultiplier);
         }
         else if (TimeHours >= 6.5f && TimeHours <= 19f)
         {
@@ -61,9 +71,13 @@ public class DayNightCycle : MonoBehaviour
             
             moonLightData.EnableShadows(false);
             moonLightData.intensity = 1400f;
-            moonLightData.SetColor(SunColor, 5500f); 
+            moonLightData.SetColor(SunColor, 5500f);
 
             //gameObject.GetComponent<Exposure>().active = false;
+
+            //Alterar valores do shader da água para não ficar demasiado ou pouco brilhante a mais
+            waterMaterial.SetVector("_SkyMultiplier", daySkyMultiplier);
+            riverMaterial.SetVector("_SkyMultiplier", daySkyMultiplier);
         }
         
         //Enable lens flare it's between 9am and 17pm
