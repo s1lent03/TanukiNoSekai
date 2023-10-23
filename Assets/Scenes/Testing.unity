@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2014.0217, g: 1703.1194, b: 1735.592, a: 1}
+  m_IndirectSpecularColor: {r: 2014.4866, g: 1703.6428, b: 1735.9377, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -630,7 +630,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f338775df37de145bab765815e96f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  crouchSpeed: 6
+  normalSpeed: 16
+  sprintSpeed: 26
   rotationSpeed: 5
   gravity: -1
   groundCheck: {fileID: 1780306773}
@@ -788,6 +790,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: b35d64f6-4ddd-45db-b65b-d3fae778e0eb
     m_ActionName: Player/Look[/Mouse/delta,/XInputControllerWindows/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8f6d4ffd-2c7d-4f69-9bfb-e3c9cca1a5d3
+    m_ActionName: Player/Crouch[/Keyboard/leftCtrl]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 58a68582-453c-4d4e-94a2-834f6b7fcfc0
+    m_ActionName: Player/Sprint[/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1514,7 +1524,7 @@ Transform:
   m_GameObject: {fileID: 1273205436}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5340661, y: 2.94827, z: -2.31}
+  m_LocalPosition: {x: 1.3425593, y: 2.94827, z: -2.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1609,7 +1619,7 @@ Transform:
   m_GameObject: {fileID: 1705670152}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5340661, y: 2.94827, z: -2.31}
+  m_LocalPosition: {x: 1.3425593, y: 2.94827, z: -2.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -6,7 +6,9 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    public float speed;
+    public float crouchSpeed;
+    public float normalSpeed;
+    public float sprintSpeed;
     public float rotationSpeed;
     public float gravity;
 
@@ -17,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerInput playerInput;
     private CharacterController characterController;
+    private float speed;
     private float height = 0f;
     private bool isGrounded;
 
@@ -49,6 +52,13 @@ public class PlayerMovement : MonoBehaviour
             height += gravity * Time.deltaTime;
             direction.y = height;
         }
+
+        if (playerInput.actions["Crouch"].IsPressed())
+            speed = crouchSpeed;
+        else if (playerInput.actions["Sprint"].IsPressed() && move.y > 0)
+            speed = sprintSpeed;
+        else
+            speed = normalSpeed;
 
         characterController.Move(direction * speed * Time.deltaTime);
 
