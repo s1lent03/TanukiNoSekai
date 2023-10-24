@@ -13,6 +13,7 @@ public class TanukiSpawner : MonoBehaviour
 
     [Header("SpawnArea")]
     public GameObject spawnArea;
+    public GameObject tanukiParent;
     private Collider areaCollider;
     private Vector3 areaCenter;
     private Vector3 areaExtents;
@@ -67,13 +68,17 @@ public class TanukiSpawner : MonoBehaviour
             //Gerar uma posição aleatórea para o Tanuki spawnar
             float randomX = Random.Range(areaCenter.x - areaExtents.x, areaCenter.x + areaExtents.x);
             float randomZ = Random.Range(areaCenter.z - areaExtents.z, areaCenter.z + areaExtents.z);
-            Vector3 randomPos = new Vector3(randomX, transform.position.y, randomZ);
+
+            randomX += tanukiToSpawn.transform.position.x;
+            randomZ += tanukiToSpawn.transform.position.z;
+
+            Vector3 randomPos = new Vector3(randomX, transform.position.y + tanukiToSpawn.transform.position.y, randomZ);
 
             //Gerar rotação aleatórea para o Tanuki
             float randomRot = Random.Range(0, 360);
             Quaternion spawnRot = Quaternion.Euler(new Vector3(transform.rotation.x, randomRot, transform.rotation.z));
 
-            Instantiate(tanukiToSpawn, randomPos, spawnRot, this.transform);
+            Instantiate(tanukiToSpawn, randomPos, spawnRot, tanukiParent.transform);
 
             //Contar mais 1 Tanuki spawnado
             numberTanukiSpawned++;
@@ -83,6 +88,11 @@ public class TanukiSpawner : MonoBehaviour
     //Ativado quando o jogador sai de dentro do collider
     private void OnTriggerExit(Collider other)
     {
-        
+        //Fazer com que os Tanuki desapareçam
+        for (int i = tanukiParent.transform.childCount - 1; i >= 0; i--)
+        {
+            numberTanukiSpawned = 0;
+            Destroy(tanukiParent.transform.GetChild(i).gameObject); 
+        }
     }
 }

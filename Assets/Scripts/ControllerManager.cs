@@ -13,7 +13,7 @@ public class ControllerManager : MonoBehaviour
     void Start()
     {
         //Verificar se tem algum comando ligado ou não
-        if (Input.GetJoystickNames()[0] != "")
+        if (Input.GetJoystickNames().Length > 0 && Input.GetJoystickNames()[0] != "")
         {
             //Comando encontra-se ligado
             thirdPersonCamera.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = gamePadSensitivity;
@@ -25,11 +25,5 @@ public class ControllerManager : MonoBehaviour
             thirdPersonCamera.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = mouseSensitivity;
             thirdPersonCamera.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = mouseSensitivity;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
