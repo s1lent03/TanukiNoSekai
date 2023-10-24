@@ -8864,11 +8864,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047647bf0f4493a4da9d553285881d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  commonTanuki: {fileID: 1721497332665089258, guid: 8e209efdfe6694f45b57417954aaa253,
+  commonTanuki: {fileID: 7617466518116006533, guid: 8e209efdfe6694f45b57417954aaa253,
     type: 3}
-  uncommonTanuki: {fileID: 5679521758863315189, guid: abff54eedc3ce2f4cb8c71ae2e195ca4,
+  uncommonTanuki: {fileID: 7617466518116006533, guid: 8e209efdfe6694f45b57417954aaa253,
     type: 3}
-  rareTanuki: {fileID: 83676127893529280, guid: 6241b4e76881c1046a9107e6a3b5d6e7,
+  rareTanuki: {fileID: 7617466518116006533, guid: 8e209efdfe6694f45b57417954aaa253,
     type: 3}
   spawnArea: {fileID: 594751781}
   tanukiParent: {fileID: 1664510420}
@@ -10147,37 +10147,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1224880631}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1271390803
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1271390804}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1271390804
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1271390803}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1276245929
 GameObject:
   m_ObjectHideFlags: 0
@@ -17687,4 +17656,3 @@ SceneRoots:
   - {fileID: 2023908065}
   - {fileID: 282485132}
   - {fileID: 1522200746}
-  - {fileID: 1271390804}
