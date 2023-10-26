@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float crouchSpeed;
     public float normalSpeed;
     public float sprintSpeed;
+    public float speed;
     public float rotationSpeed;
     public float gravity;
 
@@ -19,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerInput playerInput;
     private CharacterController characterController;
-    private float speed;
     private float height = 0f;
     private bool isGrounded;
 
