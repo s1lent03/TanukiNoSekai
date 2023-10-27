@@ -17,7 +17,9 @@ public class TriggerDialog : MonoBehaviour
 
     private bool isPlayerInRange = false;
     private bool didDialogStart = false;
+    private bool didPlayerSkip = false;
     private int lineIndex = 0;
+    private CharacterController controller;
 
     private void Awake()
     {
@@ -30,6 +32,7 @@ public class TriggerDialog : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            controller = other.GetComponent<CharacterController>();
             isPlayerInRange = true;
             Debug.Log("player entered");
         }
@@ -39,6 +42,7 @@ public class TriggerDialog : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            controller = null;
             isPlayerInRange = false;
             Debug.Log("player left");
         }
@@ -46,19 +50,23 @@ public class TriggerDialog : MonoBehaviour
 
     private void Update()
     {
-        if ((isPlayerInRange || didDialogStart) && playerInput.actions["Interact"].IsPressed() && Time.timeScale == 1)
+        if ((isPlayerInRange || didDialogStart) && playerInput.actions["Interact"].triggered && Time.timeScale == 1)
         {
             if (!didDialogStart)
             {
                 didDialogStart = true;
                 lineIndex = 0;
-
+                controller.enabled = false;
                 dialogPanel.SetActive(true);
                 nameText.text = gameObject.name;
                 StartCoroutine(ShowLine());
-            } else if (dialogText.text == dialogLines[lineIndex])
-            {
+            }
+            else if (dialogText.text != dialogLines[lineIndex]) {
+                didPlayerSkip = true;
+            }
+            else {
                 lineIndex++;
+                didPlayerSkip = false;
 
                 if (lineIndex < dialogLines.Length)
                 {
@@ -67,6 +75,7 @@ public class TriggerDialog : MonoBehaviour
                 else
                 {
                     didDialogStart = false;
+                    controller.enabled = true;
                     dialogPanel.SetActive(false);
                 }
             }
@@ -79,8 +88,13 @@ public class TriggerDialog : MonoBehaviour
 
         foreach (char ch in dialogLines[lineIndex])
         {
-            dialogText.text += ch;
-            yield return new WaitForSeconds(typingTime);
+            if (!didPlayerSkip)
+            {
+                dialogText.text += ch;
+                yield return new WaitForSeconds(typingTime);
+            }
         }
+
+        dialogText.text = dialogLines[lineIndex];
     }
 }
