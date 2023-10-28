@@ -8,6 +8,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6873195214633369837, guid: 7bd140e3b038d3b439e1a9a0e9c569b9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -6502376844467301350, guid: 7bd140e3b038d3b439e1a9a0e9c569b9,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -63,16 +68,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2451836618418748334, guid: 7bd140e3b038d3b439e1a9a0e9c569b9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2298591526327902625, guid: 7bd140e3b038d3b439e1a9a0e9c569b9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: 7bd140e3b038d3b439e1a9a0e9c569b9,
         type: 3}
       propertyPath: m_Name
       value: Green Birch Tree 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -345304088441057106, guid: 7bd140e3b038d3b439e1a9a0e9c569b9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -295236419386226380, guid: 7bd140e3b038d3b439e1a9a0e9c569b9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 674026010464438160, guid: 7bd140e3b038d3b439e1a9a0e9c569b9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1150031550872573612, guid: 7bd140e3b038d3b439e1a9a0e9c569b9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1869248139439644430, guid: 7bd140e3b038d3b439e1a9a0e9c569b9,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ff1cda59eb7a43141a0c43c10202d1bf, type: 2}
+    - target: {fileID: 3027843889506712777, guid: 7bd140e3b038d3b439e1a9a0e9c569b9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330497765349292738, guid: 7bd140e3b038d3b439e1a9a0e9c569b9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3953041891021873289, guid: 7bd140e3b038d3b439e1a9a0e9c569b9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5503856088412836368, guid: 7bd140e3b038d3b439e1a9a0e9c569b9,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -96,5 +146,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: 7bd140e3b038d3b439e1a9a0e9c569b9,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5407142813646234900}
   m_SourcePrefab: {fileID: 100100000, guid: 7bd140e3b038d3b439e1a9a0e9c569b9, type: 3}
+--- !u!1 &8288676486759576808 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 7bd140e3b038d3b439e1a9a0e9c569b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 10878907840507361}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &5407142813646234900
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8288676486759576808}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.62080383
+  m_Height: 9.265053
+  m_Direction: 1
+  m_Center: {x: 0, y: 4.6329155, z: 0.01725769}

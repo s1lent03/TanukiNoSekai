@@ -29,6 +29,7 @@ public class PauseMenuManager : MonoBehaviour
 
     [Header("Others")]
     private PlayerInput playerInput;
+    public GameObject Player;
     public bool isPaused = false;
 
     void Start()
@@ -45,14 +46,16 @@ public class PauseMenuManager : MonoBehaviour
     void Update()
     {
         //Parar o jogo ou recomeçar
-        if (playerInput.actions["Pause"].triggered && isPaused == false)
+        if (playerInput.actions["Pause"].triggered && isPaused == false && Player.GetComponentInChildren<TanukiDetection>().isInBattle == false)
         {
             //Abre o menu
             pauseMenu.SetActive(true);
             isPaused = true;
+            Player.GetComponent<PlayerMovement>().isPaused = isPaused;
 
             //Faz o cursor aparecer
-            Cursor.lockState = CursorLockMode.None;
+            if (Input.GetJoystickNames().Length <= 0 && Input.GetJoystickNames()[0] == "")
+                Cursor.lockState = CursorLockMode.None;
 
             //Para qualquer ação do jogador
             StopActions();
@@ -84,6 +87,7 @@ public class PauseMenuManager : MonoBehaviour
         //Esconde o menu
         pauseMenu.SetActive(false);
         isPaused = false;
+        Player.GetComponent<PlayerMovement>().isPaused = isPaused;
 
         //Faz o cursor desaparecer
         Cursor.lockState = CursorLockMode.Locked;

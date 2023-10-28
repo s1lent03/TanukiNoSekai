@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float crouchSpeed;
     public float normalSpeed;
     public float sprintSpeed;
+    public float speed;
     public float rotationSpeed;
     public float gravity;
 
@@ -19,13 +20,12 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerInput playerInput;
     private CharacterController characterController;
-    private float speed;
     private float height = 0f;
     private bool isGrounded;
 
     [Header("Others")]
     //Parar movimento se o jogo estiver em pausa
-    private bool isPaused;
+    public bool isPaused;
     public GameObject pauseMenu;
 
     private void Awake()
@@ -38,8 +38,6 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         //Não deixar o jogador se mexer caso o jogo esteja em pausa
-        isPaused = pauseMenu.GetComponent<PauseMenuManager>().isPaused;
-
         if (isPaused != true)
         {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);

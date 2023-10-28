@@ -24,8 +24,6 @@ public class Interact : MonoBehaviour
 
         if (Physics.Raycast(ray.origin, ray.direction, out hit))
         {
-            Debug.DrawLine(ray.origin, hit.point, Color.red);
-
             //Se o ray atingir um objeto com a tag "Interactable" e tiver a menos de 1.5 de distancia vai aparecer um texto a indicar que o objeto é interagivel
             if (hit.collider.gameObject.tag == "Interactable")
             {
@@ -33,18 +31,25 @@ public class Interact : MonoBehaviour
                 {
                     interactText.gameObject.SetActive(true);
 
-                    if (Input.GetJoystickNames()[0].ToLower().Contains("xbox"))
+                    if (Input.GetJoystickNames().Length > 0)
                     {
-                        interactText.text = "Press X Button to interact.";
-                    } 
-                    else if (Input.GetJoystickNames()[0].ToLower().Contains("playstation"))
-                    {
-                        interactText.text = "Press Square Button to interact.";
+                        if (Input.GetJoystickNames()[0].ToLower().Contains("xbox"))
+                        {
+                            interactText.text = "Press X Button to interact.";
+                        }
+                        else if (Input.GetJoystickNames()[0].ToLower().Contains("playstation"))
+                        {
+                            interactText.text = "Press Square Button to interact.";
+                        }
+                        else
+                        {
+                            interactText.text = "Press F to interact.";
+                        }
                     }
                     else
                     {
                         interactText.text = "Press F to interact.";
-                    }                                        
+                    }                                     
 
                     //Se o jogador clicar no botão pretendido, irá ao script do objeto que faz com que o VFX seja ativado
                     if (playerInput.actions["Interact"].triggered)

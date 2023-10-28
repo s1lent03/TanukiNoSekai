@@ -78,7 +78,9 @@ public class TanukiSpawner : MonoBehaviour
             float randomRot = Random.Range(0, 360);
             Quaternion spawnRot = Quaternion.Euler(new Vector3(transform.rotation.x, randomRot, transform.rotation.z));
 
-            Instantiate(tanukiToSpawn, randomPos, spawnRot, tanukiParent.transform);
+            //Spawnar o Tanuki com a tag WildTanuki
+            GameObject newTanuki = Instantiate(tanukiToSpawn, randomPos, spawnRot, tanukiParent.transform);
+            newTanuki.tag = "WildTanuki";
 
             //Contar mais 1 Tanuki spawnado
             numberTanukiSpawned++;
