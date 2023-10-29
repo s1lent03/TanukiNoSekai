@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee531c2d196e60489996cc7dd35b9ed, type: 3}
+  m_Name: Madsung
+  m_EditorClassIdentifier: 
+  name: Madsung
+  description: yes
+  tanukiModel: {fileID: 8373006536148629002, guid: 06596a7a03c84d340be2d9fda54e6240,
+    type: 3}
+  type1: 3
+  type2: 0
+  maxHp: 65
+  attack: 63
+  defense: 45
+  spAttack: 45
+  spDefense: 45
+  speed: 45
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: a063a640354b04f4db8fa579b4cce327, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 7afc11e90647f6f489ee85d45dbee8e5, type: 2}
+    level: 9

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -12,6 +13,12 @@ public class BattleManager : MonoBehaviour
     private PlayerInput playerInput;
     public GameObject eventSystemObject;
     private GameObject lastSelectedObject;
+
+    [Header("BattleHUD")]
+    [SerializeField] TMP_Text nameTxt;
+    [SerializeField] TMP_Text levelTxt;
+    [SerializeField] TMP_Text hpTxt;
+    [SerializeField] HpBar hpBar;
 
     [Header("FirstButtons")]
     public GameObject MainBattleMenuFirstButton;
@@ -52,6 +59,14 @@ public class BattleManager : MonoBehaviour
         //Escolhe o primeiro butão selecionado deste menu
         eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
         eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(MainBattleMenuFirstButton);
+    }
+
+    public void SetData(Tanuki tanuki)
+    {
+        nameTxt.text = tanuki.Base.Name;
+        levelTxt.text = "Lvl. " + tanuki.Level;
+        hpTxt.text = ((tanuki.Hp / tanuki.MaxHp) * 100) + "%";
+        hpBar.SetHp((float)tanuki.Hp / tanuki.MaxHp);
     }
 
     //Terminar a batalha

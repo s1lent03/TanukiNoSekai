@@ -55,7 +55,10 @@ public class PauseMenuManager : MonoBehaviour
 
             //Faz o cursor aparecer
             if (Input.GetJoystickNames().Length <= 0 && Input.GetJoystickNames()[0] == "")
+            {
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }            
 
             //Para qualquer ação do jogador
             StopActions();
@@ -91,6 +94,7 @@ public class PauseMenuManager : MonoBehaviour
 
         //Faz o cursor desaparecer
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         //Deixa o jogador voltar a se mexer;
         ResumeActions();

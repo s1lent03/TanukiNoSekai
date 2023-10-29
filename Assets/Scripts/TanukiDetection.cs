@@ -19,7 +19,6 @@ public class TanukiDetection : MonoBehaviour
 
     [Header("Values")]
     public bool isInBattle;
-    private bool playerFinishedMoving;
     [Space]
     public float distanceToMoveBack;
     public float playerTravelSpeed;
@@ -32,8 +31,6 @@ public class TanukiDetection : MonoBehaviour
         //Valores default para as variaveis
         isInBattle = false;
         playerInput = GetComponent<PlayerInput>();
-
-        playerFinishedMoving = true;
     }
 
     //Quando se aproxima de um Tanuki sem estar agachado, o Tanuki vai detetar e começar a batalha
@@ -41,18 +38,7 @@ public class TanukiDetection : MonoBehaviour
     {
         if (!playerInput.actions["Crouch"].IsPressed() && other.tag == "WildTanuki")
         {
-            WildTanukiDetected = other.gameObject;
-            isInBattle = true;
-
-            //Ligar o HUD de Batalha
-            BattleHud.SetActive(true);
-
-            //Desbloquear o cursor caso esteja a jogar sem comando
-            if (Input.GetJoystickNames().Length <= 0 && Input.GetJoystickNames()[0] == "")
-                Cursor.lockState = CursorLockMode.None;
-
-            //Ativar a navegação do HUD
-            Managers.GetComponent<BattleManager>().AtivateNav();
+            EnteredCollider(other.gameObject);
         }
     }
 
@@ -64,6 +50,25 @@ public class TanukiDetection : MonoBehaviour
             StarBattle();
             Player.GetComponent<PlayerMovement>().isPaused = true;
         }           
+    }
+
+    public void EnteredCollider(GameObject Tanuki)
+    {
+        WildTanukiDetected = Tanuki;
+        isInBattle = true;
+
+        //Ligar o HUD de Batalha
+        BattleHud.SetActive(true);
+
+        //Desbloquear o cursor caso esteja a jogar sem comando
+        if (Input.GetJoystickNames().Length <= 0 && Input.GetJoystickNames()[0] == "")
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+        //Ativar a navegação do HUD
+        Managers.GetComponent<BattleManager>().AtivateNav();
     }
 
     public void StarBattle()
@@ -126,5 +131,6 @@ public class TanukiDetection : MonoBehaviour
 
         //Bloquear o cursor
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
