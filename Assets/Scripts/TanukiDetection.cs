@@ -2,6 +2,7 @@ using Cinemachine;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,6 +26,11 @@ public class TanukiDetection : MonoBehaviour
     public float tanukiRotationSpeed;
     [Space]
     public Transform cameraBattleFollowPoint;
+    [Space]
+    public float zoomCamera;
+    public float unzoomCamera;
+    public float minZoomCamera;
+    public float maxZoomCamera;
 
     void Start()
     {
@@ -49,7 +55,19 @@ public class TanukiDetection : MonoBehaviour
         {
             StarBattle();
             Player.GetComponent<PlayerMovement>().isPaused = true;
-        }           
+
+            //Dar zoom ou unzoom à camera
+            float cameraDistance = thirdPersonCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance;
+            if (playerInput.actions["UnzoomCamera"].IsPressed() && cameraDistance < maxZoomCamera)
+            {
+                thirdPersonCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance += zoomCamera;
+            }
+
+            if (playerInput.actions["ZoomCamera"].IsPressed() && cameraDistance > minZoomCamera)
+            {
+                thirdPersonCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance -= unzoomCamera;
+            }
+        }
     }
 
     public void EnteredCollider(GameObject Tanuki)
@@ -113,7 +131,7 @@ public class TanukiDetection : MonoBehaviour
         thirdPersonCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenY = screenPosY;
 
         //Alterar a distância
-        thirdPersonCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = distance;
+        //thirdPersonCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = distance;
     }
 
     public void EndBattle()

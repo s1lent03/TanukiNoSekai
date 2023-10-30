@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 840.63196, g: 865.86633, b: 991.7013, a: 1}
+  m_IndirectSpecularColor: {r: 1059.1613, g: 913.4396, b: 886.59827, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8789,7 +8789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &934901231
 Transform:
   m_ObjectHideFlags: 0
@@ -15393,6 +15393,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 7e7fde4b-e41d-4824-b45a-f01f5043c326
     m_ActionName: Player/Inventory[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 66e139f6-d097-480b-b352-0d6bb8fec6b5
+    m_ActionName: Player/ZoomCamera[/Mouse/forwardButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6d742c26-741c-4e34-a1dd-8eb52269165c
+    m_ActionName: Player/UnzoomCamera[/Mouse/backButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -19211,6 +19219,10 @@ MonoBehaviour:
   playerTravelSpeed: 5
   tanukiRotationSpeed: 5
   cameraBattleFollowPoint: {fileID: 528507076}
+  zoomCamera: 0.1
+  unzoomCamera: 0.1
+  minZoomCamera: 2
+  maxZoomCamera: 7
 --- !u!135 &1868130042
 SphereCollider:
   m_ObjectHideFlags: 0

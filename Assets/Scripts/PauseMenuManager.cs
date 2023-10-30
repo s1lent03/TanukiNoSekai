@@ -81,7 +81,12 @@ public class PauseMenuManager : MonoBehaviour
                 navegationSoundFX.Play();
                 lastSelectedObject = eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject;
             }
+
+            //Prevenir q os botões percam a seleção
+            //eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject = pauseFirstButton;
         }
+
+        
     }
 
     //Volta ao jogo
