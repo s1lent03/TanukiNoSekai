@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Scroll",
+                    "type": "Value",
+                    "id": "1ee004dd-10bb-414f-be2d-06b4f51edfb2",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -408,7 +417,7 @@
                 {
                     "name": "",
                     "id": "0f01e691-066e-4361-8e07-8d987fdd7b68",
-                    "path": "<Mouse>/forwardButton",
+                    "path": "<Keyboard>/#(+)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -441,7 +450,7 @@
                 {
                     "name": "",
                     "id": "65101610-bddc-4f41-add0-93663647ee4a",
-                    "path": "<Mouse>/backButton",
+                    "path": "<Keyboard>/#(-)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -468,6 +477,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "UnzoomCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "49aba386-4732-4607-bc07-6641c115b505",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

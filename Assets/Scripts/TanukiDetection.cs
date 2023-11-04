@@ -32,6 +32,9 @@ public class TanukiDetection : MonoBehaviour
     public float minZoomCamera;
     public float maxZoomCamera;
 
+    [Header("Others")]
+    private bool doOnce = false;
+
     void Start()
     {
         //Valores default para as variaveis
@@ -58,12 +61,14 @@ public class TanukiDetection : MonoBehaviour
 
             //Dar zoom ou unzoom à camera
             float cameraDistance = thirdPersonCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance;
-            if (playerInput.actions["UnzoomCamera"].IsPressed() && cameraDistance < maxZoomCamera)
+            Vector2 scrollValue = playerInput.actions["Scroll"].ReadValue<Vector2>();
+
+            if (playerInput.actions["UnzoomCamera"].IsPressed() || scrollValue.y < 0 && cameraDistance < maxZoomCamera)
             {
                 thirdPersonCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance += zoomCamera;
             }
 
-            if (playerInput.actions["ZoomCamera"].IsPressed() && cameraDistance > minZoomCamera)
+            if (playerInput.actions["ZoomCamera"].IsPressed() || scrollValue.y > 0 && cameraDistance > minZoomCamera)
             {
                 thirdPersonCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance -= unzoomCamera;
             }
@@ -75,11 +80,8 @@ public class TanukiDetection : MonoBehaviour
         WildTanukiDetected = Tanuki;
         isInBattle = true;
 
-        //Ligar o HUD de Batalha
-        BattleHud.SetActive(true);
-
         //Desbloquear o cursor caso esteja a jogar sem comando
-        if (Input.GetJoystickNames().Length <= 0 && Input.GetJoystickNames()[0] == "")
+        if (Input.GetJoystickNames().Length <= 0 && Input.GetJoystickNames()[0] == "" && Input.GetJoystickNames() == null)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
@@ -114,6 +116,19 @@ public class TanukiDetection : MonoBehaviour
         cameraBattleFollowPoint.position = battleMidPoint;
 
         ChangeCameraValues(cameraBattleFollowPoint, new Vector3(0, 0, 0), 0.5f, 0.5f, 7);
+
+        //Dar setup ao sistema de batalha
+        if (Player.transform.position == targetPlayerPos && doOnce == false)
+        {
+            BattleUnit enemyTanuki = WildTanukiDetected.GetComponent<BattleUnit>();
+            Managers.GetComponent<BattleSystem>().enemyUnit = enemyTanuki;
+            Managers.GetComponent<BattleSystem>().SetupBattle();
+
+            //Ligar o HUD de Batalha
+            BattleHud.SetActive(true);
+
+            doOnce = true;
+        }
     }
 
     public void ChangeCameraValues(Transform follow, Vector3 offset, float screenPosX, float screenPosY, float distance)
@@ -150,5 +165,7 @@ public class TanukiDetection : MonoBehaviour
         //Bloquear o cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        doOnce = false;
     }
 }

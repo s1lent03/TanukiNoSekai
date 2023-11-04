@@ -15,10 +15,15 @@ public class BattleManager : MonoBehaviour
     private GameObject lastSelectedObject;
 
     [Header("BattleHUD")]
-    [SerializeField] TMP_Text nameTxt;
-    [SerializeField] TMP_Text levelTxt;
-    [SerializeField] TMP_Text hpTxt;
-    [SerializeField] HpBar hpBar;
+    [SerializeField] TMP_Text playerNameTxt;
+    [SerializeField] TMP_Text playerLevelTxt;
+    [SerializeField] TMP_Text playerHpTxt;
+    [SerializeField] HpBar playerHpBar;
+    [Space]
+    [SerializeField] TMP_Text enemyNameTxt;
+    [SerializeField] TMP_Text enemyLevelTxt;
+    [SerializeField] TMP_Text enemyHpTxt;
+    [SerializeField] HpBar enemyHpBar;
 
     [Header("FirstButtons")]
     public GameObject MainBattleMenuFirstButton;
@@ -50,6 +55,9 @@ public class BattleManager : MonoBehaviour
             {
                 navegationSoundFX.Play();
                 lastSelectedObject = eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject;
+
+                eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
+                eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(lastSelectedObject);
             }
         }
     }
@@ -61,12 +69,22 @@ public class BattleManager : MonoBehaviour
         eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(MainBattleMenuFirstButton);
     }
 
-    public void SetData(Tanuki tanuki)
+    public void SetData(Tanuki tanuki, bool isPlayer)
     {
-        nameTxt.text = tanuki.Base.Name;
-        levelTxt.text = "Lvl. " + tanuki.Level;
-        hpTxt.text = ((tanuki.Hp / tanuki.MaxHp) * 100) + "%";
-        hpBar.SetHp((float)tanuki.Hp / tanuki.MaxHp);
+        if (isPlayer)
+        {
+            playerNameTxt.text = tanuki.Base.Name;
+            playerLevelTxt.text = "Lvl. " + tanuki.Level;
+            playerHpTxt.text = ((tanuki.Hp / tanuki.MaxHp) * 100) + "%";
+            playerHpBar.SetHp((float)tanuki.Hp / tanuki.MaxHp);
+        }
+        else
+        {
+            enemyNameTxt.text = tanuki.Base.Name;
+            enemyLevelTxt.text = "Lvl. " + tanuki.Level;
+            enemyHpTxt.text = ((tanuki.Hp / tanuki.MaxHp) * 100) + "%";
+            enemyHpBar.SetHp((float)tanuki.Hp / tanuki.MaxHp);
+        }
     }
 
     //Terminar a batalha
