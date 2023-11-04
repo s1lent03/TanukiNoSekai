@@ -81,9 +81,9 @@ public class TanukiDetection : MonoBehaviour
         isInBattle = true;
 
         //Desbloquear o cursor caso esteja a jogar sem comando
+        Cursor.lockState = CursorLockMode.None;
         if (Input.GetJoystickNames().Length <= 0)
         {
-            Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
 

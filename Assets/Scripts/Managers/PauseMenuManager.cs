@@ -54,9 +54,9 @@ public class PauseMenuManager : MonoBehaviour
             Player.GetComponent<PlayerMovement>().isPaused = isPaused;
 
             //Faz o cursor aparecer
+            Cursor.lockState = CursorLockMode.None;
             if (Input.GetJoystickNames().Length <= 0)
-            {
-                Cursor.lockState = CursorLockMode.None;
+            {              
                 Cursor.visible = true;
             }
 
