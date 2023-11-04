@@ -56,6 +56,13 @@ public class TanukiDetection : MonoBehaviour
         //Se a batalha tiver começado, ambos os personagens se metem em posição para lutar
         if (isInBattle)
         {
+            //Desbloquear o cursor caso esteja a jogar sem comando
+            Cursor.lockState = CursorLockMode.None;
+            if (Input.GetJoystickNames().Length <= 0)
+            {
+                Cursor.visible = true;
+            }
+
             StarBattle();
             Player.GetComponent<PlayerMovement>().isPaused = true;
 
@@ -79,13 +86,6 @@ public class TanukiDetection : MonoBehaviour
     {
         WildTanukiDetected = Tanuki;
         isInBattle = true;
-
-        //Desbloquear o cursor caso esteja a jogar sem comando
-        Cursor.lockState = CursorLockMode.None;
-        if (Input.GetJoystickNames().Length <= 0)
-        {
-            Cursor.visible = true;
-        }
 
         //Ativar a navegação do HUD
         Managers.GetComponent<BattleManager>().AtivateNav();
