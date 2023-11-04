@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class TanukiDetection : MonoBehaviour
 {
     [Header("GameOjects")]
     public GameObject WildTanukiDetected;
     public GameObject Player;
+    public GameObject PlayerTanuki;
     [Space]
     public CinemachineVirtualCamera thirdPersonCamera;
     private PlayerInput playerInput;
@@ -56,13 +58,6 @@ public class TanukiDetection : MonoBehaviour
         //Se a batalha tiver começado, ambos os personagens se metem em posição para lutar
         if (isInBattle)
         {
-            //Desbloquear o cursor caso esteja a jogar sem comando
-            Cursor.lockState = CursorLockMode.None;
-            if (Input.GetJoystickNames().Length <= 0)
-            {
-                Cursor.visible = true;
-            }
-
             StarBattle();
             Player.GetComponent<PlayerMovement>().isPaused = true;
 
@@ -115,7 +110,7 @@ public class TanukiDetection : MonoBehaviour
         Vector3 battleMidPoint = (Player.transform.position + WildTanukiDetected.transform.position) * 0.5f;
         cameraBattleFollowPoint.position = battleMidPoint;
 
-        ChangeCameraValues(cameraBattleFollowPoint, new Vector3(0, 0, 0), 0.5f, 0.5f, 7);
+        ChangeCameraValues(cameraBattleFollowPoint, new Vector3(0, 0, 0), 0.5f, 0.5f);
 
         //Dar setup ao sistema de batalha
         if (Player.transform.position == targetPlayerPos && doOnce == false)
@@ -131,7 +126,7 @@ public class TanukiDetection : MonoBehaviour
         }
     }
 
-    public void ChangeCameraValues(Transform follow, Vector3 offset, float screenPosX, float screenPosY, float distance)
+    public void ChangeCameraValues(Transform follow, Vector3 offset, float screenPosX, float screenPosY)
     {
         //Aletarar os valores da camera para ela ficar adaptada à batalha ou ao andar normal
         //Alterar o ponto central da camera
@@ -144,9 +139,6 @@ public class TanukiDetection : MonoBehaviour
         //Alterar a posição do ecrã para que está a apontar
         thirdPersonCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenX = screenPosX;
         thirdPersonCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenY = screenPosY;
-
-        //Alterar a distância
-        //thirdPersonCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = distance;
     }
 
     public void EndBattle()
@@ -157,7 +149,8 @@ public class TanukiDetection : MonoBehaviour
         Player.GetComponent<PlayerMovement>().isPaused = false;
 
         //Colocar a camera com os seus valores normais
-        ChangeCameraValues(Player.transform, new Vector3(0, 1.5f, 0), 0.35f, 0.45f, 3);
+        ChangeCameraValues(Player.transform, new Vector3(0, 1.5f, 0), 0.35f, 0.45f);
+        thirdPersonCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 3f;
 
         //Desligar o HUD de batalha
         BattleHud.SetActive(false);
@@ -165,6 +158,21 @@ public class TanukiDetection : MonoBehaviour
         //Bloquear o cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        //Destruir os tanuki spawnados pelo player
+        Transform[] children = new Transform[PlayerTanuki.transform.childCount];
+
+        int i = 0;
+        foreach (Transform child in PlayerTanuki.transform)
+        {
+            children[i] = child;
+            i++;
+        }
+
+        foreach (Transform child in children)
+        {
+            Destroy(child.gameObject);
+        }
 
         doOnce = false;
     }
