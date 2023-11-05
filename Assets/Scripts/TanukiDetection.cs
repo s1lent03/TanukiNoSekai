@@ -117,10 +117,11 @@ public class TanukiDetection : MonoBehaviour
         {
             BattleUnit enemyTanuki = WildTanukiDetected.GetComponent<BattleUnit>();
             Managers.GetComponent<BattleSystem>().enemyUnit = enemyTanuki;
-            Managers.GetComponent<BattleSystem>().SetupBattle();
+            StartCoroutine(Managers.GetComponent<BattleSystem>().SetupBattle());
 
             //Ligar o HUD de Batalha
             BattleHud.SetActive(true);
+            Managers.GetComponent<BattleManager>().BackToActionsButton();
 
             doOnce = true;
         }
@@ -173,6 +174,10 @@ public class TanukiDetection : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+
+        //Remover os efeitos de pouca vida
+        BattleManager battleManager = Managers.GetComponent<BattleManager>();
+        battleManager.ChangeMatValues(battleManager.defaultMaskSize, battleManager.defaultOpacityAnim, battleManager.defaultAnimSpeed);
 
         doOnce = false;
     }

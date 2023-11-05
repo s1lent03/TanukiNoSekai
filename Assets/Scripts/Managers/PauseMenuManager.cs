@@ -26,6 +26,7 @@ public class PauseMenuManager : MonoBehaviour
 
     [Header("Sounds")]
     public AudioSource navegationSoundFX;
+    public AudioSource buttonClickSoundFX;
 
     [Header("Others")]
     private PlayerInput playerInput;
@@ -85,6 +86,9 @@ public class PauseMenuManager : MonoBehaviour
     //Volta ao jogo
     public void ResumeButton()
     {
+        //Toca o sound effect de click
+        buttonClickSoundFX.Play();
+
         //Esconde o menu
         pauseMenu.SetActive(false);
         isPaused = false;
@@ -101,6 +105,9 @@ public class PauseMenuManager : MonoBehaviour
     //Abre o menu dos visuais/gráficos
     public void VisualsButton()
     {
+        //Toca o sound effect de click
+        buttonClickSoundFX.Play();
+
         //Esconde o menu pausa e abre o menu dos visuals
         pauseMenu.SetActive(false);
         visualsMenu.SetActive(true);
@@ -109,6 +116,9 @@ public class PauseMenuManager : MonoBehaviour
     //Abre o menu do audio
     public void AudioButton()
     {
+        //Toca o sound effect de click
+        buttonClickSoundFX.Play();
+
         //Esconde o menu pausa e abre o menu dos visuals
         pauseMenu.SetActive(false);
         audioMenu.SetActive(true);
@@ -117,6 +127,9 @@ public class PauseMenuManager : MonoBehaviour
     //Abre o menu dos controls
     public void ControlsButton()
     {
+        //Toca o sound effect de click
+        buttonClickSoundFX.Play();
+
         //Esconde o menu pausa e abre o menu dos visuals
         pauseMenu.SetActive(false);
         controlsMenu.SetActive(true);
@@ -125,6 +138,9 @@ public class PauseMenuManager : MonoBehaviour
     //Abre o menu do audio
     public void QuitButton()
     {
+        //Toca o sound effect de click
+        buttonClickSoundFX.Play();
+
         //Esconde o menu pausa e abre o menu dos visuals
         pauseMenu.SetActive(false);
         quitMenu.SetActive(true);
@@ -137,6 +153,9 @@ public class PauseMenuManager : MonoBehaviour
     //Volta para o menu principal
     public void QuitMainMenuButton()
     {
+        //Toca o sound effect de click
+        buttonClickSoundFX.Play();
+
         //Dá load à cena do menu principal
         SceneManager.LoadScene("MainMenu");
     }
@@ -144,6 +163,9 @@ public class PauseMenuManager : MonoBehaviour
     //Fecha o jogo
     public void QuitDesktopButton()
     {
+        //Toca o sound effect de click
+        buttonClickSoundFX.Play();
+
         //Dá quit ao jogo
         Application.Quit();
     }
@@ -151,6 +173,9 @@ public class PauseMenuManager : MonoBehaviour
     //Volta de qualquer sub-menu para o menu pausa
     public void BackToPauseMenu()
     {
+        //Toca o sound effect de click
+        buttonClickSoundFX.Play();
+
         //Desliga os sub-menus
         visualsMenu.SetActive(false);
         audioMenu.SetActive(false);

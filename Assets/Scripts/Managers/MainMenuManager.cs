@@ -28,6 +28,7 @@ public class MainMenuManager : MonoBehaviour
 
     [Header("Sounds")]
     public AudioSource navegationSoundFX;
+    public AudioSource buttonClickSoundFX;
 
     void Start()
     {
@@ -55,6 +56,9 @@ public class MainMenuManager : MonoBehaviour
     //Abre o menu para dar load ou criar uma jornada
     public void JourneyButton()
     {
+        //Toca o sound effect de click
+        buttonClickSoundFX.Play();
+
         //Fecha outras janelas
         loadJourneyMenu.SetActive(false);
         createJourneyMenu.SetActive(false);
@@ -73,6 +77,9 @@ public class MainMenuManager : MonoBehaviour
     //Fecha o menu de criar ou dar load a uma jornada e abre o menu apenas de dar load
     public void LoadJourneyButton()
     {
+        //Toca o sound effect de click
+        buttonClickSoundFX.Play();
+
         //Fecha outras janelas
         journeyMenu.SetActive(false);
         createJourneyMenu.SetActive(false);
@@ -91,6 +98,9 @@ public class MainMenuManager : MonoBehaviour
     //Fecha o menu de criar ou dar load a uma jornada e abre o menu apenas de criar
     public void CreateJourneyButton()
     {
+        //Toca o sound effect de click
+        buttonClickSoundFX.Play();
+
         //Fecha outras janelas
         journeyMenu.SetActive(false);
         loadJourneyMenu.SetActive(false);
@@ -110,6 +120,9 @@ public class MainMenuManager : MonoBehaviour
     //Abre o menu de criar uma arena 1v1
     public void CreatePvpButton()
     {
+        //Toca o sound effect de click
+        buttonClickSoundFX.Play();
+
         //Fecha outras janelas
         journeyMenu.SetActive(false);
         loadJourneyMenu.SetActive(false);
@@ -128,6 +141,9 @@ public class MainMenuManager : MonoBehaviour
     //Abre o menu das definições
     public void SettingsButton()
     {
+        //Toca o sound effect de click
+        buttonClickSoundFX.Play();
+
         //Fecha outras janelas
         journeyMenu.SetActive(false);
         loadJourneyMenu.SetActive(false);
@@ -144,6 +160,9 @@ public class MainMenuManager : MonoBehaviour
     //Abre a janela dos creditos de desenvolvimento
     public void CreditsButton()
     {
+        //Toca o sound effect de click
+        buttonClickSoundFX.Play();
+
         //Fecha outras janelas
         journeyMenu.SetActive(false);
         loadJourneyMenu.SetActive(false);
@@ -158,6 +177,9 @@ public class MainMenuManager : MonoBehaviour
     //Fecha o jogo
     public void QuitDesktopButton()
     {
+        //Toca o sound effect de click
+        buttonClickSoundFX.Play();
+
         //Dá quit ao jogo
         Application.Quit();
     }
