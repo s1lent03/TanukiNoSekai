@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1059.1466, g: 913.4435, b: 886.5924, a: 1}
+  m_IndirectSpecularColor: {r: 1083.005, g: 941.9796, b: 928.58215, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6569,7 +6569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogText: {fileID: 55985092}
-  lettersPerSecond: 50
+  lettersPerSecond: 70
   moveTexts:
   - {fileID: 575309500}
   - {fileID: 1233912565}
@@ -13048,8 +13048,8 @@ MonoBehaviour:
   commonSpawnRate: 55
   uncommonSpawnRate: 30
   rareSpawnRate: 15
-  maxSpawnLevel: 11
-  minSpawnLevel: 9
+  maxSpawnLevel: 12
+  minSpawnLevel: 10
 --- !u!1 &1098693384
 GameObject:
   m_ObjectHideFlags: 0
@@ -18092,19 +18092,29 @@ MonoBehaviour:
   enemyHpBar: {fileID: 1608864345}
   MainBattleMenuFirstButton: {fileID: 1360216184}
   MovesMenuFirstButton: {fileID: 1458022297}
+  Move1ButtonGo: {fileID: 1458022297}
+  Move2ButtonGo: {fileID: 1210483035}
+  Move3ButtonGo: {fileID: 515722390}
+  Move4ButtonGo: {fileID: 916906424}
+  Action1ButtonGo: {fileID: 1360216184}
+  Action2ButtonGo: {fileID: 1589065104}
+  Action3ButtonGo: {fileID: 1314828002}
+  Action4ButtonGo: {fileID: 192620745}
   navegationSoundFX: {fileID: 1404675252}
   buttonClickSoundFX: {fileID: 1404675255}
   healthWarningMat: {fileID: 374657308}
-  defaultMaskSize: 0
+  defaultMaskSize: 2
   defaultOpacityAnim: 0
   defaultAnimSpeed: 0
-  midMaskSize: 0.8
+  midMaskSize: 1
   midOpacityAnim: 0.5
   midAnimSpeed: 3
   criticalMaskSize: 0.65
   criticalOpacityAnim: 0.3
   criticalAnimSpeed: 7
   isPaused: 0
+  doOnceMoves: 0
+  doOnceActions: 0
 --- !u!114 &1404675254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18123,6 +18133,7 @@ MonoBehaviour:
   enemyHud: {fileID: 1404675253}
   dialogBox: {fileID: 508110485}
   TanukiDetector: {fileID: 1868130038}
+  state: 0
 --- !u!82 &1404675255
 AudioSource:
   m_ObjectHideFlags: 0

@@ -42,6 +42,12 @@ public class BattleManager : MonoBehaviour
     [SerializeField] GameObject Move3ButtonGo;
     [SerializeField] GameObject Move4ButtonGo;
 
+    [Header("ActionButtons")]
+    [SerializeField] GameObject Action1ButtonGo;
+    [SerializeField] GameObject Action2ButtonGo;
+    [SerializeField] GameObject Action3ButtonGo;
+    [SerializeField] GameObject Action4ButtonGo;
+
     [Header("Sounds")]
     public AudioSource navegationSoundFX;
     public AudioSource buttonClickSoundFX;
@@ -63,6 +69,8 @@ public class BattleManager : MonoBehaviour
 
     [Header("Others")]
     public bool isPaused = false;
+    [SerializeField] bool doOnceMoves = false;
+    [SerializeField] bool doOnceActions = false;
     Tanuki _enemyTanuki;
     Tanuki _playerTanuki;
 
@@ -92,8 +100,7 @@ public class BattleManager : MonoBehaviour
                 eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(lastSelectedObject);
 
                 //Descobrir qual habilidade está selecionada para indicar informação sobre a mesma
-                if (eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject != null)
-                {
+
                     int spaceIndex = eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject.ToString().IndexOf(" ");
                     string buttonName = eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject.ToString().Substring(0, spaceIndex);
                     switch (buttonName)
@@ -114,7 +121,7 @@ public class BattleManager : MonoBehaviour
                             gameObject.GetComponent<BattleSystem>().HandleMoveSelection(3);
                             break;
                     }
-                }               
+                
             }
 
             //Se o Tanuki do jogador estiver com pouca vida, ativar um shader de post-processing para demonstrar isso
@@ -124,7 +131,7 @@ public class BattleManager : MonoBehaviour
             {
                 ChangeMatValues(defaultMaskSize, defaultOpacityAnim, defaultAnimSpeed);
             }
-            else if (hpPercentage < 50 && hpPercentage > 20)
+            else if (hpPercentage <= 50 && hpPercentage >= 20)
             {
                 ChangeMatValues(midMaskSize, midOpacityAnim, midAnimSpeed);
             }
@@ -134,13 +141,23 @@ public class BattleManager : MonoBehaviour
             }
 
             //Impedir que o jogador utilize ataques enquanto outros ataques estão a ser usados
-            if (gameObject.GetComponent<BattleSystem>().state == BattleState.PlayerAction)
+            if (gameObject.GetComponent<BattleSystem>().state == BattleState.PlayerMove)
             {
                 EnableMoveButtons();
             }
             else
             {
                 DisableMoveButtons();
+            }
+
+            //Impedir que o utilizador utilize botões enquanto dialogo está a ser escrito
+            if (gameObject.GetComponent<BattleSystem>().state == BattleState.PlayerAction)
+            {
+                EnableActionButtons();
+            }
+            else
+            {
+                DisableActionButtons();
             }
         }
     }
@@ -159,6 +176,8 @@ public class BattleManager : MonoBehaviour
         Move2ButtonGo.GetComponent<Button>().interactable = false;
         Move3ButtonGo.GetComponent<Button>().interactable = false;
         Move4ButtonGo.GetComponent<Button>().interactable = false;
+
+        doOnceMoves = false;
     }
 
     //Habilitar os botões
@@ -169,16 +188,48 @@ public class BattleManager : MonoBehaviour
         Move3ButtonGo.GetComponent<Button>().interactable = true;
         Move4ButtonGo.GetComponent<Button>().interactable = true;
 
-        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
-        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(MovesMenuFirstButton);
+        if (doOnceMoves == false)
+        {
+            eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
+            eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(MovesMenuFirstButton);
+
+            doOnceMoves = true;
+        }
+    }
+
+    //Desabilitar os botões
+    public void DisableActionButtons()
+    {
+        Action1ButtonGo.GetComponent<Button>().interactable = false;
+        Action2ButtonGo.GetComponent<Button>().interactable = false;
+        Action3ButtonGo.GetComponent<Button>().interactable = false;
+        Action4ButtonGo.GetComponent<Button>().interactable = false;
+
+        doOnceActions = false;
+    }
+
+    //Habilitar os botões
+    public void EnableActionButtons()
+    {
+        Action1ButtonGo.GetComponent<Button>().interactable = true;
+        Action2ButtonGo.GetComponent<Button>().interactable = true;
+        Action3ButtonGo.GetComponent<Button>().interactable = true;
+        Action4ButtonGo.GetComponent<Button>().interactable = true;
+
+        if (doOnceActions == false)
+        {
+            eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
+            eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(MainBattleMenuFirstButton);
+
+            BackToActionsButton();
+
+            doOnceActions = true;
+        }
     }
 
     //Alterar valores do material de health warning
     public void ChangeMatValues(float maskSize, float opAnim, float animSpeed)
     {
-        /*healthWarningMat.GetComponent<Material>().SetFloat("_Mask_Size", maskSize);
-        healthWarningMat.GetComponent<Material>().SetFloat("_Opacity_Animation", opAnim);
-        healthWarningMat.GetComponent<Material>().SetFloat("_Animation_Speed", animSpeed);*/
         var pass = healthWarningMat.GetComponent<CustomPassVolume>().customPasses[0];
 
         if (pass is FullScreenCustomPass full)
