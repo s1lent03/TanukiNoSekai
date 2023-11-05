@@ -100,28 +100,26 @@ public class BattleManager : MonoBehaviour
                 eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(lastSelectedObject);
 
                 //Descobrir qual habilidade está selecionada para indicar informação sobre a mesma
+                int spaceIndex = eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject.ToString().IndexOf(" ");
+                string buttonName = eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject.ToString().Substring(0, spaceIndex);
+                switch (buttonName)
+                {
+                    case "Move1Btn":
+                        gameObject.GetComponent<BattleSystem>().HandleMoveSelection(0);
+                        break;
 
-                    int spaceIndex = eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject.ToString().IndexOf(" ");
-                    string buttonName = eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject.ToString().Substring(0, spaceIndex);
-                    switch (buttonName)
-                    {
-                        case "Move1Btn":
-                            gameObject.GetComponent<BattleSystem>().HandleMoveSelection(0);
-                            break;
+                    case "Move2Btn":
+                        gameObject.GetComponent<BattleSystem>().HandleMoveSelection(1);
+                        break;
 
-                        case "Move2Btn":
-                            gameObject.GetComponent<BattleSystem>().HandleMoveSelection(1);
-                            break;
+                    case "Move3Btn":
+                        gameObject.GetComponent<BattleSystem>().HandleMoveSelection(2);
+                        break;
 
-                        case "Move3Btn":
-                            gameObject.GetComponent<BattleSystem>().HandleMoveSelection(2);
-                            break;
-
-                        case "Move4Btn":
-                            gameObject.GetComponent<BattleSystem>().HandleMoveSelection(3);
-                            break;
-                    }
-                
+                    case "Move4Btn":
+                        gameObject.GetComponent<BattleSystem>().HandleMoveSelection(3);
+                        break;
+                }              
             }
 
             //Se o Tanuki do jogador estiver com pouca vida, ativar um shader de post-processing para demonstrar isso

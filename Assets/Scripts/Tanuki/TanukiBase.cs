@@ -119,3 +119,35 @@ public enum TanukiType
     Psychic,
     Fighting
 }
+
+public class TypeChart
+{
+    static float[][] chart =
+    {
+        //                   NOR WAT FIR GRN GRS AIR SHD LIT DRG ICE ELC PSY FIGHT
+        /*NOR*/ new float[] { 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 1f, 0.5f},
+        /*WAT*/ new float[] { 1f, 1f, 2f, 2f, 0.5f, 1f, 1f, 1f, 1f, 0.5f, 0.5f, 1f, 1f},
+        /*FIR*/ new float[] { 1f, 0.5f, 1f, 0.5f, 2f, 1f, 1f, 1f, 1f, 2f, 1f, 1f, 1f},
+        /*GRN*/ new float[] { 1f, 0.5f, 2f, 1f, 0.5f, 0.5f, 1f, 1f, 1f, 2f, 2f, 1f, 0.5f},
+        /*GRS*/ new float[] { 1f, 2f, 0.5f, 2f, 1f, 0.5f, 1f, 1f, 1f, 0.5f, 1f, 1f, 1f},
+        /*AIR*/ new float[] { 1f, 1f, 1f, 2f, 2f, 1f, 2f, 0.5f, 1f, 0.5f, 0.5f, 0.5f, 2f},
+        /*SHD*/ new float[] { 1f, 1f, 1f, 1f, 1f, 0.5f, 1f, 2f, 0.5f, 1f, 1f, 2f, 2f},
+        /*LIT*/ new float[] { 1f, 1f, 1f, 0.5f, 1f, 2f, 0.5f, 1f, 2f, 2f, 1f, 1f, 2f},
+        /*DRG*/ new float[] { 1f, 1f, 1f, 1f, 1f, 1f, 2f, 1f, 2f, 0.5f, 1f, 0.5f, 2f},
+        /*ICE*/ new float[] { 1f, 2f, 0.5f, 0.5f, 2f, 2f, 1f, 0.5f, 2f, 1f, 1f, 0.5f, 0.5f},
+        /*ELC*/ new float[] { 1f, 2f, 1f, 0.5f, 0.5f, 2f, 1f, 1f, 1f, 0.5f, 1f, 1f, 1f},
+        /*PSY*/ new float[] { 1f, 1f, 1f, 1f, 1f, 2f, 0.5f, 1f, 2f, 1f, 0.5f, 1f, 1f},
+        /*FIT*/ new float[] { 2f, 1f, 1f, 2f, 1f, 0.5f, 0.5f, 0.5f, 1f, 2f, 1f, 1f, 1f}
+    };
+
+    public static float GetEffectiveness(TanukiType attackType, TanukiType defenseType)
+    {
+        if (attackType == TanukiType.None || defenseType == TanukiType.None)
+            return 1;
+
+        int row = (int)attackType - 1;
+        int col = (int)defenseType - 1;
+
+        return chart[row][col];
+    }
+}
