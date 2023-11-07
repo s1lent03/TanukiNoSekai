@@ -8,7 +8,6 @@ public class NPCMovement : MonoBehaviour
     public float range;
 
     private NavMeshAgent navMeshAgent;
-
     private bool inCoroutine = false;
     private Vector3 target = Vector3.zero;
 
@@ -27,17 +26,19 @@ public class NPCMovement : MonoBehaviour
     {
         inCoroutine = true;
 
-        if (RandomPoint(transform.position, range, out target))
+        while (target == Vector3.zero)
         {
-            Debug.DrawLine(transform.position, target, Color.red);
-            navMeshAgent.destination = target;
+            yield return new WaitForSeconds(0.01f);
+            RandomPoint(transform.position, range, out target);
+            navMeshAgent.SetDestination(target);
         }
 
-        while ((Mathf.Round(transform.position.x) != target.x) && (Mathf.Round(transform.position.z) != target.z))
+        while ((transform.position.x != target.x) && (transform.position.z != target.z))
         {
             yield return new WaitForSeconds(0.01f);
         }
 
+        target = Vector3.zero;
         inCoroutine = false;
     }
 
@@ -47,12 +48,14 @@ public class NPCMovement : MonoBehaviour
         {
             Vector3 randomPoint = center + Random.insideUnitSphere * range;
             NavMeshHit hit;
+
             if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
             {
                 result = hit.position;
                 return true;
             }
         }
+
         result = Vector3.zero;
         return false;
     }
