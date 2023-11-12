@@ -2,28 +2,40 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using Cinemachine;
+using DG.Tweening;
 
 public class TriggerDialog : MonoBehaviour
 {
     [Header("Objects")]
-    public GameObject dialogPanel;
+    public RectTransform dialoguePanel;
     public TMP_Text nameText;
-    public TMP_Text dialogText;
-    public PlayerInput playerInput;
+    public TMP_Text dialogueText;
+    public Transform player;
+    public TMP_Text notification;
+    public CinemachineVirtualCamera dialogueCamera;
 
     [Header("Variables")]
-    [TextArea(4, 6)] public string[] dialogLines;
+    [TextArea(4, 6)] public string[] dialogueLines;
     public float typingTime;
+    public float cooldownTime;
 
     private bool isPlayerInRange = false;
-    private bool didDialogStart = false;
+    private bool didDialogueStart = false;
     private int lineIndex = 0;
+    private float cooldown = 0f;
+    private float originalYAxis = 0f;
 
     private void Awake()
     {
         nameText.text = string.Empty;
-        dialogText.text = string.Empty;
-        dialogPanel.SetActive(false);
+        dialogueText.text = string.Empty;
+        dialoguePanel.gameObject.SetActive(true);
+        originalYAxis = dialoguePanel.anchoredPosition.y;
+        dialoguePanel.position = new Vector3(dialoguePanel.position.x, -Screen.height, dialoguePanel.position.z);
+        notification.text = "INTERACT WITH " + transform.parent.gameObject.name;
+        notification.transform.localScale = new Vector3(1, 0, 1);
+        dialogueCamera.Priority = 9;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,41 +58,101 @@ public class TriggerDialog : MonoBehaviour
 
     private void Update()
     {
-        if ((isPlayerInRange || didDialogStart) && playerInput.actions["Interact"].IsPressed() && Time.timeScale == 1)
-        {
-            if (!didDialogStart)
-            {
-                didDialogStart = true;
-                lineIndex = 0;
+        if (didDialogueStart || !isPlayerInRange)
+            notification.transform.DOScaleY(0, 0.25f);
+        else
+            notification.transform.DOScaleY(1, 0.25f);
 
-                dialogPanel.SetActive(true);
-                nameText.text = gameObject.name;
+        if (didDialogueStart && dialogueCamera.Priority == 11)
+            player.GetComponent<PlayerMovement>().isPaused = true;
+
+        // code for random line
+        if ((isPlayerInRange || didDialogueStart) && player.GetComponent<PlayerInput>().actions["Interact"].IsPressed() && Time.timeScale == 1)
+        {
+            if (!didDialogueStart)
+            {
+                didDialogueStart = true;
+                lineIndex = Random.Range(0, dialogueLines.Length);
+                dialogueCamera.Priority = 11;
+                dialoguePanel.DOAnchorPosY(originalYAxis, 0.5f).SetEase(Ease.InOutSine);
+                nameText.text = transform.parent.gameObject.name;
+                StartCoroutine(ShowLine());
+            } else if (dialogueText.text == dialogueLines[lineIndex])
+            {
+                player.GetComponent<PlayerMovement>().isPaused = false;
+                dialogueCamera.Priority = 9;
+                dialoguePanel.DOMoveY(-Screen.height, 0.5f).SetEase(Ease.InOutSine);
+            }
+        }
+
+        if (didDialogueStart && dialogueCamera.Priority == 9)
+        {
+            if (cooldown >= cooldownTime || !isPlayerInRange)
+            {
+                didDialogueStart = false;
+                cooldown = 0f;
+            }
+            else
+            {
+                cooldown += Time.deltaTime;
+            }
+        }
+
+        // addition to if clause related to player walkspeed
+
+        /*&& lineIndex < dialogueLines.Length*/
+
+        // code for dialog with multiple lines
+
+        /*if ((isPlayerInRange || didDialogueStart) && player.GetComponent<PlayerInput>().actions["Interact"].IsPressed() && Time.timeScale == 1)
+        {
+            if (!didDialogueStart)
+            {
+                didDialogueStart = true;
+                lineIndex = 0;
+                dialogueCamera.Priority = 11;
+                dialoguePanel.DOAnchorPosY(originalYAxis, 0.5f).SetEase(Ease.InOutSine);
+                nameText.text = transform.parent.gameObject.name;
                 StartCoroutine(ShowLine());
             }
-            else if (dialogText.text == dialogLines[lineIndex])
+            else if (lineIndex >= dialogueLines.Length || dialogueText.text == dialogueLines[lineIndex])
             {
                 lineIndex++;
 
-                if (lineIndex < dialogLines.Length)
+                if (lineIndex < dialogueLines.Length)
                 {
                     StartCoroutine(ShowLine());
                 }
                 else
                 {
-                    didDialogStart = false;
-                    dialogPanel.SetActive(false);
+                    player.GetComponent<PlayerMovement>().isPaused = false;
+                    dialogueCamera.Priority = 9;
+                    dialoguePanel.DOMoveY(-Screen.height, 0.5f).SetEase(Ease.InOutSine);
                 }
             }
         }
+
+        if (didDialogueStart && lineIndex >= dialogueLines.Length)
+        {
+            if (cooldown >= cooldownTime || !isPlayerInRange)
+            {
+                didDialogueStart = false;
+                cooldown = 0f;
+            }
+            else
+            {
+                cooldown += Time.deltaTime;
+            }
+        }*/
     }
 
     private IEnumerator ShowLine()
     {
-        dialogText.text = string.Empty;
+        dialogueText.text = string.Empty;
 
-        foreach (char ch in dialogLines[lineIndex])
+        foreach (char ch in dialogueLines[lineIndex])
         {
-            dialogText.text += ch;
+            dialogueText.text += ch;
             yield return new WaitForSeconds(typingTime);
         }
     }
