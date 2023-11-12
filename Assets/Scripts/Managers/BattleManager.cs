@@ -100,26 +100,29 @@ public class BattleManager : MonoBehaviour
                 eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(lastSelectedObject);
 
                 //Descobrir qual habilidade está selecionada para indicar informação sobre a mesma
-                int spaceIndex = eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject.ToString().IndexOf(" ");
-                string buttonName = eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject.ToString().Substring(0, spaceIndex);
-                switch (buttonName)
+                if (eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject != null)
                 {
-                    case "Move1Btn":
-                        gameObject.GetComponent<BattleSystem>().HandleMoveSelection(0);
-                        break;
+                    int spaceIndex = eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject.ToString().IndexOf(" ");
+                    string buttonName = eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject.ToString().Substring(0, spaceIndex);
+                    switch (buttonName)
+                    {
+                        case "Move1Btn":
+                            gameObject.GetComponent<BattleSystem>().HandleMoveSelection(0);
+                            break;
 
-                    case "Move2Btn":
-                        gameObject.GetComponent<BattleSystem>().HandleMoveSelection(1);
-                        break;
+                        case "Move2Btn":
+                            gameObject.GetComponent<BattleSystem>().HandleMoveSelection(1);
+                            break;
 
-                    case "Move3Btn":
-                        gameObject.GetComponent<BattleSystem>().HandleMoveSelection(2);
-                        break;
+                        case "Move3Btn":
+                            gameObject.GetComponent<BattleSystem>().HandleMoveSelection(2);
+                            break;
 
-                    case "Move4Btn":
-                        gameObject.GetComponent<BattleSystem>().HandleMoveSelection(3);
-                        break;
-                }              
+                        case "Move4Btn":
+                            gameObject.GetComponent<BattleSystem>().HandleMoveSelection(3);
+                            break;
+                    }
+                }         
             }
 
             //Se o Tanuki do jogador estiver com pouca vida, ativar um shader de post-processing para demonstrar isso
@@ -157,6 +160,10 @@ public class BattleManager : MonoBehaviour
             {
                 DisableActionButtons();
             }
+        }
+        else
+        {
+            ChangeMatValues(defaultMaskSize, defaultOpacityAnim, defaultAnimSpeed);
         }
     }
 
@@ -247,7 +254,7 @@ public class BattleManager : MonoBehaviour
 
             playerNameTxt.text = tanuki.Base.Name;
             playerLevelTxt.text = "Lvl. " + tanuki.Level;
-            playerHpTxt.text = (tanuki.Hp / tanuki.MaxHp * 100) + "%";
+            playerHpTxt.text = (int)((float)tanuki.Hp / tanuki.MaxHp * 100) + "%";
             playerHpBar.SetHp((float)tanuki.Hp / tanuki.MaxHp);
         }
         else
@@ -256,7 +263,7 @@ public class BattleManager : MonoBehaviour
 
             enemyNameTxt.text = tanuki.Base.Name;
             enemyLevelTxt.text = "Lvl. " + tanuki.Level;
-            enemyHpTxt.text = (tanuki.Hp / tanuki.MaxHp * 100) + "%";
+            enemyHpTxt.text = (int)((float)tanuki.Hp / tanuki.MaxHp * 100) + "%";
             enemyHpBar.SetHp((float)tanuki.Hp / tanuki.MaxHp);
         }
     }

@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1059.1398, g: 913.45715, b: 886.6051, a: 1}
+  m_IndirectSpecularColor: {r: 1059.1056, g: 913.1134, b: 885.8976, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5688,11 +5688,11 @@ Transform:
   m_GameObject: {fileID: 435210468}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0.456}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0.4559937}
   m_LocalScale: {x: 1, y: 0.15, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1522200746}
+  m_Father: {fileID: 1403577736}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &435210470
 BoxCollider:
@@ -10346,8 +10346,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee72424d6708ddb40b30ac9ee7a4a3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _base: {fileID: 11400000, guid: c0bad7f38560f6144b5a599c2df87244, type: 2}
-  level: 9
+  tanukiUnitData:
+    _base: {fileID: 0}
+    level: 0
 --- !u!1001 &834401323
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13035,12 +13036,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047647bf0f4493a4da9d553285881d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  commonTanuki: {fileID: 7067895223377157501, guid: 13f1821e9ea47bf48a38aecc086959ef,
-    type: 3}
-  uncommonTanuki: {fileID: 7969400902675711116, guid: bbb5be0741eee2c44867af2c84aa320f,
-    type: 3}
-  rareTanuki: {fileID: 7969400902675711116, guid: bbb5be0741eee2c44867af2c84aa320f,
-    type: 3}
+  commonTanuki:
+    _base: {fileID: 11400000, guid: 61bf15b1fd5ae6945bfd4e24964305f0, type: 2}
+    level: 0
+  uncommonTanuki:
+    _base: {fileID: 11400000, guid: 16680591217b9ee4b89c4b18e36f75f5, type: 2}
+    level: 0
+  rareTanuki:
+    _base: {fileID: 11400000, guid: 16680591217b9ee4b89c4b18e36f75f5, type: 2}
+    level: 0
   spawnArea: {fileID: 594751781}
   tanukiParent: {fileID: 1664510420}
   minNumberSpawns: 3
@@ -17858,6 +17862,90 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1403577735
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1403577736}
+  - component: {fileID: 1403577738}
+  - component: {fileID: 1403577737}
+  m_Layer: 0
+  m_Name: Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1403577736
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403577735}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1.3, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 435210469}
+  m_Father: {fileID: 1522200746}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1403577737
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403577735}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 257
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1403577738
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403577735}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1404675247
 GameObject:
   m_ObjectHideFlags: 0
@@ -18133,6 +18221,8 @@ MonoBehaviour:
   enemyHud: {fileID: 1404675253}
   dialogBox: {fileID: 508110485}
   TanukiDetector: {fileID: 1868130038}
+  HitEffect: {fileID: 9097354204291819951, guid: 39e7cc4a4df5e604bb2c541fb08bf286,
+    type: 3}
   state: 0
 --- !u!82 &1404675255
 AudioSource:
@@ -20050,10 +20140,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1522200746}
-  - component: {fileID: 1522200745}
-  - component: {fileID: 1522200744}
   - component: {fileID: 1522200743}
   - component: {fileID: 1522200742}
+  - component: {fileID: 1522200748}
   - component: {fileID: 1522200741}
   - component: {fileID: 1522200747}
   - component: {fileID: 1522200740}
@@ -20214,59 +20303,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.5982819
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1522200744
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522200739}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 257
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1522200745
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522200739}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Center: {x: 0, y: 0.015716553, z: 0}
 --- !u!4 &1522200746
 Transform:
   m_ObjectHideFlags: 0
@@ -20277,11 +20316,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 480.024, y: 102, z: 420.54}
-  m_LocalScale: {x: 1, y: 1.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1403577736}
   - {fileID: 585891811}
-  - {fileID: 435210469}
   - {fileID: 1868130039}
   - {fileID: 528507076}
   - {fileID: 831724507}
@@ -20301,6 +20340,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactDistance: 7
   interactText: {fileID: 1906339033}
+--- !u!114 &1522200748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522200739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a82522c1c0bf1af4b971a3f7dedb86a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tanukis:
+  - _base: {fileID: 11400000, guid: c0bad7f38560f6144b5a599c2df87244, type: 2}
+    level: 9
+  - _base: {fileID: 11400000, guid: 61bf15b1fd5ae6945bfd4e24964305f0, type: 2}
+    level: 9
 --- !u!1 &1524113379
 GameObject:
   m_ObjectHideFlags: 0

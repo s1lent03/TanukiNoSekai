@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class BattleUnit : MonoBehaviour
 {
-    [SerializeField] TanukiBase _base;
-    [SerializeField] public int level;
+    public Tanuki tanukiUnitData;
     GameObject newTanuki;
 
     public Tanuki Tanuki { get; set; }
-    public void Setup(bool isPlayerOrTrainer)
+    public void Setup(bool isPlayerOrTrainer, Tanuki tanuki)
     {
-        Tanuki = new Tanuki(_base, level);
+        Tanuki = tanuki;
 
         if (gameObject.tag != "WildTanuki")
         {
@@ -26,6 +25,23 @@ public class BattleUnit : MonoBehaviour
 
     public void PlayEnterAnimation()
     {
-        newTanuki.transform.DOScale(new Vector3(1, 1, 1), 1);
+        newTanuki.transform.Find("ModelObject").transform.DOScale(new Vector3(1, 1, 1), 1);
+    }
+
+    public void PlayAttackAnimation()
+    {
+        //ANIMAÇÃO DE ATAQUE !!!!!
+    }
+
+    public IEnumerator PlayHitAnimation(GameObject hitEffect, Transform tanukiPosition)
+    {
+        GameObject effect = Instantiate(hitEffect, tanukiPosition);
+        yield return new WaitForSeconds(hitEffect.GetComponent<ParticleSystem>().main.duration);
+        Destroy(effect);
+    }
+
+    public void PlayFainAnimation(GameObject tanukiToFaint)
+    {
+        tanukiToFaint.transform.Find("ModelObject").transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 1);
     }
 }

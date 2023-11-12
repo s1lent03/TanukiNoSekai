@@ -34,6 +34,12 @@ public class TanukiDetection : MonoBehaviour
     public float minZoomCamera;
     public float maxZoomCamera;
 
+    [Header("SpawnLevels")]
+    [SerializeField] int maxSpawnLevelOffset;
+    [SerializeField] int minSpawnLevelOffset;
+    int minSpawnLevel;
+    int maxSpawnLevel;
+
     [Header("Others")]
     private bool doOnce = false;
 
@@ -47,7 +53,7 @@ public class TanukiDetection : MonoBehaviour
     //Quando se aproxima de um Tanuki sem estar agachado, o Tanuki vai detetar e começar a batalha
     private void OnTriggerEnter(Collider other)
     {
-        if (!playerInput.actions["Crouch"].IsPressed() && other.tag == "WildTanuki")
+        if (!playerInput.actions["Crouch"].IsPressed() && other.tag == "WildTanuki" && Player.GetComponent<TanukiParty>().GetHealthyTanuki() != null)
         {
             EnteredCollider(other.gameObject);
         }
@@ -58,7 +64,7 @@ public class TanukiDetection : MonoBehaviour
         //Se a batalha tiver começado, ambos os personagens se metem em posição para lutar
         if (isInBattle)
         {
-            StarBattle();
+            StartBattle();
             Player.GetComponent<PlayerMovement>().isPaused = true;
 
             //Dar zoom ou unzoom à camera
@@ -86,7 +92,7 @@ public class TanukiDetection : MonoBehaviour
         Managers.GetComponent<BattleManager>().AtivateNav();
     }
 
-    public void StarBattle()
+    public void StartBattle()
     {
         //Virar o Tanuki em direção ao jogador
         Vector3 tanukiDir = Player.transform.position - WildTanukiDetected.transform.position;
@@ -115,16 +121,28 @@ public class TanukiDetection : MonoBehaviour
         //Dar setup ao sistema de batalha
         if (Player.transform.position == targetPlayerPos && doOnce == false)
         {
+            var playerParty = Player.GetComponent<TanukiParty>();      
+
             BattleUnit enemyTanuki = WildTanukiDetected.GetComponent<BattleUnit>();
             Managers.GetComponent<BattleSystem>().enemyUnit = enemyTanuki;
-            StartCoroutine(Managers.GetComponent<BattleSystem>().SetupBattle());
 
+            Managers.GetComponent<BattleSystem>().StartBattle(playerParty, enemyTanuki.tanukiUnitData, RandomizeWildTanukiLevels(playerParty.GetHighestLevelTanuki()));
+            
             //Ligar o HUD de Batalha
             BattleHud.SetActive(true);
             Managers.GetComponent<BattleManager>().BackToActionsButton();
 
             doOnce = true;
         }
+    }
+
+    public int RandomizeWildTanukiLevels(int highestTanukiLevel)
+    {
+        //Dar um level ao tanuki spawnado
+        minSpawnLevel = highestTanukiLevel - minSpawnLevelOffset;
+        maxSpawnLevel = highestTanukiLevel + maxSpawnLevelOffset;
+
+        return Random.Range(minSpawnLevel, maxSpawnLevel + 1);
     }
 
     public void ChangeCameraValues(Transform follow, Vector3 offset, float screenPosX, float screenPosY)
