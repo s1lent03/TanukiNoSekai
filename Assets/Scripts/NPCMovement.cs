@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class NPCMovement : MonoBehaviour
 {
-    public BoxCollider zone;
+    public float range;
 
     private NavMeshAgent navMeshAgent;
     private bool inCoroutine = false;
@@ -29,7 +29,7 @@ public class NPCMovement : MonoBehaviour
         while (target == Vector3.zero)
         {
             yield return new WaitForSeconds(0.01f);
-            target = CalculatePath();
+            RandomPoint(transform.position, range, out target);
             navMeshAgent.SetDestination(target);
         }
 
@@ -42,21 +42,21 @@ public class NPCMovement : MonoBehaviour
         inCoroutine = false;
     }
 
-    private Vector3 CalculatePath()
+    private bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
-        Vector3 extents = zone.size / 2f;
-        Vector3 point = new Vector3(
-            Random.Range(-extents.x, extents.x),
-            Random.Range(-extents.y, extents.y),
-            Random.Range(-extents.z, extents.z)
-        );
-        NavMeshHit hit;
-
-        if (NavMesh.SamplePosition(zone.transform.TransformPoint(point), out hit, 1.0f, NavMesh.AllAreas))
+        for (int i = 0; i < 30; i++)
         {
-            return hit.position;
+            Vector3 randomPoint = center + Random.insideUnitSphere * range;
+            NavMeshHit hit;
+
+            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+            {
+                result = hit.position;
+                return true;
+            }
         }
 
-        return Vector3.zero;
+        result = Vector3.zero;
+        return false;
     }
 }
