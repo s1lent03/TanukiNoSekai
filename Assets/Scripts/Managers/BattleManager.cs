@@ -17,6 +17,9 @@ public class BattleManager : MonoBehaviour
     public GameObject MoveSelectionButtons;
     public GameObject MoveInfoBox;
     [Space]
+    public GameObject PartyMenu;
+    public GameObject DialogBox;
+    [Space]
     private PlayerInput playerInput;
     public GameObject eventSystemObject;
     private GameObject lastSelectedObject;
@@ -32,9 +35,16 @@ public class BattleManager : MonoBehaviour
     [SerializeField] TMP_Text enemyHpTxt;
     [SerializeField] HpBar enemyHpBar;
 
+    [Header("TanukiPartyObjects")]
+    [SerializeField] PartyMemberUI[] memberSlots;
+    [Space]
+    [SerializeField] TMP_Text TypesInfoTxt;
+    [SerializeField] TMP_Text MovesInfoTxt;
+
     [Header("FirstButtons")]
     public GameObject MainBattleMenuFirstButton;
     public GameObject MovesMenuFirstButton;
+    public GameObject PartyMenuFirstButton;
 
     [Header("MovesButtons")]
     [SerializeField] GameObject Move1ButtonGo;
@@ -160,6 +170,60 @@ public class BattleManager : MonoBehaviour
             {
                 DisableActionButtons();
             }
+
+            //Procurar informações sobre o tanuki selecionado no party selection
+            if (PartyMenu.activeSelf)
+            {
+                GameObject currentTanukiSelected = eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject.transform.parent.gameObject;
+
+                //Descobrir os moves do tanuki selecionado
+                switch (currentTanukiSelected.name)
+                {
+                    case "Tanuki1":
+                        MovesInfoTxt.text = memberSlots[0].GetMoves(gameObject.GetComponent<BattleSystem>().playerParty.Tanukis[0]);
+                        break;
+
+                    case "Tanuki2":
+                        MovesInfoTxt.text = memberSlots[1].GetMoves(gameObject.GetComponent<BattleSystem>().playerParty.Tanukis[1]);
+                        break;
+
+                    case "Tanuki3":
+                        MovesInfoTxt.text = memberSlots[2].GetMoves(gameObject.GetComponent<BattleSystem>().playerParty.Tanukis[2]);
+                        break;
+
+                    case "Tanuki4":
+                        MovesInfoTxt.text = memberSlots[3].GetMoves(gameObject.GetComponent<BattleSystem>().playerParty.Tanukis[3]);
+                        break;
+
+                    case "Tanuki5":
+                        MovesInfoTxt.text = memberSlots[4].GetMoves(gameObject.GetComponent<BattleSystem>().playerParty.Tanukis[4]);
+                        break;
+                }
+
+                //Descobrir o(s) tipo(s) do tanuki selecionado
+                switch (currentTanukiSelected.name)
+                {
+                    case "Tanuki1":
+                        TypesInfoTxt.text = memberSlots[0].GetTypes(gameObject.GetComponent<BattleSystem>().playerParty.Tanukis[0]);
+                        break;
+
+                    case "Tanuki2":
+                        TypesInfoTxt.text = memberSlots[1].GetTypes(gameObject.GetComponent<BattleSystem>().playerParty.Tanukis[1]);
+                        break;
+
+                    case "Tanuki3":
+                        TypesInfoTxt.text = memberSlots[2].GetTypes(gameObject.GetComponent<BattleSystem>().playerParty.Tanukis[2]);
+                        break;
+
+                    case "Tanuki4":
+                        TypesInfoTxt.text = memberSlots[3].GetTypes(gameObject.GetComponent<BattleSystem>().playerParty.Tanukis[3]);
+                        break;
+
+                    case "Tanuki5":
+                        TypesInfoTxt.text = memberSlots[4].GetTypes(gameObject.GetComponent<BattleSystem>().playerParty.Tanukis[4]);
+                        break;
+                }
+            }
         }
         else
         {
@@ -277,6 +341,17 @@ public class BattleManager : MonoBehaviour
         yield return enemyHpBar.SetHpSmooth((float)_enemyTanuki.Hp / _enemyTanuki.MaxHp);
     }
 
+    public void SetPartyData(List<Tanuki> tanukis)
+    {
+        for (int i = 0; i < memberSlots.Length; i++)
+        {
+            if (i < tanukis.Count)
+                memberSlots[i].SetData(tanukis[i]);
+            else
+                memberSlots[i].gameObject.SetActive(false);
+        }
+    }
+
     //Utiliza a habilidade 1
     public void Move1Button()
     {
@@ -328,11 +403,31 @@ public class BattleManager : MonoBehaviour
 
         ActionSelectionButtons.SetActive(true);
         MoveSelectionButtons.SetActive(false);
+        PartyMenu.SetActive(false);
 
         MoveInfoBox.SetActive(false);
+        DialogBox.SetActive(true);
 
         eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
         eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(MainBattleMenuFirstButton);
+    }
+
+    //Mostrar party de Tanukis
+    public void PartySelection()
+    {
+        buttonClickSoundFX.Play();
+
+        ActionSelectionButtons.SetActive(false);
+        MoveSelectionButtons.SetActive(false);
+        PartyMenu.SetActive(true);
+
+        MoveInfoBox.SetActive(false);
+        DialogBox.SetActive(false);
+
+        gameObject.GetComponent<BattleSystem>().OpenPartyScreen();
+
+        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
+        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(PartyMenuFirstButton);
     }
 
     //Terminar a batalha

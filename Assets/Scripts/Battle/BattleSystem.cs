@@ -18,7 +18,7 @@ public class BattleSystem : MonoBehaviour
 
     public BattleState state;
 
-    TanukiParty playerParty;
+    public TanukiParty playerParty;
     Tanuki wildTanuki;
 
     public void StartBattle(TanukiParty playerParty, Tanuki wildTanuki, int wildLevel)
@@ -48,6 +48,11 @@ public class BattleSystem : MonoBehaviour
     {
         state = BattleState.PlayerAction;
         StartCoroutine(dialogBox.TypeDialog("Choose an action.."));
+    }
+
+    public void OpenPartyScreen() 
+    {
+        gameObject.GetComponent<BattleManager>().SetPartyData(playerParty.Tanukis);
     }
 
     public void PlayerMove()

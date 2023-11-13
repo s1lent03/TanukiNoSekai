@@ -10,6 +10,7 @@ public class TanukiBase : ScriptableObject
     [SerializeField] string name;
     [TextArea][SerializeField] string description;
     [SerializeField] GameObject tanukiModel;
+    [SerializeField] Sprite tanukiIconSprite;
 
     [SerializeField] TanukiType type1;
     [SerializeField] TanukiType type2;
@@ -38,6 +39,11 @@ public class TanukiBase : ScriptableObject
     public GameObject TanukiModel
     {
         get { return tanukiModel; }
+    }
+
+    public Sprite TanukiSprite
+    {
+        get { return tanukiIconSprite; }
     }
 
     public TanukiType Type1

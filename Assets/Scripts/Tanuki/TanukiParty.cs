@@ -7,6 +7,11 @@ public class TanukiParty : MonoBehaviour
 {
     [SerializeField] List<Tanuki> tanukis;
 
+    public List<Tanuki> Tanukis
+    {
+        get { return tanukis; }
+    }
+
     void Start()
     {
         foreach (var tanuki in tanukis)
