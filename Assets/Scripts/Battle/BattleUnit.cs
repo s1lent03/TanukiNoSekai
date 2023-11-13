@@ -40,7 +40,7 @@ public class BattleUnit : MonoBehaviour
         Destroy(effect);
     }
 
-    public void PlayFainAnimation(GameObject tanukiToFaint)
+    public void PlayFaintAnimation(GameObject tanukiToFaint)
     {
         tanukiToFaint.transform.Find("ModelObject").transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 1);
     }

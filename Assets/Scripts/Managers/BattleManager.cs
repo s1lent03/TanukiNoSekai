@@ -44,7 +44,8 @@ public class BattleManager : MonoBehaviour
     [Header("FirstButtons")]
     public GameObject MainBattleMenuFirstButton;
     public GameObject MovesMenuFirstButton;
-    public GameObject PartyMenuFirstButton;
+    public GameObject PartyMenuRunButton;
+    public GameObject PartyMenuBackButton;
 
     [Header("MovesButtons")]
     [SerializeField] GameObject Move1ButtonGo;
@@ -410,6 +411,9 @@ public class BattleManager : MonoBehaviour
 
         eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
         eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(MainBattleMenuFirstButton);
+
+        if (gameObject.GetComponent<BattleSystem>().state == BattleState.PartyScreen || gameObject.GetComponent<BattleSystem>().state == BattleState.PlayerMove)
+            gameObject.GetComponent<BattleSystem>().state = BattleState.PlayerAction;
     }
 
     //Mostrar party de Tanukis
@@ -424,10 +428,51 @@ public class BattleManager : MonoBehaviour
         MoveInfoBox.SetActive(false);
         DialogBox.SetActive(false);
 
+        if (gameObject.GetComponent<BattleSystem>().state == BattleState.EnemyMove)
+        {
+            PartyMenuRunButton.SetActive(true);
+            PartyMenuBackButton.SetActive(false);
+            eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
+            eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(PartyMenuRunButton);
+        }
+        else
+        {
+            PartyMenuRunButton.SetActive(false);
+            PartyMenuBackButton.SetActive(true);
+            eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
+            eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(PartyMenuBackButton);
+        }
+
         gameObject.GetComponent<BattleSystem>().OpenPartyScreen();
 
-        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
-        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(PartyMenuFirstButton);
+    }
+
+    //Escolher o tanuki a substituir
+    public void ChooseTanukiFromParty()
+    {
+        GameObject currentTanukiSelected = eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject.transform.parent.gameObject;
+        switch (currentTanukiSelected.name)
+        {
+            case "Tanuki1":
+                gameObject.GetComponent<BattleSystem>().HandlePartySelection(0);
+                break;
+
+            case "Tanuki2":
+                gameObject.GetComponent<BattleSystem>().HandlePartySelection(1);
+                break;
+
+            case "Tanuki3":
+                gameObject.GetComponent<BattleSystem>().HandlePartySelection(2);
+                break;
+
+            case "Tanuki4":
+                gameObject.GetComponent<BattleSystem>().HandlePartySelection(3);
+                break;
+
+            case "Tanuki5":
+                gameObject.GetComponent<BattleSystem>().HandlePartySelection(4);
+                break;
+        }
     }
 
     //Terminar a batalha

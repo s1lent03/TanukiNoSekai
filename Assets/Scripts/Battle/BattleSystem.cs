@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public enum BattleState { Start, PlayerAction, PlayerMove, EnemyMove, Busy}
+public enum BattleState { Start, PlayerAction, PlayerMove, EnemyMove, Busy, PartyScreen}
 
 public class BattleSystem : MonoBehaviour
 {
@@ -52,6 +52,7 @@ public class BattleSystem : MonoBehaviour
 
     public void OpenPartyScreen() 
     {
+        state = BattleState.PartyScreen;
         gameObject.GetComponent<BattleManager>().SetPartyData(playerParty.Tanukis);
     }
 
@@ -83,7 +84,7 @@ public class BattleSystem : MonoBehaviour
             {
                 yield return dialogBox.TypeDialog($"{enemyUnit.Tanuki.Base.Name} has fainted.");
 
-                enemyUnit.PlayFainAnimation(enemyUnit.gameObject);
+                enemyUnit.PlayFaintAnimation(enemyUnit.gameObject);
                 yield return new WaitForSeconds(1f);
 
                 Destroy(TanukiDetector.GetComponent<TanukiDetection>().WildTanukiDetected);
@@ -120,7 +121,7 @@ public class BattleSystem : MonoBehaviour
             if (playerUnit.transform.childCount > 0)
             {
                 Transform child = playerUnit.transform.GetChild(0);
-                playerUnit.PlayFainAnimation(child.gameObject);
+                playerUnit.PlayFaintAnimation(child.gameObject);
                 yield return new WaitForSeconds(1f);
                 Destroy(child.gameObject);
             }
@@ -128,14 +129,7 @@ public class BattleSystem : MonoBehaviour
             var nextTanuki = playerParty.GetHealthyTanuki();
             if (nextTanuki != null)
             {
-                playerUnit.Setup(true, nextTanuki);
-                playerHud.SetData(nextTanuki, true);
-
-                dialogBox.SetMoveNames(nextTanuki.Moves);
-
-                yield return dialogBox.TypeDialog($"Go {nextTanuki.Base.Name}!");
-
-                PlayerAction();
+                gameObject.GetComponent<BattleManager>().PartySelection();
             }
             else
             {
@@ -170,5 +164,45 @@ public class BattleSystem : MonoBehaviour
         {
             dialogBox.UpdateMoveSelection(playerUnit.Tanuki.Moves[0], false);
         }
+    }
+
+    public void HandlePartySelection(int currentTanukiIndex)
+    {
+        var selectedTanuki = playerParty.Tanukis[currentTanukiIndex];
+
+        if (selectedTanuki.Hp <= 0)
+        {
+            return;
+        }
+
+        if (selectedTanuki == playerUnit.Tanuki)
+        {
+            return;
+        }
+
+        state = BattleState.Busy;
+        gameObject.GetComponent<BattleManager>().BackToActionsButton();
+        StartCoroutine(SwitchTanuki(selectedTanuki));
+    }
+
+    IEnumerator SwitchTanuki(Tanuki newTanuki)
+    {       
+        if (playerUnit.Tanuki.Hp > 0)
+        {
+            yield return dialogBox.TypeDialog($"Come back {playerUnit.Tanuki.Base.name}!");
+            Transform child = playerUnit.transform.GetChild(0);
+            playerUnit.PlayFaintAnimation(child.gameObject);
+            yield return new WaitForSeconds(1f);
+            Destroy(child.gameObject);
+        }      
+
+        playerUnit.Setup(true, newTanuki);
+        playerHud.SetData(newTanuki, true);
+
+        dialogBox.SetMoveNames(newTanuki.Moves);
+
+        yield return dialogBox.TypeDialog($"Go {newTanuki.Base.Name}!");
+
+        StartCoroutine(EnemyMove());
     }
 }
