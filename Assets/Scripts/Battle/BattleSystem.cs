@@ -21,6 +21,10 @@ public class BattleSystem : MonoBehaviour
     public TanukiParty playerParty;
     Tanuki wildTanuki;
 
+    [Header("Sound Effects")]
+    [SerializeField] AudioSource normalHitSoundFX;
+    [SerializeField] AudioSource criticalHitSoundFX;
+
     public void StartBattle(TanukiParty playerParty, Tanuki wildTanuki, int wildLevel)
     {
         this.playerParty = playerParty;
@@ -77,6 +81,12 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(enemyUnit.PlayHitAnimation(HitEffect, enemyUnit.gameObject.transform));
 
             var damageDetails = enemyUnit.Tanuki.TakeDamage(move, playerUnit.Tanuki);
+
+            if (damageDetails.Critical > 1f)
+                criticalHitSoundFX.Play();
+            else
+                normalHitSoundFX.Play();
+
             yield return gameObject.GetComponent<BattleManager>().UpdateHP();
             yield return ShowDamageDetails(damageDetails);
 
@@ -111,6 +121,12 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(enemyUnit.PlayHitAnimation(HitEffect, playerUnit.gameObject.transform));
 
         var damageDetails = playerUnit.Tanuki.TakeDamage(move, enemyUnit.Tanuki);
+
+        if(damageDetails.Critical > 1f)
+            criticalHitSoundFX.Play();
+        else
+            normalHitSoundFX.Play();
+
         yield return gameObject.GetComponent<BattleManager>().UpdateHP();
         yield return ShowDamageDetails(damageDetails);
 
@@ -151,7 +167,7 @@ public class BattleSystem : MonoBehaviour
             yield return dialogBox.TypeDialog("It's super effective!");
 
         if (damageDetails.TypeEffectiveness < 1f)
-            yield return dialogBox.TypeDialog("It's not very effective..");
+            yield return dialogBox.TypeDialog("It's not very effective..");          
     }
 
     public void HandleMoveSelection(int currentMoveIndex)
