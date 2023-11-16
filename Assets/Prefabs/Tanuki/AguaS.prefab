@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4024408325516849205}
   - component: {fileID: 727239239523992451}
   - component: {fileID: 8146689090290635270}
+  - component: {fileID: 3380376780329785124}
   m_Layer: 0
   m_Name: AguaS
   m_TagString: Interactable
@@ -103,6 +104,21 @@ CapsuleCollider:
   m_Height: 2.3803797
   m_Direction: 1
   m_Center: {x: 0, y: 0.17244601, z: 0.089565575}
+--- !u!114 &3380376780329785124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44381308457942407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee72424d6708ddb40b30ac9ee7a4a3b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tanukiUnitData:
+    _base: {fileID: 0}
+    level: 0
 --- !u!1 &5698929347805559353
 GameObject:
   m_ObjectHideFlags: 0
