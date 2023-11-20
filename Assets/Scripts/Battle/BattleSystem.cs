@@ -1,9 +1,10 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public enum BattleState { Start, PlayerAction, PlayerMove, EnemyMove, Busy, PartyScreen}
+public enum BattleState { Start, ActionSelection, MoveSelection, PerformMove, Busy, PartyScreen, BattleOver}
 
 public class BattleSystem : MonoBehaviour
 {
@@ -14,7 +15,13 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] BattleDialogBox dialogBox;
 
     public GameObject TanukiDetector;
+
+    [Header("Effects")]
     public GameObject HitEffect;
+    public GameObject StatsUpEffect;
+    public GameObject StatsDownEffect;
+
+    private GameObject StatusEffect;
 
     public BattleState state;
 
@@ -45,12 +52,27 @@ public class BattleSystem : MonoBehaviour
 
         yield return dialogBox.TypeDialog($"A wild {enemyUnit.Tanuki.Base.name} appeared!");
 
-        PlayerAction();
+        ChooseFirstTurn();
     }
 
-    public void PlayerAction()
+    void ChooseFirstTurn()
     {
-        state = BattleState.PlayerAction;
+        if (playerUnit.Tanuki.Speed >= enemyUnit.Tanuki.Speed)
+            ActionSelection();
+        else
+            StartCoroutine(EnemyMove());
+    }
+
+    void BattleOver()
+    {
+        state = BattleState.BattleOver;
+
+        playerParty.Tanukis.ForEach(t => t.OnBattleOver());
+    }
+
+    public void ActionSelection()
+    {
+        state = BattleState.ActionSelection;
         StartCoroutine(dialogBox.TypeDialog("Choose an action.."));
     }
 
@@ -60,27 +82,58 @@ public class BattleSystem : MonoBehaviour
         gameObject.GetComponent<BattleManager>().SetPartyData(playerParty.Tanukis);
     }
 
-    public void PlayerMove()
+    public void MoveSelection()
     {
-        state = BattleState.PlayerMove;
+        state = BattleState.MoveSelection;
     }
 
-    public IEnumerator PerformPlayerMove(int currentMoveIndex)
+    public IEnumerator PlayerMove(int currentMoveIndex)
     {
         if (currentMoveIndex < playerUnit.Tanuki.Moves.Count)
         {
-            state = BattleState.Busy;
+            state = BattleState.PerformMove;
 
             var move = playerUnit.Tanuki.Moves[currentMoveIndex];
-            move.Pp--;
-            yield return dialogBox.TypeDialog($"{playerUnit.Tanuki.Base.Name} used {move.Base.Name}.");
 
-            playerUnit.PlayAttackAnimation();
-            yield return new WaitForSeconds(1f);
+            yield return RunMove(playerUnit, enemyUnit, move, false);
 
-            StartCoroutine(enemyUnit.PlayHitAnimation(HitEffect, enemyUnit.gameObject.transform));
+            if (state == BattleState.PerformMove)
+                StartCoroutine(EnemyMove());
 
-            var damageDetails = enemyUnit.Tanuki.TakeDamage(move, playerUnit.Tanuki);
+        }
+    }
+
+    IEnumerator EnemyMove()
+    {
+        state = BattleState.PerformMove;
+
+        var move = enemyUnit.Tanuki.GetRandomMove();
+        move.Pp--;
+
+        yield return RunMove(enemyUnit, playerUnit, move, true);
+
+        if (state == BattleState.PerformMove)
+            ActionSelection();
+    }
+
+    IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move, bool isPlayer)
+    {
+        move.Pp--;
+        yield return dialogBox.TypeDialog($"{sourceUnit.Tanuki.Base.Name} used {move.Base.Name}.");
+
+        sourceUnit.PlayAttackAnimation();
+        yield return new WaitForSeconds(1f);
+        
+
+        if (move.Base.Category == MoveCategory.Status)
+        {
+            yield return RunMoveEffects(move, sourceUnit, targetUnit);
+        }
+        else
+        {
+            StartCoroutine(targetUnit.PlayHitAnimation(HitEffect, targetUnit.gameObject.transform));
+
+            var damageDetails = targetUnit.Tanuki.TakeDamage(move, sourceUnit.Tanuki);
 
             if (damageDetails.Critical > 1f)
                 criticalHitSoundFX.Play();
@@ -89,72 +142,90 @@ public class BattleSystem : MonoBehaviour
 
             yield return gameObject.GetComponent<BattleManager>().UpdateHP();
             yield return ShowDamageDetails(damageDetails);
+        }
 
-            if (damageDetails.Fainted)
+        if (targetUnit.Tanuki.Hp <= 0)
+        {
+            yield return dialogBox.TypeDialog($"{targetUnit.Tanuki.Base.Name} has fainted.");
+
+            if (isPlayer) //Caso o Tanuki a morrer seja do Player
             {
-                yield return dialogBox.TypeDialog($"{enemyUnit.Tanuki.Base.Name} has fainted.");
+                if (playerUnit.transform.childCount > 0)
+                {
+                    Transform child = playerUnit.transform.GetChild(0);
+                    playerUnit.PlayFaintAnimation(child.gameObject);
+                    yield return new WaitForSeconds(1f);
+                    Destroy(child.gameObject);
+                }
 
-                enemyUnit.PlayFaintAnimation(enemyUnit.gameObject);
+                var nextTanuki = playerParty.GetHealthyTanuki();
+                if (nextTanuki != null)
+                {
+                    gameObject.GetComponent<BattleManager>().PartySelection();
+                }
+                else
+                {
+                    TanukiDetector.GetComponent<TanukiDetection>().EndBattle();
+                }
+            }
+            else //Caso o Tanuki a morrer seja Wild
+            {
+                targetUnit.PlayFaintAnimation(targetUnit.gameObject);
                 yield return new WaitForSeconds(1f);
 
                 Destroy(TanukiDetector.GetComponent<TanukiDetection>().WildTanukiDetected);
-                TanukiDetector.GetComponent<TanukiDetection>().EndBattle();             
+                TanukiDetector.GetComponent<TanukiDetection>().EndBattle();
             }
-            else
-            {
-                StartCoroutine(EnemyMove());
-            }
+
+            BattleOver();
         }
     }
 
-    IEnumerator EnemyMove()
+    IEnumerator RunMoveEffects(Move move, BattleUnit source, BattleUnit target)
     {
-        state = BattleState.EnemyMove;
-
-        var move = enemyUnit.Tanuki.GetRandomMove();
-        move.Pp--;
-        yield return dialogBox.TypeDialog($"{enemyUnit.Tanuki.Base.Name} used {move.Base.Name}.");
-
-        enemyUnit.PlayAttackAnimation();
-        yield return new WaitForSeconds(1f);
-
-        StartCoroutine(enemyUnit.PlayHitAnimation(HitEffect, playerUnit.gameObject.transform));
-
-        var damageDetails = playerUnit.Tanuki.TakeDamage(move, enemyUnit.Tanuki);
-
-        if(damageDetails.Critical > 1f)
-            criticalHitSoundFX.Play();
-        else
-            normalHitSoundFX.Play();
-
-        yield return gameObject.GetComponent<BattleManager>().UpdateHP();
-        yield return ShowDamageDetails(damageDetails);
-
-        if (damageDetails.Fainted)
+        var effects = move.Base.Effects;
+        if (effects.Boosts != null)
         {
-            yield return dialogBox.TypeDialog($"{playerUnit.Tanuki.Base.Name} has fainted.");
-
-            if (playerUnit.transform.childCount > 0)
+            if (move.Base.Target == MoveTarget.Self)
             {
-                Transform child = playerUnit.transform.GetChild(0);
-                playerUnit.PlayFaintAnimation(child.gameObject);
-                yield return new WaitForSeconds(1f);
-                Destroy(child.gameObject);
-            }
+                source.Tanuki.ApplyBoosts(effects.Boosts);
 
-            var nextTanuki = playerParty.GetHealthyTanuki();
-            if (nextTanuki != null)
-            {
-                gameObject.GetComponent<BattleManager>().PartySelection();
+                yield return PlayStatusChangeAnimation(StatsUpEffect, source);
             }
             else
             {
-                TanukiDetector.GetComponent<TanukiDetection>().EndBattle();
+                target.Tanuki.ApplyBoosts(effects.Boosts);
+
+                yield return PlayStatusChangeAnimation(StatsDownEffect, target);
             }
         }
-        else
+
+        yield return ShowStatusChanges(source.Tanuki);
+        yield return ShowStatusChanges(target.Tanuki);
+    }
+
+    IEnumerator PlayStatusChangeAnimation(GameObject effect, BattleUnit target)
+    {
+        Vector3 pos = new Vector3(target.transform.position.x, 100.2f, target.transform.position.z);
+        StatusEffect = Instantiate(effect, pos, Quaternion.identity);
+
+        StatusEffect.transform.DOScale(new Vector3(1, 1, 1), 1);
+        yield return new WaitForSeconds(1f);
+    }
+
+    IEnumerator ShowStatusChanges(Tanuki tanuki)
+    {
+        while (tanuki.StatusChanges.Count > 0)
         {
-            PlayerAction();
+            var message = tanuki.StatusChanges.Dequeue();
+            yield return dialogBox.TypeDialog(message);
+        }
+
+        if (StatusEffect.gameObject != null)
+        {
+            StatusEffect.transform.DOScale(new Vector3(0.1f, 1, 0.1f), 1);
+            yield return new WaitForSeconds(1f);
+            Destroy(StatusEffect.gameObject);
         }
     }
 
@@ -169,6 +240,7 @@ public class BattleSystem : MonoBehaviour
         if (damageDetails.TypeEffectiveness < 1f)
             yield return dialogBox.TypeDialog("It's not very effective..");          
     }
+
 
     public void HandleMoveSelection(int currentMoveIndex)
     {
@@ -202,12 +274,16 @@ public class BattleSystem : MonoBehaviour
     }
 
     IEnumerator SwitchTanuki(Tanuki newTanuki)
-    {       
+    {
+        bool currentTanukiFainted = true;
         if (playerUnit.Tanuki.Hp > 0)
         {
+            currentTanukiFainted = false;
             yield return dialogBox.TypeDialog($"Come back {playerUnit.Tanuki.Base.name}!");
+
             Transform child = playerUnit.transform.GetChild(0);
             playerUnit.PlayFaintAnimation(child.gameObject);
+
             yield return new WaitForSeconds(1f);
             Destroy(child.gameObject);
         }      
@@ -219,6 +295,9 @@ public class BattleSystem : MonoBehaviour
 
         yield return dialogBox.TypeDialog($"Go {newTanuki.Base.Name}!");
 
-        StartCoroutine(EnemyMove());
+        if (currentTanukiFainted)
+            ChooseFirstTurn();
+        else
+            StartCoroutine(EnemyMove());
     }
 }

@@ -35,7 +35,7 @@ public class PartyMemberUI : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             if (i < tanuki.Moves.Count)
-                movesTxt += tanuki.Moves[i].Base.name;
+                movesTxt += tanuki.Moves[i].Base.Name;
             else
                 movesTxt += "--";
 

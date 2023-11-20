@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1058.8116, g: 912.90247, b: 885.73157, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -27632,6 +27632,10 @@ MonoBehaviour:
   TanukiDetector: {fileID: 1868130038}
   HitEffect: {fileID: 9097354204291819951, guid: 39e7cc4a4df5e604bb2c541fb08bf286,
     type: 3}
+  StatsUpEffect: {fileID: 6979609308600820294, guid: 4df20318838a95f468da08bdec88ec44,
+    type: 3}
+  StatsDownEffect: {fileID: 7418416355307910505, guid: 3f4a49c2f44e5bf449b96dff11a5e145,
+    type: 3}
   state: 0
   playerParty: {fileID: 0}
   normalHitSoundFX: {fileID: 1404675257}
@@ -30543,10 +30547,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tanukis:
-  - _base: {fileID: 11400000, guid: c0bad7f38560f6144b5a599c2df87244, type: 2}
-    level: 9
   - _base: {fileID: 11400000, guid: 61bf15b1fd5ae6945bfd4e24964305f0, type: 2}
-    level: 7
+    level: 10
+  - _base: {fileID: 11400000, guid: c0bad7f38560f6144b5a599c2df87244, type: 2}
+    level: 11
 --- !u!1 &1524113379
 GameObject:
   m_ObjectHideFlags: 0

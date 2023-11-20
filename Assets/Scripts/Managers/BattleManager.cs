@@ -153,7 +153,7 @@ public class BattleManager : MonoBehaviour
             }
 
             //Impedir que o jogador utilize ataques enquanto outros ataques estão a ser usados
-            if (gameObject.GetComponent<BattleSystem>().state == BattleState.PlayerMove)
+            if (gameObject.GetComponent<BattleSystem>().state == BattleState.MoveSelection)
             {
                 EnableMoveButtons();
             }
@@ -163,7 +163,7 @@ public class BattleManager : MonoBehaviour
             }
 
             //Impedir que o utilizador utilize botões enquanto dialogo está a ser escrito
-            if (gameObject.GetComponent<BattleSystem>().state == BattleState.PlayerAction)
+            if (gameObject.GetComponent<BattleSystem>().state == BattleState.ActionSelection)
             {
                 EnableActionButtons();
             }
@@ -357,28 +357,28 @@ public class BattleManager : MonoBehaviour
     public void Move1Button()
     {
         buttonClickSoundFX.Play();
-        StartCoroutine(gameObject.GetComponent<BattleSystem>().PerformPlayerMove(0));
+        StartCoroutine(gameObject.GetComponent<BattleSystem>().PlayerMove(0));
     }
 
     //Utiliza a habilidade 2
     public void Move2Button()
     {
         buttonClickSoundFX.Play();
-        StartCoroutine(gameObject.GetComponent<BattleSystem>().PerformPlayerMove(1));
+        StartCoroutine(gameObject.GetComponent<BattleSystem>().PlayerMove(1));
     }
 
     //Utiliza a habilidade 3
     public void Move3Button()
     {
         buttonClickSoundFX.Play();
-        StartCoroutine(gameObject.GetComponent<BattleSystem>().PerformPlayerMove(2));
+        StartCoroutine(gameObject.GetComponent<BattleSystem>().PlayerMove(2));
     }
 
     //Utiliza a habilidade 4
     public void Move4Button()
     {
         buttonClickSoundFX.Play();
-        StartCoroutine(gameObject.GetComponent<BattleSystem>().PerformPlayerMove(3));
+        StartCoroutine(gameObject.GetComponent<BattleSystem>().PlayerMove(3));
     }
 
     //Mostra as habilidades
@@ -391,7 +391,7 @@ public class BattleManager : MonoBehaviour
 
         MoveInfoBox.SetActive(true);
 
-        gameObject.GetComponent<BattleSystem>().PlayerMove();
+        gameObject.GetComponent<BattleSystem>().MoveSelection();
 
         eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
         eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(MovesMenuFirstButton);
@@ -412,8 +412,8 @@ public class BattleManager : MonoBehaviour
         eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
         eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(MainBattleMenuFirstButton);
 
-        if (gameObject.GetComponent<BattleSystem>().state == BattleState.PartyScreen || gameObject.GetComponent<BattleSystem>().state == BattleState.PlayerMove)
-            gameObject.GetComponent<BattleSystem>().state = BattleState.PlayerAction;
+        if (gameObject.GetComponent<BattleSystem>().state == BattleState.PartyScreen || gameObject.GetComponent<BattleSystem>().state == BattleState.MoveSelection)
+            gameObject.GetComponent<BattleSystem>().state = BattleState.ActionSelection;
     }
 
     //Mostrar party de Tanukis
@@ -428,7 +428,7 @@ public class BattleManager : MonoBehaviour
         MoveInfoBox.SetActive(false);
         DialogBox.SetActive(false);
 
-        if (gameObject.GetComponent<BattleSystem>().state == BattleState.EnemyMove)
+        if (gameObject.GetComponent<BattleSystem>().state == BattleState.PerformMove)
         {
             PartyMenuRunButton.SetActive(true);
             PartyMenuBackButton.SetActive(false);

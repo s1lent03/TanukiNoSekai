@@ -10,16 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a294961f0831b59418269adcb4bc2803, type: 3}
-  m_Name: VineSqueeze
+  m_Name: Grow
   m_EditorClassIdentifier: 
-  name: Vine Squeeze
-  description: User summons vines that embrace the enemy and squeeze it, dealing
-    damage.
+  name: Grow
+  description: Makes the Tanuki grow, enhancing their Attack and Sp. Attack stat
+    by +1.
   type: 5
-  power: 50
-  accuracy: 100
-  pp: 15
-  category: 0
+  power: 0
+  accuracy: 80
+  pp: 20
+  category: 2
   effects:
-    boosts: []
-  target: 0
+    boosts:
+    - stat: 0
+      boost: 1
+    - stat: 2
+      boost: 1
+  target: 1
