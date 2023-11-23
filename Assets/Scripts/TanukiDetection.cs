@@ -193,6 +193,9 @@ public class TanukiDetection : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        //Remover efeitos de status
+        Managers.GetComponent<BattleSystem>().StopStatusEffectAnimation();
+
         //Remover os efeitos de pouca vida
         BattleManager battleManager = Managers.GetComponent<BattleManager>();
         battleManager.ChangeMatValues(battleManager.defaultMaskSize, battleManager.defaultOpacityAnim, battleManager.defaultAnimSpeed);
