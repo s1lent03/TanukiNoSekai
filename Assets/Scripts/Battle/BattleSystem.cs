@@ -297,7 +297,7 @@ public class BattleSystem : MonoBehaviour
             yield return dialogBox.TypeDialog(message);
         }
 
-        if (StatEffect != null && StatusEffect.gameObject != null)
+        if (StatEffect != null && StatEffect.gameObject != null)
         {
             StatEffect.transform.DOScale(new Vector3(0.1f, 1, 0.1f), 1);
             yield return new WaitForSeconds(1f);

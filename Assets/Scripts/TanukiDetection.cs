@@ -121,6 +121,10 @@ public class TanukiDetection : MonoBehaviour
         //Dar setup ao sistema de batalha
         if (Player.transform.position == targetPlayerPos && doOnce == false)
         {
+            //Trocar para a primeira camera de combate
+            Managers.GetComponent<ControllerManager>().ChangeToBattleCamera();
+            Managers.GetComponent<ControllerManager>().isPlayerInBattle = true;
+
             var playerParty = Player.GetComponent<TanukiParty>();      
 
             BattleUnit enemyTanuki = WildTanukiDetected.GetComponent<BattleUnit>();
@@ -162,6 +166,10 @@ public class TanukiDetection : MonoBehaviour
 
     public void EndBattle()
     {
+        //Volta a priorizar a camera princiapl
+        Managers.GetComponent<ControllerManager>().DefaultCameraValues();
+        Managers.GetComponent<ControllerManager>().isPlayerInBattle = false;
+
         //Volta a colocar as variaveis como estavam antes da batalha começar
         WildTanukiDetected = null;
         isInBattle = false;
