@@ -95,11 +95,14 @@ public class TanukiSpawner : MonoBehaviour
     //Ativado quando o jogador sai de dentro do collider
     private void OnTriggerExit(Collider other)
     {
-        //Fazer com que os Tanuki desapareçam
-        for (int i = tanukiParent.transform.childCount - 1; i >= 0; i--)
+        //Fazer com que os Tanuki desapareçam caso o player saia da trigger box
+        if (other.tag == "Player")
         {
-            numberTanukiSpawned = 0;
-            Destroy(tanukiParent.transform.GetChild(i).gameObject); 
+            for (int i = tanukiParent.transform.childCount - 1; i >= 0; i--)
+            {
+                numberTanukiSpawned = 0;
+                Destroy(tanukiParent.transform.GetChild(i).gameObject);
+            }
         }
     }
 }

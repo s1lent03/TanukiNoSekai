@@ -12,7 +12,9 @@ public class MoveBase : ScriptableObject
     [SerializeField] TanukiType type;
     [SerializeField] int power;
     [SerializeField] int accuracy;
+    [SerializeField] bool alwaysHits;
     [SerializeField] int pp;
+    [SerializeField] int priority;
     [SerializeField] MoveCategory category;
     [SerializeField] MoveEffects effects;
     [SerializeField] MoveTarget target;
@@ -42,9 +44,19 @@ public class MoveBase : ScriptableObject
         get { return accuracy; }
     }
 
+    public bool AlwaysHits
+    {
+        get { return alwaysHits; }
+    }
+
     public int Pp
     {
         get { return pp; }
+    }
+
+    public int Priority
+    {
+        get { return priority; }
     }
 
     public MoveCategory Category

@@ -6,6 +6,8 @@ using UnityEngine.UIElements;
 
 public enum BattleState { Start, ActionSelection, MoveSelection, PerformMove, Busy, PartyScreen, BattleOver}
 
+public enum BattleAction { Move, SwitchTanuki, Run}
+
 public class BattleSystem : MonoBehaviour
 {
     [SerializeField] BattleUnit playerUnit;
@@ -99,18 +101,22 @@ public class BattleSystem : MonoBehaviour
 
     public IEnumerator PlayerMove(int currentMoveIndex)
     {
-        if (currentMoveIndex < playerUnit.Tanuki.Moves.Count)
+        if (playerUnit.Tanuki.Moves[currentMoveIndex].Pp > 0)
         {
-            state = BattleState.PerformMove;
+            if (currentMoveIndex < playerUnit.Tanuki.Moves.Count)
+            {
+                state = BattleState.PerformMove;
 
-            var move = playerUnit.Tanuki.Moves[currentMoveIndex];
+                var move = playerUnit.Tanuki.Moves[currentMoveIndex];
 
-            yield return RunMove(playerUnit, enemyUnit, move, false);
+                yield return RunMove(playerUnit, enemyUnit, move, false);
 
-            if (state == BattleState.PerformMove)
-                StartCoroutine(EnemyMove());
-
+                if (state == BattleState.PerformMove)
+                    StartCoroutine(EnemyMove());
+            }
         }
+        else
+            yield return dialogBox.TypeDialog($"{playerUnit.Tanuki.Moves[currentMoveIndex].Base.Name} doesn't have power points left.");
     }
 
     IEnumerator EnemyMove()
@@ -118,12 +124,24 @@ public class BattleSystem : MonoBehaviour
         state = BattleState.PerformMove;
 
         var move = enemyUnit.Tanuki.GetRandomMove();
-        move.Pp--;
 
-        yield return RunMove(enemyUnit, playerUnit, move, true);
+        do
+        {
+            if (move.Base.Pp > 0)
+            {
+                move.Pp--;
 
-        if (state == BattleState.PerformMove)
-            ActionSelection();
+                yield return RunMove(enemyUnit, playerUnit, move, true);
+
+                if (state == BattleState.PerformMove)
+                {
+                    ActionSelection();
+                }
+            }
+
+            move = enemyUnit.Tanuki.GetRandomMove();
+        }
+        while (move.Base.Pp > 0);
     }
 
     IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move, bool isPlayer)
@@ -139,30 +157,37 @@ public class BattleSystem : MonoBehaviour
         move.Pp--;
         yield return dialogBox.TypeDialog($"{sourceUnit.Tanuki.Base.Name} used {move.Base.Name}.");
 
-        sourceUnit.PlayAttackAnimation();
-        yield return new WaitForSeconds(1f);
-        
-
-        if (move.Base.Category == MoveCategory.Status)
+        if (CheckIfMoveHits(move, sourceUnit, targetUnit))
         {
-            yield return RunMoveEffects(move, sourceUnit, targetUnit, isPlayer);
+            sourceUnit.PlayAttackAnimation();
+            yield return new WaitForSeconds(1f);
+
+
+            if (move.Base.Category == MoveCategory.Status)
+            {
+                yield return RunMoveEffects(move, sourceUnit, targetUnit, isPlayer);
+            }
+            else
+            {
+                StartCoroutine(targetUnit.PlayHitAnimation(HitEffect, targetUnit.gameObject.transform));
+
+                var damageDetails = targetUnit.Tanuki.TakeDamage(move, sourceUnit.Tanuki);
+
+                if (damageDetails.Critical > 1f)
+                    criticalHitSoundFX.Play();
+                else
+                    normalHitSoundFX.Play();
+
+                yield return gameObject.GetComponent<BattleManager>().UpdateHP();
+                yield return ShowDamageDetails(damageDetails);
+            }
+
+            yield return CheckIfFainted(targetUnit, isPlayer);
         }
         else
         {
-            StartCoroutine(targetUnit.PlayHitAnimation(HitEffect, targetUnit.gameObject.transform));
-
-            var damageDetails = targetUnit.Tanuki.TakeDamage(move, sourceUnit.Tanuki);
-
-            if (damageDetails.Critical > 1f)
-                criticalHitSoundFX.Play();
-            else
-                normalHitSoundFX.Play();
-
-            yield return gameObject.GetComponent<BattleManager>().UpdateHP();
-            yield return ShowDamageDetails(damageDetails);
+            yield return dialogBox.TypeDialog($"{sourceUnit.Tanuki.Base.Name}'s attack missed.");
         }
-
-        yield return CheckIfFainted(targetUnit, isPlayer);
 
         //Condições de status como poison ou burn vão dar dano após o turno
         sourceUnit.Tanuki.OnAfterTurn();
@@ -287,6 +312,31 @@ public class BattleSystem : MonoBehaviour
             Transform child = gameObject.transform.GetChild(0);
             Destroy(child.gameObject);
         }
+    }
+
+    bool CheckIfMoveHits(Move move, BattleUnit source, BattleUnit target)
+    {
+        if (move.Base.AlwaysHits)
+            return true;
+
+        float moveAccuracy = move.Base.Accuracy;
+
+        int accuracy = source.Tanuki.StatBoosts[Stat.Accuracy];
+        int evasion = target.Tanuki.StatBoosts[Stat.Evasion];
+
+        var boostValues = new float[] { 1f, 4f/3f, 5f/3f, 2f, 7f/3f, 8f/3f, 3f};
+
+        if (accuracy > 0)
+            moveAccuracy *= boostValues[accuracy];
+        else
+            moveAccuracy /= boostValues[-accuracy];
+
+        if (evasion > 0)
+            moveAccuracy /= boostValues[evasion];
+        else
+            moveAccuracy *= boostValues[-evasion];
+
+        return Random.Range(1, 101) <= moveAccuracy;
     }
 
     IEnumerator ShowStatusChanges(Tanuki tanuki)

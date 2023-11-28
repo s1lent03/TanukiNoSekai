@@ -55,7 +55,6 @@ public class ControllerManager : MonoBehaviour
         //Se o jogador estiver em batalha trocar para camera de batalha
         if (playerInput.actions["SwitchBattleCamera"].triggered && isPlayerInBattle)
         {
-            Debug.Log("triggered");
             if (currentCameraNumber == 0)
             {
                 ChangeToBattleCamera();

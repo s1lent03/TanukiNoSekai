@@ -58,7 +58,6 @@ public class BattleManager : MonoBehaviour
     [Header("ActionButtons")]
     [SerializeField] GameObject Action1ButtonGo;
     [SerializeField] GameObject Action2ButtonGo;
-    [SerializeField] GameObject Action3ButtonGo;
     [SerializeField] GameObject Action4ButtonGo;
 
     [Header("Sounds")]
@@ -274,7 +273,6 @@ public class BattleManager : MonoBehaviour
     {
         Action1ButtonGo.GetComponent<Button>().interactable = false;
         Action2ButtonGo.GetComponent<Button>().interactable = false;
-        Action3ButtonGo.GetComponent<Button>().interactable = false;
         Action4ButtonGo.GetComponent<Button>().interactable = false;
 
         doOnceActions = false;
@@ -285,7 +283,6 @@ public class BattleManager : MonoBehaviour
     {
         Action1ButtonGo.GetComponent<Button>().interactable = true;
         Action2ButtonGo.GetComponent<Button>().interactable = true;
-        Action3ButtonGo.GetComponent<Button>().interactable = true;
         Action4ButtonGo.GetComponent<Button>().interactable = true;
 
         if (doOnceActions == false)

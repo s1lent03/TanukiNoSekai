@@ -59,7 +59,7 @@ public class Tanuki
         Stats.Add(Stat.SpDefense, Mathf.FloorToInt((Base.SpDefense * Level) / 100f) + 5);
         Stats.Add(Stat.Speed, Mathf.FloorToInt((Base.Speed * Level) / 100f) + 5);
 
-        MaxHp = Mathf.FloorToInt((Base.MaxHp * Level) / 100f) + 10;
+        MaxHp = Mathf.FloorToInt((Base.MaxHp * Level) / 100f) + 10 + Level;
     }
 
     void ResetStatBoost()
@@ -71,6 +71,8 @@ public class Tanuki
             {Stat.SpAttack, 0},
             {Stat.SpDefense, 0},
             {Stat.Speed, 0},
+            {Stat.Accuracy, 0},
+            {Stat.Evasion, 0},
         };
     }
 
@@ -169,6 +171,8 @@ public class Tanuki
 
     public void SetStatus(ConditionID conditionId)
     {
+        if (Status != null) return;
+
         Status = ConditionsDB.Conditions[conditionId];
         StatusChanges.Enqueue($"{Base.Name} {Status.StartMessage}");
     }
