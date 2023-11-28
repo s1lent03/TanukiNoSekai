@@ -84,6 +84,7 @@ public class TanukiSpawner : MonoBehaviour
 
             newTanuki.Init();
             newTanukiObject.GetComponent<BattleUnit>().tanukiUnitData = newTanuki;
+            newTanukiObject.GetComponent<TanukiMovement>().SendCollider(areaCollider);
             
             //Animação de spawnar tanuki
             newTanukiObject.transform.Find("ModelObject").transform.DOScale(new Vector3(1, 1, 1), 1);

@@ -113,6 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: 1
+  speed: 3
+  playerDistance: 5
   groundCheck: {fileID: 2389961966497469979}
   groundDistance: 0.4
   groundMask:
