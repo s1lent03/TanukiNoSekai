@@ -7,16 +7,16 @@ using UnityEngine;
 public class Tanuki
 {
     [SerializeField] TanukiBase _base;
-    [SerializeField] public int level;
+    [SerializeField] public int Level;
 
     public TanukiBase Base
     {
         get { return _base; }
     }
-    public int Level
+    /*public int Level
     {
         get { return level; }
-    }
+    }*/
 
     public int Hp { get; set; }
 

@@ -28,6 +28,10 @@ public class TanukiSpawner : MonoBehaviour
     [Range(0, 100)] public int uncommonSpawnRate;
     [Range(0, 100)] public int rareSpawnRate;
 
+    [Header("SpawnLevels")]
+    [SerializeField] int minSpawnLevel;
+    [SerializeField] int maxSpawnLevel;
+
     void Start()
     {
         //Get collider
@@ -81,6 +85,7 @@ public class TanukiSpawner : MonoBehaviour
             //Spawnar o Tanuki com a tag WildTanuki
             GameObject newTanukiObject = Instantiate(newTanuki.Base.TanukiModel, randomPos, spawnRot, tanukiParent.transform);
             newTanukiObject.tag = "WildTanuki";
+            newTanuki.Level = RandomizeWildTanukiLevels();
 
             newTanuki.Init();
             newTanukiObject.GetComponent<BattleUnit>().tanukiUnitData = newTanuki;
@@ -91,6 +96,12 @@ public class TanukiSpawner : MonoBehaviour
 
             numberTanukiSpawned++;
         }
+    }
+
+    public int RandomizeWildTanukiLevels()
+    {
+        //Dar um level ao tanuki spawnado
+        return Random.Range(minSpawnLevel, maxSpawnLevel + 1);
     }
 
     //Ativado quando o jogador sai de dentro do collider

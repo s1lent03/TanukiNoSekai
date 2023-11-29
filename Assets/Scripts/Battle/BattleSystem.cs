@@ -44,11 +44,11 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] AudioSource normalHitSoundFX;
     [SerializeField] AudioSource criticalHitSoundFX;
 
-    public void StartBattle(TanukiParty playerParty, Tanuki wildTanuki, int wildLevel)
+    public void StartBattle(TanukiParty playerParty, Tanuki wildTanuki/*, int wildLevel*/)
     {
         this.playerParty = playerParty;
         this.wildTanuki = wildTanuki;
-        this.wildTanuki.level = wildLevel;
+        /*this.wildTanuki.level = wildLevel;*/
         this.wildTanuki.Init();
         StartCoroutine(SetupBattle());
     }
@@ -125,23 +125,19 @@ public class BattleSystem : MonoBehaviour
 
         var move = enemyUnit.Tanuki.GetRandomMove();
 
-        do
+        while (move.Base.Pp <= 0)
         {
-            if (move.Base.Pp > 0)
-            {
-                move.Pp--;
-
-                yield return RunMove(enemyUnit, playerUnit, move, true);
-
-                if (state == BattleState.PerformMove)
-                {
-                    ActionSelection();
-                }
-            }
-
             move = enemyUnit.Tanuki.GetRandomMove();
         }
-        while (move.Base.Pp > 0);
+
+        move.Pp--;
+
+        yield return RunMove(enemyUnit, playerUnit, move, true);
+
+        if (state == BattleState.PerformMove)
+        {
+            ActionSelection();
+        }
     }
 
     IEnumerator RunMove(BattleUnit sourceUnit, BattleUnit targetUnit, Move move, bool isPlayer)

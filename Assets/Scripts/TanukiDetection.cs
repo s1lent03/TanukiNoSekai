@@ -42,6 +42,7 @@ public class TanukiDetection : MonoBehaviour
 
     [Header("Others")]
     private bool doOnce = false;
+    bool reachedFinalPos = false;
 
     void Start()
     {
@@ -108,7 +109,11 @@ public class TanukiDetection : MonoBehaviour
         Player.transform.rotation = Quaternion.Slerp(Player.transform.rotation, playerTargetRot, tanukiRotationSpeed * Time.deltaTime);
 
         //Mover Player para trás
-        Vector3 targetPlayerPos = WildTanukiDetected.transform.position + WildTanukiDetected.transform.forward * distanceToMoveBack;
+        Vector3 targetPlayerPos;
+        if (!reachedFinalPos)
+            targetPlayerPos = WildTanukiDetected.transform.position + WildTanukiDetected.transform.forward * distanceToMoveBack;
+        else
+            targetPlayerPos = transform.position;
 
         //Manter a altura do player
         targetPlayerPos = new Vector3(targetPlayerPos.x, Player.transform.position.y, targetPlayerPos.z);
@@ -133,13 +138,14 @@ public class TanukiDetection : MonoBehaviour
             BattleUnit enemyTanuki = WildTanukiDetected.GetComponent<BattleUnit>();
             Managers.GetComponent<BattleSystem>().enemyUnit = enemyTanuki;
 
-            Managers.GetComponent<BattleSystem>().StartBattle(playerParty, enemyTanuki.tanukiUnitData, RandomizeWildTanukiLevels(playerParty.GetHighestLevelTanuki()));
+            Managers.GetComponent<BattleSystem>().StartBattle(playerParty, enemyTanuki.tanukiUnitData/*, RandomizeWildTanukiLevels(playerParty.GetHighestLevelTanuki())*/);
             
             //Ligar o HUD de Batalha
             BattleHud.SetActive(true);
             Managers.GetComponent<BattleManager>().BackToActionsButton();
 
             doOnce = true;
+            reachedFinalPos = true;
         }
     }
 
