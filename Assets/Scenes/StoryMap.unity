@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1059.5675, g: 914.1085, b: 887.8522, a: 1}
+  m_IndirectSpecularColor: {r: 1058.5978, g: 912.49133, b: 885.07776, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5836,7 +5836,7 @@ GameObject:
   - component: {fileID: 245397510}
   m_Layer: 3
   m_Name: Terrain1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 2147483647
@@ -14233,7 +14233,7 @@ GameObject:
   - component: {fileID: 649715554}
   m_Layer: 0
   m_Name: Terrain2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 2147483647
@@ -31745,7 +31745,7 @@ MonoBehaviour:
   Stone: {fileID: 1998323515101076812, guid: b2995491afc861444bd55c4eb910aacb, type: 3}
   ThrowPoint: {fileID: 1145680724}
   ThrowForce: 4500
-  ThrowCoolDown: 1
+  ThrowCoolDown: 0.8
   Managers: {fileID: 1404675247}
   mainCamera: {fileID: 516672109}
 --- !u!1 &1524113379

@@ -14,7 +14,7 @@ public class TanukiMovement : MonoBehaviour
     public LayerMask groundMask;
 
     private bool isGrounded;
-    private bool stunned;
+    public bool stunned;
     private CharacterController characterController;
     private Collider zone;
     private float height = 0f;

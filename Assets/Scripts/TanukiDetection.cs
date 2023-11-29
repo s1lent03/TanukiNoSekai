@@ -85,11 +85,14 @@ public class TanukiDetection : MonoBehaviour
 
     public void EnteredCollider(GameObject Tanuki)
     {
-        WildTanukiDetected = Tanuki;
-        isInBattle = true;
+        if (Tanuki.GetComponent<TanukiMovement>().stunned == true)
+        {
+            WildTanukiDetected = Tanuki;
+            isInBattle = true;
 
-        //Ativar a navegação do HUD
-        Managers.GetComponent<BattleManager>().AtivateNav();
+            //Ativar a navegação do HUD
+            Managers.GetComponent<BattleManager>().AtivateNav();
+        }
     }
 
     public void StartBattle()
