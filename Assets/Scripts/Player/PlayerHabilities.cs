@@ -17,6 +17,7 @@ public class PlayerHabilities : MonoBehaviour
     [SerializeField] GameObject Managers;
     [SerializeField] Camera mainCamera;
     PlayerInput playerInput;
+    
 
     Vector3 ThrowStartPoint;
 
