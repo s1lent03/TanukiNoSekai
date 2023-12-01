@@ -7,14 +7,18 @@ public class TanukiMovement : MonoBehaviour
     [Header("Movement")]
     public float gravity;
     public float speed = 3f;
+    public float chaseSpeed = 6f;
 
     [Header("Ground Check")]
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
-    private bool isGrounded;
+    [Header("Booleans")]
     public bool stunned;
+    public bool angry;
+
+    private bool isGrounded;
     private CharacterController characterController;
     private Collider zone;
     private float height = 0f;
@@ -33,16 +37,26 @@ public class TanukiMovement : MonoBehaviour
         // movement
         if (!stunned)
         {
-            if (Mathf.Round(transform.position.x) == Mathf.Round(nextPosition.x) && Mathf.Round(transform.position.z) == Mathf.Round(nextPosition.z))
+            if (angry)
             {
-                NewPosition();
+                Vector3 playerPosition = new Vector3(GameObject.Find("Character").transform.position.x, transform.position.y, GameObject.Find("Character").transform.position.z);
+                Vector3 playerDirection = (playerPosition - transform.position).normalized;
+
+                characterController.Move(playerDirection * chaseSpeed * Time.deltaTime);
+                transform.LookAt(playerPosition);
+            } else
+            {
+                if (Mathf.Round(transform.position.x) == Mathf.Round(nextPosition.x) && Mathf.Round(transform.position.z) == Mathf.Round(nextPosition.z))
+                {
+                    NewPosition();
+                }
+
+                Vector3 lookPosition = nextPosition;
+                lookPosition.y = transform.position.y;
+
+                characterController.Move((nextPosition - transform.position).normalized * speed * Time.deltaTime);
+                transform.LookAt(lookPosition);
             }
-
-            Vector3 lookPosition = nextPosition;
-            lookPosition.y = transform.position.y;
-
-            characterController.Move((nextPosition - transform.position).normalized * speed * Time.deltaTime);
-            transform.LookAt(lookPosition);
         }
 
         // graivty
