@@ -113,6 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: 1
+  speed: 3
+  playerDistance: 5
   groundCheck: {fileID: 4880002614665623945}
   groundDistance: 0.4
   groundMask:
@@ -179,8 +181,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee72424d6708ddb40b30ac9ee7a4a3b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _base: {fileID: 11400000, guid: 16680591217b9ee4b89c4b18e36f75f5, type: 2}
-  level: 5
+  tanukiUnitData:
+    _base: {fileID: 0}
+    level: 0
 --- !u!1001 &5170366387986476779
 PrefabInstance:
   m_ObjectHideFlags: 0

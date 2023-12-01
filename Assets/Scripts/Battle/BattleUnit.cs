@@ -17,6 +17,7 @@ public class BattleUnit : MonoBehaviour
         {
             newTanuki = Instantiate(Tanuki.Base.TanukiModel, gameObject.transform);
             newTanuki.tag = "Untagged";
+            newTanuki.GetComponent<TanukiMovement>().stunned = true;
 
             if (isPlayerOrTrainer)
                 PlayEnterAnimation();

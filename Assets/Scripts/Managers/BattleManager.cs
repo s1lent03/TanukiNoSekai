@@ -25,11 +25,13 @@ public class BattleManager : MonoBehaviour
     private GameObject lastSelectedObject;
 
     [Header("BattleHUD")]
+    [SerializeField] Image playerStatusImage;
     [SerializeField] TMP_Text playerNameTxt;
     [SerializeField] TMP_Text playerLevelTxt;
     [SerializeField] TMP_Text playerHpTxt;
     [SerializeField] HpBar playerHpBar;
     [Space]
+    [SerializeField] Image enemyStatusImage;
     [SerializeField] TMP_Text enemyNameTxt;
     [SerializeField] TMP_Text enemyLevelTxt;
     [SerializeField] TMP_Text enemyHpTxt;
@@ -56,7 +58,6 @@ public class BattleManager : MonoBehaviour
     [Header("ActionButtons")]
     [SerializeField] GameObject Action1ButtonGo;
     [SerializeField] GameObject Action2ButtonGo;
-    [SerializeField] GameObject Action3ButtonGo;
     [SerializeField] GameObject Action4ButtonGo;
 
     [Header("Sounds")]
@@ -272,7 +273,6 @@ public class BattleManager : MonoBehaviour
     {
         Action1ButtonGo.GetComponent<Button>().interactable = false;
         Action2ButtonGo.GetComponent<Button>().interactable = false;
-        Action3ButtonGo.GetComponent<Button>().interactable = false;
         Action4ButtonGo.GetComponent<Button>().interactable = false;
 
         doOnceActions = false;
@@ -283,7 +283,6 @@ public class BattleManager : MonoBehaviour
     {
         Action1ButtonGo.GetComponent<Button>().interactable = true;
         Action2ButtonGo.GetComponent<Button>().interactable = true;
-        Action3ButtonGo.GetComponent<Button>().interactable = true;
         Action4ButtonGo.GetComponent<Button>().interactable = true;
 
         if (doOnceActions == false)
@@ -335,11 +334,21 @@ public class BattleManager : MonoBehaviour
 
     public IEnumerator UpdateHP()
     {
-        playerHpTxt.text = (int)((float)_playerTanuki.Hp / (float)_playerTanuki.MaxHp * 100) + "%";
-        yield return playerHpBar.SetHpSmooth((float)_playerTanuki.Hp / _playerTanuki.MaxHp);
+        if (_playerTanuki.HpChanged)
+        {
+            playerHpTxt.text = (int)((float)_playerTanuki.Hp / (float)_playerTanuki.MaxHp * 100) + "%";
+            yield return playerHpBar.SetHpSmooth((float)_playerTanuki.Hp / _playerTanuki.MaxHp);
 
-        enemyHpTxt.text = (int)((float)_enemyTanuki.Hp / (float)_enemyTanuki.MaxHp * 100) + "%";
-        yield return enemyHpBar.SetHpSmooth((float)_enemyTanuki.Hp / _enemyTanuki.MaxHp);
+            _playerTanuki.HpChanged = false;
+        }
+
+        if (_enemyTanuki.HpChanged)
+        {
+            enemyHpTxt.text = (int)((float)_enemyTanuki.Hp / (float)_enemyTanuki.MaxHp * 100) + "%";
+            yield return enemyHpBar.SetHpSmooth((float)_enemyTanuki.Hp / _enemyTanuki.MaxHp);
+
+            _enemyTanuki.HpChanged = false;
+        }        
     }
 
     public void SetPartyData(List<Tanuki> tanukis)
@@ -473,6 +482,15 @@ public class BattleManager : MonoBehaviour
                 gameObject.GetComponent<BattleSystem>().HandlePartySelection(4);
                 break;
         }
+    }
+
+    //Alterar a cor do efeito que está a ser utilizado (paralyse, burn, etc)
+    public void ChangeEffectFeedbackImage(bool isPlayer, Color newColor)
+    {
+        if(isPlayer)
+            playerStatusImage.color = newColor;
+        else
+            enemyStatusImage.color = newColor;
     }
 
     //Terminar a batalha

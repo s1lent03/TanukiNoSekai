@@ -7,16 +7,16 @@ using UnityEngine;
 public class Tanuki
 {
     [SerializeField] TanukiBase _base;
-    [SerializeField] public int level;
+    [SerializeField] public int Level;
 
     public TanukiBase Base
     {
         get { return _base; }
     }
-    public int Level
+    /*public int Level
     {
         get { return level; }
-    }
+    }*/
 
     public int Hp { get; set; }
 
@@ -26,7 +26,10 @@ public class Tanuki
 
     public Dictionary<Stat, int> StatBoosts { get; private set; }
 
+    public Condition Status { get; private set; }
+
     public Queue<string> StatusChanges { get; private set; } = new Queue<string>();
+    public bool HpChanged { get; set; }
 
     public void Init()
     {
@@ -56,7 +59,7 @@ public class Tanuki
         Stats.Add(Stat.SpDefense, Mathf.FloorToInt((Base.SpDefense * Level) / 100f) + 5);
         Stats.Add(Stat.Speed, Mathf.FloorToInt((Base.Speed * Level) / 100f) + 5);
 
-        MaxHp = Mathf.FloorToInt((Base.MaxHp * Level) / 100f) + 10;
+        MaxHp = Mathf.FloorToInt((Base.MaxHp * Level) / 100f) + 10 + Level;
     }
 
     void ResetStatBoost()
@@ -68,6 +71,8 @@ public class Tanuki
             {Stat.SpAttack, 0},
             {Stat.SpDefense, 0},
             {Stat.Speed, 0},
+            {Stat.Accuracy, 0},
+            {Stat.Evasion, 0},
         };
     }
 
@@ -153,20 +158,44 @@ public class Tanuki
         float d = a * move.Base.Power * ((float)attack / defense) + 2;
         int damage = Mathf.FloorToInt(d * modifiers);
 
-        Hp -= damage;
-        if (Hp <= 0)
-        {
-            Hp = 0;
-            damageDetails.Fainted = true;
-        }
+        UpdateHp(damage);
 
         return damageDetails;
+    }
+
+    public void UpdateHp(int damage)
+    {
+        Hp = Mathf.Clamp(Hp - damage, 0, MaxHp);
+        HpChanged = true;
+    }
+
+    public void SetStatus(ConditionID conditionId)
+    {
+        if (Status != null) return;
+
+        Status = ConditionsDB.Conditions[conditionId];
+        StatusChanges.Enqueue($"{Base.Name} {Status.StartMessage}");
     }
 
     public Move GetRandomMove()
     {
         int r = Random.Range(0, Moves.Count);
         return Moves[r];
+    }
+
+    public bool OnBeforeMove()
+    {
+        if (Status?.OnBeforeMove != null)
+        {
+            return Status.OnBeforeMove(this);
+        }
+
+        return true;
+    }
+
+    public void OnAfterTurn()
+    {
+        Status?.OnAfterTurn?.Invoke(this);
     }
 
     public void OnBattleOver()

@@ -42,6 +42,7 @@ public class TanukiDetection : MonoBehaviour
 
     [Header("Others")]
     private bool doOnce = false;
+    bool reachedFinalPos = false;
 
     void Start()
     {
@@ -85,11 +86,14 @@ public class TanukiDetection : MonoBehaviour
 
     public void EnteredCollider(GameObject Tanuki)
     {
-        WildTanukiDetected = Tanuki;
-        isInBattle = true;
+        if (Tanuki.GetComponent<TanukiMovement>().stunned == true)
+        {
+            WildTanukiDetected = Tanuki;
+            isInBattle = true;
 
-        //Ativar a navegação do HUD
-        Managers.GetComponent<BattleManager>().AtivateNav();
+            //Ativar a navegação do HUD
+            Managers.GetComponent<BattleManager>().AtivateNav();
+        }
     }
 
     public void StartBattle()
@@ -105,7 +109,11 @@ public class TanukiDetection : MonoBehaviour
         Player.transform.rotation = Quaternion.Slerp(Player.transform.rotation, playerTargetRot, tanukiRotationSpeed * Time.deltaTime);
 
         //Mover Player para trás
-        Vector3 targetPlayerPos = WildTanukiDetected.transform.position + WildTanukiDetected.transform.forward * distanceToMoveBack;
+        Vector3 targetPlayerPos;
+        if (!reachedFinalPos)
+            targetPlayerPos = WildTanukiDetected.transform.position + WildTanukiDetected.transform.forward * distanceToMoveBack;
+        else
+            targetPlayerPos = transform.position;
 
         //Manter a altura do player
         targetPlayerPos = new Vector3(targetPlayerPos.x, Player.transform.position.y, targetPlayerPos.z);
@@ -121,18 +129,23 @@ public class TanukiDetection : MonoBehaviour
         //Dar setup ao sistema de batalha
         if (Player.transform.position == targetPlayerPos && doOnce == false)
         {
+            //Trocar para a primeira camera de combate
+            Managers.GetComponent<ControllerManager>().ChangeToBattleCamera();
+            Managers.GetComponent<ControllerManager>().isPlayerInBattle = true;
+
             var playerParty = Player.GetComponent<TanukiParty>();      
 
             BattleUnit enemyTanuki = WildTanukiDetected.GetComponent<BattleUnit>();
             Managers.GetComponent<BattleSystem>().enemyUnit = enemyTanuki;
 
-            Managers.GetComponent<BattleSystem>().StartBattle(playerParty, enemyTanuki.tanukiUnitData, RandomizeWildTanukiLevels(playerParty.GetHighestLevelTanuki()));
+            Managers.GetComponent<BattleSystem>().StartBattle(playerParty, enemyTanuki.tanukiUnitData/*, RandomizeWildTanukiLevels(playerParty.GetHighestLevelTanuki())*/);
             
             //Ligar o HUD de Batalha
             BattleHud.SetActive(true);
             Managers.GetComponent<BattleManager>().BackToActionsButton();
 
             doOnce = true;
+            reachedFinalPos = true;
         }
     }
 
@@ -162,6 +175,10 @@ public class TanukiDetection : MonoBehaviour
 
     public void EndBattle()
     {
+        //Volta a priorizar a camera princiapl
+        Managers.GetComponent<ControllerManager>().DefaultCameraValues();
+        Managers.GetComponent<ControllerManager>().isPlayerInBattle = false;
+
         //Volta a colocar as variaveis como estavam antes da batalha começar
         WildTanukiDetected = null;
         isInBattle = false;
@@ -192,6 +209,9 @@ public class TanukiDetection : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+
+        //Remover efeitos de status
+        Managers.GetComponent<BattleSystem>().StopStatusEffectAnimation();
 
         //Remover os efeitos de pouca vida
         BattleManager battleManager = Managers.GetComponent<BattleManager>();

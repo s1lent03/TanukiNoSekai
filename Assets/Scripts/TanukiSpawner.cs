@@ -28,6 +28,10 @@ public class TanukiSpawner : MonoBehaviour
     [Range(0, 100)] public int uncommonSpawnRate;
     [Range(0, 100)] public int rareSpawnRate;
 
+    [Header("SpawnLevels")]
+    [SerializeField] int minSpawnLevel;
+    [SerializeField] int maxSpawnLevel;
+
     void Start()
     {
         //Get collider
@@ -81,9 +85,11 @@ public class TanukiSpawner : MonoBehaviour
             //Spawnar o Tanuki com a tag WildTanuki
             GameObject newTanukiObject = Instantiate(newTanuki.Base.TanukiModel, randomPos, spawnRot, tanukiParent.transform);
             newTanukiObject.tag = "WildTanuki";
+            newTanuki.Level = RandomizeWildTanukiLevels();
 
             newTanuki.Init();
             newTanukiObject.GetComponent<BattleUnit>().tanukiUnitData = newTanuki;
+            newTanukiObject.GetComponent<TanukiMovement>().SendCollider(areaCollider);
             
             //Animação de spawnar tanuki
             newTanukiObject.transform.Find("ModelObject").transform.DOScale(new Vector3(1, 1, 1), 1);
@@ -92,14 +98,23 @@ public class TanukiSpawner : MonoBehaviour
         }
     }
 
+    public int RandomizeWildTanukiLevels()
+    {
+        //Dar um level ao tanuki spawnado
+        return Random.Range(minSpawnLevel, maxSpawnLevel + 1);
+    }
+
     //Ativado quando o jogador sai de dentro do collider
     private void OnTriggerExit(Collider other)
     {
-        //Fazer com que os Tanuki desapareçam
-        for (int i = tanukiParent.transform.childCount - 1; i >= 0; i--)
+        //Fazer com que os Tanuki desapareçam caso o player saia da trigger box
+        if (other.tag == "Player")
         {
-            numberTanukiSpawned = 0;
-            Destroy(tanukiParent.transform.GetChild(i).gameObject); 
+            for (int i = tanukiParent.transform.childCount - 1; i >= 0; i--)
+            {
+                numberTanukiSpawned = 0;
+                Destroy(tanukiParent.transform.GetChild(i).gameObject);
+            }
         }
     }
 }
