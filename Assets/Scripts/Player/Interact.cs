@@ -13,9 +13,20 @@ public class Interact : MonoBehaviour
     public TMP_Text interactText;
     private PlayerInput playerInput;
 
+    [Header("Buying")]
+    [SerializeField] TMP_Text currentMoneyText;
+
+    [Header("Others")]
+    GameObject buyingInfoObject;
+    string lastInfoName;
+
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
+        lastInfoName = "";
+
+        //REMOVERRRRRRRRRRRRRRRRRRRRRRRRR
+        PlayerPrefs.SetInt("CurrentMoney", 500);
     }
 
     private void FixedUpdate()
@@ -24,49 +35,121 @@ public class Interact : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2, 0));
         RaycastHit hit = new RaycastHit();
 
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, 30f))
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, interactDistance))
         {
             Debug.DrawLine(ray.origin, hit.point, Color.red);
 
+            GameObject otherObject = hit.collider.gameObject;
+
             //Se o ray atingir um objeto com a tag pretendida e tiver a menos de 1.5 de distancia vai aparecer um texto a indicar que o objeto é interagivel
-            if (hit.collider.gameObject.tag == "Interactable" || hit.collider.gameObject.tag == "WildTanuki" && hit.collider.gameObject.transform.parent.name != "Tanuki")
+            if (otherObject.tag == "WildTanuki" && otherObject.GetComponent<TanukiMovement>().stunned == true)
             {
-                if (Vector3.Distance(hit.point, ray.origin) < interactDistance)
+                interactText.text = WhatToDisplay("Mouse 2", "LT", "L2", "feed the Tanuki");
+
+                //Se o jogador clicar no botão pretendido, irá ao script do objeto que faz com que o VFX seja ativado
+                if (playerInput.actions["GiveBerries"].triggered)
                 {
-                    interactText.gameObject.SetActive(true);
-                    
-                    if (Input.GetJoystickNames().Length > 0)
+                    gameObject.GetComponent<PlayerHabilities>().PlayDropBerry();
+                }
+            }
+            //Se o ray atingir um objeto com a tag pretendida e tiver a menos de 1.5 de distancia vai aparecer um texto a indicar que o objeto é interagivel
+            else if (otherObject.tag == "Buyable")
+            {
+                interactText.text = WhatToDisplay("F", "X", "Square Button", "buy the item");
+
+                //Mostrar dinheiro atual
+                currentMoneyText.text = "Money: " + PlayerPrefs.GetInt("CurrentMoney") + "$";
+
+                if (lastInfoName != otherObject.name && buyingInfoObject != null)
+                {
+                    buyingInfoObject.transform.Find("Info").gameObject.SetActive(false);
+                    lastInfoName = buyingInfoObject.name;                    
+                }
+
+                //Mostrar custo do item a comprar
+                buyingInfoObject = otherObject;
+                buyingInfoObject.transform.Find("Info").gameObject.SetActive(true);
+
+                //Se o jogador clicar no botão pretendido, irá ao script do objeto que faz com que o VFX seja ativado
+                if (playerInput.actions["Interact"].triggered)
+                {
+                    if (otherObject.name == "BallLevel1Buy")
                     {
-                        
-                        if (Input.GetJoystickNames()[0].ToLower().Contains("xbox"))
+                        if (PlayerPrefs.GetInt("CurrentMoney") > 10)
                         {
-                            interactText.text = "Press X Button to interact.";
-                        }
-                        else if (Input.GetJoystickNames()[0].ToLower().Contains("playstation"))
-                        {
-                            interactText.text = "Press Square Button to interact.";
-                        }
-                        else
-                        {
-                            interactText.text = "Press F to interact.";
+                            //Adicionar mais um item do escolhido e remover dinheiro
+                            PlayerPrefs.SetInt("NumberOfBall1", PlayerPrefs.GetInt("NumberOfBall1") + 1);
+                            PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 10);
+
+                            //Mostrar dinheiro atual
+                            currentMoneyText.text = "Money: " + PlayerPrefs.GetInt("CurrentMoney") + "$";
                         }
                     }
-                    else
+                    else if (otherObject.name == "BallLevel2Buy")
                     {
-                        interactText.text = "Press F to interact.";
-                    }                                     
+                        if (PlayerPrefs.GetInt("CurrentMoney") > 25)
+                        {
+                            //Adicionar mais um item do escolhido e remover dinheiro
+                            PlayerPrefs.SetInt("NumberOfBall2", PlayerPrefs.GetInt("NumberOfBall2") + 1);
+                            PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 25);
 
-                    //Se o jogador clicar no botão pretendido, irá ao script do objeto que faz com que o VFX seja ativado
-                    if (playerInput.actions["Interact"].triggered)
+                            //Mostrar dinheiro atual
+                            currentMoneyText.text = "Money: " + PlayerPrefs.GetInt("CurrentMoney") + "$";
+                        }
+                    }
+                    else if (otherObject.name == "BallLevel3Buy")
                     {
-                        gameObject.GetComponentInChildren<TanukiDetection>().EnteredCollider(hit.collider.gameObject);
+                        if (PlayerPrefs.GetInt("CurrentMoney") > 60)
+                        {
+                            //Adicionar mais um item do escolhido e remover dinheiro
+                            PlayerPrefs.SetInt("NumberOfBall3", PlayerPrefs.GetInt("NumberOfBall3") + 1);
+                            PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 60);
+
+                            //Mostrar dinheiro atual
+                            currentMoneyText.text = "Money: " + PlayerPrefs.GetInt("CurrentMoney") + "$";
+                        }
                     }
                 }
             }
+        }
+        else
+        {
+            interactText.text = "";
+            currentMoneyText.text = "";
+
+            if (buyingInfoObject != null)
+                buyingInfoObject.transform.Find("Info").gameObject.SetActive(false);
+        }
+    }
+
+    //Dependendo do que o jogador tiver a utilizar para jogar, vai mostrar o devido texto
+    public string WhatToDisplay(string keyboardKey, string xboxKey, string psKey, string whatToDo)
+    {
+        interactText.gameObject.SetActive(true);
+
+        string buttonName;
+        if (Input.GetJoystickNames().Length > 0)
+        {
+            //Escolher o que escrever no nome do botão a clicar, dependendo do controlador
+            if (Input.GetJoystickNames()[0].ToLower().Contains("xbox"))
+            {
+                buttonName = xboxKey + " Button";
+            }
+            else if (Input.GetJoystickNames()[0].ToLower().Contains("playstation"))
+            {
+                buttonName = psKey + " Square Button";
+            }
             else
             {
-                interactText.gameObject.SetActive(false);
+                buttonName = keyboardKey;
             }
         }
+        else
+        {
+            buttonName = keyboardKey;
+        }
+
+        //Escrever o texto
+        return "Press " + buttonName + " to " + whatToDo + ".";
     }
 }

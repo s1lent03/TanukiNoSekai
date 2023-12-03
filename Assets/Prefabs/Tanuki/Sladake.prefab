@@ -114,12 +114,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravity: 1
   speed: 3
-  playerDistance: 5
+  chaseSpeed: 6
   groundCheck: {fileID: 4880002614665623945}
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+  stunned: 0
+  angry: 0
 --- !u!143 &1364983880986837558
 CharacterController:
   m_ObjectHideFlags: 0
@@ -183,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tanukiUnitData:
     _base: {fileID: 0}
-    level: 0
+    Level: 0
 --- !u!1001 &5170366387986476779
 PrefabInstance:
   m_ObjectHideFlags: 0

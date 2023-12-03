@@ -86,10 +86,14 @@ public class TanukiDetection : MonoBehaviour
 
     public void EnteredCollider(GameObject Tanuki)
     {
-        if (Tanuki.GetComponent<TanukiMovement>().stunned == true)
+        if (Tanuki.GetComponent<TanukiMovement>().angry == true && Tanuki.GetComponent<TanukiMovement>().stunned == false)
         {
             WildTanukiDetected = Tanuki;
             isInBattle = true;
+
+            //Parar o Tanuki
+            Tanuki.GetComponent<TanukiMovement>().angry = false;
+            Tanuki.GetComponent<TanukiMovement>().stunned = true;
 
             //Ativar a navegação do HUD
             Managers.GetComponent<BattleManager>().AtivateNav();
@@ -180,9 +184,10 @@ public class TanukiDetection : MonoBehaviour
         Managers.GetComponent<ControllerManager>().isPlayerInBattle = false;
 
         //Volta a colocar as variaveis como estavam antes da batalha começar
+        WildTanukiDetected.GetComponent<TanukiMovement>().stunned = false;
         WildTanukiDetected = null;
         isInBattle = false;
-        Player.GetComponent<PlayerMovement>().isPaused = false;
+        Player.GetComponent<PlayerMovement>().isPaused = false;        
 
         //Colocar a camera com os seus valores normais
         ChangeCameraValues(Player.transform, new Vector3(0, 1.5f, 0), 0.35f, 0.45f);
@@ -217,6 +222,7 @@ public class TanukiDetection : MonoBehaviour
         BattleManager battleManager = Managers.GetComponent<BattleManager>();
         battleManager.ChangeMatValues(battleManager.defaultMaskSize, battleManager.defaultOpacityAnim, battleManager.defaultAnimSpeed);
 
+        reachedFinalPos = false;
         doOnce = false;
     }
 }
