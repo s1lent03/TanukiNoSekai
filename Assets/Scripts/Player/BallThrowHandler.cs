@@ -34,16 +34,15 @@ public class BallThrowHandler : MonoBehaviour
         //Verifica se acertou num Tanuki
         if (enemyTanuki.tag == "WildTanuki" && !hasHitGround && !hasHitTanuki)
         {
-            Debug.Log("acertou");
             hasHitTanuki = true;
 
             enemyTanuki.GetComponent<TanukiMovement>().angry = true;
 
-            int currentBallNum = 2;
+            int currentBallNum = PlayerPrefs.GetInt("CurrentBallLevel");
 
-            int rand = Random.Range(1, enemyTanuki.GetComponent<BattleUnit>().tanukiUnitData.Level / currentBallNum);
+            int rand = Random.Range(1, enemyTanuki.GetComponent<BattleUnit>().tanukiUnitData.Level / (currentBallNum * 2));
 
-            if (rand == 1)
+            if (rand <= currentBallNum * 2)
             {
                 enemyTanuki.GetComponent<TanukiMovement>().stunned = true;
                 StartCoroutine(StunnedTime(enemyTanuki));

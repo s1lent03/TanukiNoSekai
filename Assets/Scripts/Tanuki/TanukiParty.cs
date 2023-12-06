@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TanukiParty : MonoBehaviour
 {
-    [SerializeField] List<Tanuki> tanukis;
+    public List<Tanuki> tanukis;
 
     public List<Tanuki> Tanukis
     {

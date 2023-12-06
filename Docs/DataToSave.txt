@@ -1,0 +1,51 @@
+Variaveis a guardar quando sai do jogo:
+
+[Jogador]
+Transform
+
+[Itens]
+Money - PlayerPrefs.GetInt("CurrentMoney")
+
+Catching Ball Level 1 - PlayerPrefs.GetInt("NumberOfBall1")
+Catching Ball Level 2 - PlayerPrefs.GetInt("NumberOfBall2")
+Catching Ball Level 3 - PlayerPrefs.GetInt("NumberOfBall3")
+
+Berry Level 1 - PlayerPrefs.GetInt("NumberOfBerry1")
+Berry Level 2 - PlayerPrefs.GetInt("NumberOfBerry2")
+Berry Level 3 - PlayerPrefs.GetInt("NumberOfBerry3")
+
+[Tanukis]
+Tanuki [0]
+Level
+Move 1
+Move 2
+Move 3
+Move 4
+
+Tanuki [1]
+Level
+Move 1
+Move 2
+Move 3
+Move 4
+
+Tanuki [2]
+Level
+Move 1
+Move 2
+Move 3
+Move 4
+
+Tanuki [3]
+Level
+Move 1
+Move 2
+Move 3
+Move 4
+
+Tanuki [4]
+Level
+Move 1
+Move 2
+Move 3
+Move 4

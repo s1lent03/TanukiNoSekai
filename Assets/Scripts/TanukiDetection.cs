@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.HID;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class TanukiDetection : MonoBehaviour
@@ -43,6 +44,7 @@ public class TanukiDetection : MonoBehaviour
     [Header("Others")]
     private bool doOnce = false;
     bool reachedFinalPos = false;
+    [SerializeField] GameObject HUD;
 
     void Start()
     {
@@ -143,8 +145,9 @@ public class TanukiDetection : MonoBehaviour
             Managers.GetComponent<BattleSystem>().enemyUnit = enemyTanuki;
 
             Managers.GetComponent<BattleSystem>().StartBattle(playerParty, enemyTanuki.tanukiUnitData/*, RandomizeWildTanukiLevels(playerParty.GetHighestLevelTanuki())*/);
-            
-            //Ligar o HUD de Batalha
+
+            //Ligar o HUD de Batalha e desligar o normal
+            HUD.SetActive(false);
             BattleHud.SetActive(true);
             Managers.GetComponent<BattleManager>().BackToActionsButton();
 
@@ -193,8 +196,9 @@ public class TanukiDetection : MonoBehaviour
         ChangeCameraValues(Player.transform, new Vector3(0, 1.5f, 0), 0.35f, 0.45f);
         thirdPersonCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 3f;
 
-        //Desligar o HUD de batalha
+        //Desligar o HUD de batalha e ligar o normal
         BattleHud.SetActive(false);
+        HUD.SetActive(true);
 
         //Bloquear o cursor
         Cursor.lockState = CursorLockMode.Locked;

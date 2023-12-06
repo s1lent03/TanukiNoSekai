@@ -10,11 +10,6 @@ public class HpBar : MonoBehaviour
     [SerializeField] Color yellowHp;
     [SerializeField] Color redHp;
 
-    void Start()
-    {
-        
-    }
-
     public void SetHp(float hpNormalized)
     {
         health.transform.localScale = new Vector3(hpNormalized, 1f);

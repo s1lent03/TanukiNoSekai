@@ -47,7 +47,7 @@ public class PauseMenuManager : MonoBehaviour
     void Update()
     {
         //Parar o jogo ou recomeçar
-        if (playerInput.actions["Pause"].triggered && isPaused == false && Player.GetComponentInChildren<TanukiDetection>().isInBattle == false)
+        if (playerInput.actions["Pause"].triggered && !isPaused && !Player.GetComponentInChildren<TanukiDetection>().isInBattle && !gameObject.GetComponent<ControllerManager>().isPlayerInBattle)
         {
             //Abre o menu
             pauseMenu.SetActive(true);

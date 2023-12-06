@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using DG.Tweening;
+using UnityEngine.EventSystems;
 
 public class PlayerHabilities : MonoBehaviour
 {
@@ -23,6 +25,13 @@ public class PlayerHabilities : MonoBehaviour
     [SerializeField] Sprite Ball2Sprite;
     [SerializeField] Sprite Ball3Sprite;
 
+    [Header("Berry Sprites")]
+    [SerializeField] Image BerrySprite;
+    [SerializeField] TMP_Text NumBerriesTxt;
+    [SerializeField] Sprite Berry1Sprite;
+    [SerializeField] Sprite Berry2Sprite;
+    [SerializeField] Sprite Berry3Sprite;
+
     [Header("Drop Berry")]
     [SerializeField] List<GameObject> BerryVariants;
     [SerializeField] GameObject Berry;
@@ -32,11 +41,17 @@ public class PlayerHabilities : MonoBehaviour
     [SerializeField] float DropCoolDown;
     bool canDropNextBerry = true;
 
+    [Header("Party")]
+    [SerializeField] GameObject eventSystemObject;
+    [SerializeField] GameObject PartyScreen;
+    [SerializeField] GameObject PartyMenuRunButton;
+    [Space]
+    [SerializeField] PartyMemberUI[] memberSlots;
+
     [Header("Others")]
     [SerializeField] GameObject Managers;
     [SerializeField] Camera mainCamera;
-    PlayerInput playerInput;
-    
+    PlayerInput playerInput;    
 
     Vector3 ThrowStartPoint;
     Vector3 DropStartPoint;
@@ -46,6 +61,7 @@ public class PlayerHabilities : MonoBehaviour
         //Dar um valor default às variaveis
         playerInput = GetComponent<PlayerInput>();
         PlayerPrefs.SetInt("CurrentBallLevel", 1);
+        PlayerPrefs.SetInt("CurrentBerryLevel", 1);      
     }
 
     void Update()
@@ -81,8 +97,29 @@ public class PlayerHabilities : MonoBehaviour
             }            
         }
 
-        //Valor de quantas bolas a selecionada possui
+        //Trocar de berry selecionada
+        if (!Managers.GetComponent<ControllerManager>().isPlayerInBattle && !Managers.GetComponent<PauseMenuManager>().isPaused && playerInput.actions["ChangeBerry"].triggered)
+        {
+            switch (PlayerPrefs.GetInt("CurrentBerryLevel"))
+            {
+                case 1:
+                    PlayerPrefs.SetInt("CurrentBerryLevel", 2);
+                    ChangeBerrySpriteAndValues(Berry2Sprite);
+                    break;
+                case 2:
+                    PlayerPrefs.SetInt("CurrentBerryLevel", 3);
+                    ChangeBerrySpriteAndValues(Berry3Sprite);
+                    break;
+                case 3:
+                    PlayerPrefs.SetInt("CurrentBerryLevel", 1);
+                    ChangeBerrySpriteAndValues(Berry1Sprite);
+                    break;
+            }
+        }
+
+        //Valor de quantas bolas e berries a selecionada possui
         NumBallsTxt.text = PlayerPrefs.GetInt("NumberOfBall" + PlayerPrefs.GetInt("CurrentBallLevel")) + "x";
+        NumBerriesTxt.text = PlayerPrefs.GetInt("NumberOfBerry" + PlayerPrefs.GetInt("CurrentBerryLevel")) + "x";
     }
 
     void ChangeBallSpriteAndValues(Sprite ballSprite)
@@ -91,33 +128,86 @@ public class PlayerHabilities : MonoBehaviour
         BallSprite.sprite = ballSprite;        
     }
 
-    public void PlayDropBerry()
+    void ChangeBerrySpriteAndValues(Sprite berrySprite)
+    {
+        //Trocar a sprite da berry e o numero de berries da selecionada
+        BerrySprite.sprite = berrySprite;
+    }
+
+    public void PlayDropBerry(GameObject Tanuki)
     {
         //Dropar berries para apanhar o Tanuki
         if (!Managers.GetComponent<ControllerManager>().isPlayerInBattle && !Managers.GetComponent<PauseMenuManager>().isPaused && canDropNextBerry)
         {
-            //Atirar bola
-            StartCoroutine(DropBerry());
+
+            if (PlayerPrefs.GetInt("NumberOfBerry" + PlayerPrefs.GetInt("CurrentBerryLevel")) > 0)
+            {
+                StartCoroutine(DropBerry(PlayerPrefs.GetInt("CurrentBerryLevel") - 1, Tanuki));
+                PlayerPrefs.SetInt("NumberOfBerry" + PlayerPrefs.GetInt("CurrentBerryLevel"), PlayerPrefs.GetInt("NumberOfBerry" + PlayerPrefs.GetInt("CurrentBerryLevel")) - 1);
+            }
         }
     } 
 
-    IEnumerator DropBerry()
+    IEnumerator DropBerry(int berryIndex, GameObject tanuki)
     {
         canDropNextBerry = false;
 
-        //Assinar a berry selecionada
-        Berry = BerryVariants[0];
+        //Assinar a berry selecionada 
+        Berry = BerryVariants[berryIndex];
 
         //Criar variaveis para guardar os dados de onde a berry vai sair e em que direção ela vai
         DropStartPoint = DropPoint.position;
         Vector3 lookAtPosition = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)).direction;
 
-        //Criar a berry e dar-lhe força para ir na direção criada anteriormente
+        //Criar a berry e fazer com que vá para a boca do tanuki
         GameObject BerryToDrop = Instantiate(Berry, DropStartPoint, Quaternion.identity);
-        BerryToDrop.GetComponent<Rigidbody>().AddForce(lookAtPosition * DropForce);
+        Transform Mouth = tanuki.gameObject.transform.Find("ModelObject").transform.Find("Mouth").gameObject.transform;
+        BerryToDrop.transform.DOMove(new Vector3(Mouth.position.x, Mouth.position.y, Mouth.position.z), 1f);
 
         //Destruir berry
-        StartCoroutine(DestroyBall(BerryToDrop, 3f));
+        StartCoroutine(DestroyBall(BerryToDrop, 1f));
+        yield return new WaitForSeconds(1f);
+
+        //Apanhar Tanuki
+        int currentBerryNum = PlayerPrefs.GetInt("CurrentBerryLevel");
+
+        int rand = Random.Range(1, tanuki.gameObject.GetComponent<BattleUnit>().tanukiUnitData.Level / (currentBerryNum * 2));
+
+        Debug.Log("Current berry num: " + currentBerryNum);
+        Debug.Log("Random: " + rand);
+        Debug.Log("Tanuki lvl: " + tanuki.gameObject.GetComponent<BattleUnit>().tanukiUnitData.Level);
+
+        if (rand <= currentBerryNum * 2)
+        {
+            if (gameObject.GetComponent<TanukiParty>().Tanukis.Count == 5)
+            {
+                //Abre o menu de party para escolher qual Tanuki vai ser trocado
+                Managers.GetComponent<ControllerManager>().isPlayerInBattle = true;
+                gameObject.GetComponent<PlayerMovement>().isPaused = true;
+
+                PartyScreen.SetActive(true);
+                eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
+                eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(PartyMenuRunButton);
+
+                List<Tanuki> tanukis = gameObject.GetComponent<TanukiParty>().tanukis;
+                for (int i = 0; i < memberSlots.Length; i++)
+                {
+                    if (i < tanukis.Count)
+                        memberSlots[i].SetData(tanukis[i]);
+                    else
+                        memberSlots[i].gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                //Adiciona o tanuki à party
+                gameObject.GetComponent<TanukiParty>().Tanukis.Add(tanuki.gameObject.GetComponent<BattleUnit>().tanukiUnitData);
+
+                tanuki.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 1f);
+                yield return new WaitForSeconds(1f);
+                Destroy(tanuki.gameObject);
+            }
+        }       
 
         //Esperar algum tempo para mandar outra
         yield return new WaitForSeconds(DropCoolDown);

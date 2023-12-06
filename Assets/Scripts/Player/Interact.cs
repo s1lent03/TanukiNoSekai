@@ -5,6 +5,7 @@ using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class Interact : MonoBehaviour
 {
@@ -49,7 +50,7 @@ public class Interact : MonoBehaviour
                 //Se o jogador clicar no botão pretendido, irá ao script do objeto que faz com que o VFX seja ativado
                 if (playerInput.actions["GiveBerries"].triggered)
                 {
-                    gameObject.GetComponent<PlayerHabilities>().PlayDropBerry();
+                    gameObject.GetComponent<PlayerHabilities>().PlayDropBerry(otherObject.gameObject);
                 }
             }
             //Se o ray atingir um objeto com a tag pretendida e tiver a menos de 1.5 de distancia vai aparecer um texto a indicar que o objeto é interagivel
@@ -62,6 +63,7 @@ public class Interact : MonoBehaviour
 
                 if (lastInfoName != otherObject.name && buyingInfoObject != null)
                 {
+                    buyingInfoObject.transform.Find("Info").gameObject.transform.DOScale(new Vector3(0.01f, 0.01f, 0.01f), 1);
                     buyingInfoObject.transform.Find("Info").gameObject.SetActive(false);
                     lastInfoName = buyingInfoObject.name;                    
                 }
@@ -69,6 +71,7 @@ public class Interact : MonoBehaviour
                 //Mostrar custo do item a comprar
                 buyingInfoObject = otherObject;
                 buyingInfoObject.transform.Find("Info").gameObject.SetActive(true);
+                buyingInfoObject.transform.Find("Info").gameObject.transform.DOScale(new Vector3(1f, 1.3f, 1f), 1);
 
                 //Se o jogador clicar no botão pretendido, irá ao script do objeto que faz com que o VFX seja ativado
                 if (playerInput.actions["Interact"].triggered)
@@ -109,6 +112,42 @@ public class Interact : MonoBehaviour
                             currentMoneyText.text = "Money: " + PlayerPrefs.GetInt("CurrentMoney") + "$";
                         }
                     }
+                    else if (otherObject.name == "BerryLevel1Buy")
+                    {
+                        if (PlayerPrefs.GetInt("CurrentMoney") > 15)
+                        {
+                            //Adicionar mais um item do escolhido e remover dinheiro
+                            PlayerPrefs.SetInt("NumberOfBerry1", PlayerPrefs.GetInt("NumberOfBerry1") + 1);
+                            PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 15);
+
+                            //Mostrar dinheiro atual
+                            currentMoneyText.text = "Money: " + PlayerPrefs.GetInt("CurrentMoney") + "$";
+                        }
+                    }
+                    else if (otherObject.name == "BerryLevel2Buy")
+                    {
+                        if (PlayerPrefs.GetInt("CurrentMoney") > 35)
+                        {
+                            //Adicionar mais um item do escolhido e remover dinheiro
+                            PlayerPrefs.SetInt("NumberOfBerry2", PlayerPrefs.GetInt("NumberOfBerry2") + 1);
+                            PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 35);
+
+                            //Mostrar dinheiro atual
+                            currentMoneyText.text = "Money: " + PlayerPrefs.GetInt("CurrentMoney") + "$";
+                        }
+                    }
+                    else if (otherObject.name == "BerryLevel3Buy")
+                    {
+                        if (PlayerPrefs.GetInt("CurrentMoney") > 80)
+                        {
+                            //Adicionar mais um item do escolhido e remover dinheiro
+                            PlayerPrefs.SetInt("NumberOfBerry3", PlayerPrefs.GetInt("NumberOfBerry3") + 1);
+                            PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 80);
+
+                            //Mostrar dinheiro atual
+                            currentMoneyText.text = "Money: " + PlayerPrefs.GetInt("CurrentMoney") + "$";
+                        }
+                    }
                 }
             }
         }
@@ -118,7 +157,10 @@ public class Interact : MonoBehaviour
             currentMoneyText.text = "";
 
             if (buyingInfoObject != null)
+            {
+                buyingInfoObject.transform.Find("Info").gameObject.transform.DOScale(new Vector3(0.01f, 0.01f, 0.01f), 1);
                 buyingInfoObject.transform.Find("Info").gameObject.SetActive(false);
+            }
         }
     }
 
