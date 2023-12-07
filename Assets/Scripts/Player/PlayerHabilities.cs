@@ -43,10 +43,15 @@ public class PlayerHabilities : MonoBehaviour
 
     [Header("Party")]
     [SerializeField] GameObject eventSystemObject;
-    [SerializeField] GameObject PartyScreen;
-    [SerializeField] GameObject PartyMenuRunButton;
+    [SerializeField] GameObject PartyScreenLetGo;
+    [SerializeField] GameObject PartyMenuRunButtonLetGo;
     [Space]
-    [SerializeField] PartyMemberUI[] memberSlots;
+    [SerializeField] PartyMemberUI[] memberSlotsLetGo;
+    [Space]
+    [SerializeField] GameObject PartyScreenToSee;
+    [SerializeField] GameObject PartyMenuRunButtonToSee;
+    [Space]
+    [SerializeField] PartyMemberUI[] memberSlotsToSee;
 
     [Header("Others")]
     [SerializeField] GameObject Managers;
@@ -117,6 +122,37 @@ public class PlayerHabilities : MonoBehaviour
             }
         }
 
+        //Abrir o menu de party dos Tanuki
+        if (!Managers.GetComponent<ControllerManager>().isPlayerInBattle && !Managers.GetComponent<PauseMenuManager>().isPaused && playerInput.actions["ShowParty"].triggered && !PartyScreenToSee.activeInHierarchy)
+        {
+            //Abre o menu de party
+            Managers.GetComponent<ControllerManager>().isPlayerInBattle = true;
+            gameObject.GetComponent<PlayerMovement>().isPaused = true;
+
+            PartyScreenToSee.SetActive(true);
+            eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
+            eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(PartyMenuRunButtonToSee);
+
+            List<Tanuki> tanukis = gameObject.GetComponent<TanukiParty>().tanukis;
+            for (int i = 0; i < memberSlotsToSee.Length; i++)
+            {
+                if (i < tanukis.Count)
+                {
+                    memberSlotsToSee[i].SetData(tanukis[i]);
+                }                    
+                else
+                    memberSlotsToSee[i].gameObject.SetActive(false);
+            }
+        }
+        else if (Managers.GetComponent<ControllerManager>().isPlayerInBattle && !Managers.GetComponent<PauseMenuManager>().isPaused && playerInput.actions["ShowParty"].triggered && PartyScreenLetGo.activeInHierarchy)
+        {
+            //Abre o menu de party
+            Managers.GetComponent<ControllerManager>().isPlayerInBattle = false;
+            gameObject.GetComponent<PlayerMovement>().isPaused = false;
+
+            PartyScreenToSee.SetActive(false);
+        }
+
         //Valor de quantas bolas e berries a selecionada possui
         NumBallsTxt.text = PlayerPrefs.GetInt("NumberOfBall" + PlayerPrefs.GetInt("CurrentBallLevel")) + "x";
         NumBerriesTxt.text = PlayerPrefs.GetInt("NumberOfBerry" + PlayerPrefs.GetInt("CurrentBerryLevel")) + "x";
@@ -185,17 +221,19 @@ public class PlayerHabilities : MonoBehaviour
                 Managers.GetComponent<ControllerManager>().isPlayerInBattle = true;
                 gameObject.GetComponent<PlayerMovement>().isPaused = true;
 
-                PartyScreen.SetActive(true);
+                PartyMenuRunButtonLetGo.SetActive(true);
                 eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
-                eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(PartyMenuRunButton);
+                eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(PartyMenuRunButtonLetGo);
 
                 List<Tanuki> tanukis = gameObject.GetComponent<TanukiParty>().tanukis;
-                for (int i = 0; i < memberSlots.Length; i++)
+                for (int i = 0; i < memberSlotsLetGo.Length; i++)
                 {
                     if (i < tanukis.Count)
-                        memberSlots[i].SetData(tanukis[i]);
+                    {
+                        memberSlotsLetGo[i].SetData(tanukis[i]);
+                    }
                     else
-                        memberSlots[i].gameObject.SetActive(false);
+                        memberSlotsLetGo[i].gameObject.SetActive(false);
                 }
             }
             else
