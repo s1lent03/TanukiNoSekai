@@ -42,7 +42,11 @@ public class Interact : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2, 0));
         RaycastHit hit = new RaycastHit();
 
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, interactDistance))
+        //Ignorar o terreno
+        int groundLayer = 3;
+        int layerMask = 1 << groundLayer;
+
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, interactDistance, 1 << 0))
         {
             Debug.DrawLine(ray.origin, hit.point, Color.red);
 

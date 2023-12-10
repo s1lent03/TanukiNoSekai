@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1094.505, g: 956.1564, b: 949.76184, a: 1}
+  m_IndirectSpecularColor: {r: 840.3512, g: 865.5714, b: 991.3356, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2719,7 +2719,7 @@ GameObject:
   - component: {fileID: 77674519}
   - component: {fileID: 77674518}
   m_Layer: 0
-  m_Name: Button
+  m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2788,9 +2788,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1404675253}
-        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
-        m_MethodName: ChooseTanukiFromParty
+      - m_Target: {fileID: 1522200749}
+        m_TargetAssemblyTypeName: PlayerHabilities, Assembly-CSharp
+        m_MethodName: LetTanukiGo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13424,7 +13424,7 @@ GameObject:
   - component: {fileID: 364888796}
   - component: {fileID: 364888795}
   m_Layer: 0
-  m_Name: Button
+  m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13493,9 +13493,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1404675253}
-        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
-        m_MethodName: ChooseTanukiFromParty
+      - m_Target: {fileID: 1522200749}
+        m_TargetAssemblyTypeName: PlayerHabilities, Assembly-CSharp
+        m_MethodName: LetTanukiGo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16747,7 +16747,7 @@ GameObject:
   - component: {fileID: 464314509}
   - component: {fileID: 464314508}
   m_Layer: 0
-  m_Name: Button
+  m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16816,9 +16816,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1404675253}
-        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
-        m_MethodName: ChooseTanukiFromParty
+      - m_Target: {fileID: 1522200749}
+        m_TargetAssemblyTypeName: PlayerHabilities, Assembly-CSharp
+        m_MethodName: LetTanukiGo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17647,9 +17647,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1404675253}
-        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
-        m_MethodName: RunButton
+      - m_Target: {fileID: 1522200749}
+        m_TargetAssemblyTypeName: PlayerHabilities, Assembly-CSharp
+        m_MethodName: BackTanukiParty
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -29774,6 +29774,7 @@ MonoBehaviour:
   tanukiUnitData:
     _base: {fileID: 0}
     Level: 0
+    XpPoints: 0
 --- !u!1 &832370026
 GameObject:
   m_ObjectHideFlags: 0
@@ -36203,7 +36204,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282927176
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -36859,7 +36860,7 @@ GameObject:
   - component: {fileID: 1047035903}
   - component: {fileID: 1047035902}
   m_Layer: 0
-  m_Name: Button
+  m_Name: 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36928,9 +36929,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1404675253}
-        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
-        m_MethodName: ChooseTanukiFromParty
+      - m_Target: {fileID: 1522200749}
+        m_TargetAssemblyTypeName: PlayerHabilities, Assembly-CSharp
+        m_MethodName: LetTanukiGo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -38968,15 +38969,19 @@ MonoBehaviour:
   commonTanuki:
     _base: {fileID: 11400000, guid: 73e33430855230647a8dfb01053a8212, type: 2}
     Level: 0
+    XpPoints: 0
   uncommonTanuki:
     _base: {fileID: 11400000, guid: 61bf15b1fd5ae6945bfd4e24964305f0, type: 2}
     Level: 0
+    XpPoints: 0
   rareTanuki:
     _base: {fileID: 11400000, guid: 16680591217b9ee4b89c4b18e36f75f5, type: 2}
     Level: 0
+    XpPoints: 0
   newTanuki:
     _base: {fileID: 0}
     Level: 0
+    XpPoints: 0
   spawnArea: {fileID: 594751781}
   tanukiParent: {fileID: 1664510420}
   minNumberSpawns: 3
@@ -45936,7 +45941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -800, y: -400}
+  m_AnchoredPosition: {x: -775, y: -400}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1310842472
@@ -53285,8 +53290,16 @@ MonoBehaviour:
   tanukis:
   - _base: {fileID: 11400000, guid: 61bf15b1fd5ae6945bfd4e24964305f0, type: 2}
     Level: 10
+    XpPoints: 0
   - _base: {fileID: 11400000, guid: c0bad7f38560f6144b5a599c2df87244, type: 2}
     Level: 11
+    XpPoints: 0
+  - _base: {fileID: 11400000, guid: 16680591217b9ee4b89c4b18e36f75f5, type: 2}
+    Level: 13
+    XpPoints: 0
+  - _base: {fileID: 11400000, guid: 16680591217b9ee4b89c4b18e36f75f5, type: 2}
+    Level: 6
+    XpPoints: 0
 --- !u!114 &1522200749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53334,6 +53347,8 @@ MonoBehaviour:
   - {fileID: 87350400}
   - {fileID: 1628507446}
   - {fileID: 616255842}
+  MovesInfoLetGoTxt: {fileID: 1502347675}
+  TypesInfoLetGoTxt: {fileID: 1020890476}
   PartyScreenToSee: {fileID: 1575368254}
   PartyMenuRunButtonToSee: {fileID: 495575766}
   memberSlotsToSee:
@@ -53342,6 +53357,8 @@ MonoBehaviour:
   - {fileID: 1871528647}
   - {fileID: 500760622}
   - {fileID: 1699686302}
+  MovesInfoToSeeTxt: {fileID: 820518012}
+  TypesInfoToSeeTxt: {fileID: 1031677598}
   Managers: {fileID: 1404675247}
   mainCamera: {fileID: 516672109}
 --- !u!1 &1524113379
@@ -60785,7 +60802,7 @@ GameObject:
   - component: {fileID: 1771477209}
   - component: {fileID: 1771477208}
   m_Layer: 0
-  m_Name: Button
+  m_Name: 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60854,9 +60871,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1404675253}
-        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
-        m_MethodName: ChooseTanukiFromParty
+      - m_Target: {fileID: 1522200749}
+        m_TargetAssemblyTypeName: PlayerHabilities, Assembly-CSharp
+        m_MethodName: LetTanukiGo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -65429,9 +65446,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1404675253}
-        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
-        m_MethodName: RunButton
+      - m_Target: {fileID: 1522200749}
+        m_TargetAssemblyTypeName: PlayerHabilities, Assembly-CSharp
+        m_MethodName: RunTanukiParty
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -67323,7 +67340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -800, y: -250}
+  m_AnchoredPosition: {x: -775, y: -250}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1968175023

@@ -8,15 +8,12 @@ public class Tanuki
 {
     [SerializeField] TanukiBase _base;
     [SerializeField] public int Level;
+    [SerializeField] public float XpPoints;
 
     public TanukiBase Base
     {
         get { return _base; }
     }
-    /*public int Level
-    {
-        get { return level; }
-    }*/
 
     public int Hp { get; set; }
 
