@@ -279,7 +279,7 @@ public class PlayerHabilities : MonoBehaviour
 
         //Criar a berry e fazer com que vá para a boca do tanuki
         GameObject BerryToDrop = Instantiate(Berry, DropStartPoint, Quaternion.identity);
-        Transform Mouth = tanuki.gameObject.transform.Find("ModelObject").transform.Find("Mouth").gameObject.transform;
+        Transform Mouth = tanuki.gameObject.transform.Find("ModelObject").transform.Find("Model").transform.Find("Armature").transform.Find("Body").transform.Find("Mouth").gameObject.transform;
         BerryToDrop.transform.DOMove(new Vector3(Mouth.position.x, Mouth.position.y, Mouth.position.z), 1f);
 
         //Destruir berry

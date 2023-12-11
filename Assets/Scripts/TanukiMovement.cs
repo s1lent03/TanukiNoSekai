@@ -9,6 +9,9 @@ public class TanukiMovement : MonoBehaviour
     public float speed = 3f;
     public float chaseSpeed = 6f;
 
+    [Header("Model")]
+    public Animator tanukiAnimator;
+
     [Header("Ground Check")]
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -58,6 +61,13 @@ public class TanukiMovement : MonoBehaviour
                 characterController.Move((nextPosition - transform.position).normalized * speed * Time.deltaTime);
                 transform.LookAt(lookPosition);
             }
+
+            tanukiAnimator.SetBool(Animator.StringToHash("Moving"), true);
+        } 
+        else
+        {
+            //stunned
+            tanukiAnimator.SetBool(Animator.StringToHash("Moving"), false);
         }
 
         // graivty

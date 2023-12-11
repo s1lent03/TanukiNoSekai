@@ -45,6 +45,8 @@ public class BallThrowHandler : MonoBehaviour
             if (rand <= currentBallNum * 2)
             {
                 enemyTanuki.GetComponent<TanukiMovement>().stunned = true;
+                enemyTanuki.GetComponent<TanukiMovement>().tanukiAnimator.SetTrigger(Animator.StringToHash("Hurt"));
+                enemyTanuki.GetComponent<TanukiMovement>().tanukiAnimator.SetBool(Animator.StringToHash("Stunned"), true);
                 StartCoroutine(StunnedTime(enemyTanuki));
             }                
         }            
@@ -55,7 +57,9 @@ public class BallThrowHandler : MonoBehaviour
     {
         float randTime = Random.Range(4, 7);
         yield return new WaitForSeconds(randTime);
-
+       
+        enemy.GetComponent<TanukiMovement>().tanukiAnimator.SetBool(Animator.StringToHash("Stunned"), false);
+        yield return new WaitForSeconds(1f);
         enemy.GetComponent<TanukiMovement>().stunned = false;
     }
 }

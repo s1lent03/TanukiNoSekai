@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee531c2d196e60489996cc7dd35b9ed, type: 3}
+  m_Name: Kenmaru
+  m_EditorClassIdentifier: 
+  name: Kenmaru
+  description: Sword fish
+  tanukiModel: {fileID: 3140581890707304031, guid: 65fad9672dfad7e48aa9621278e7f610,
+    type: 3}
+  tanukiIconSprite: {fileID: 21300000, guid: aa0e4978a56bd804cb84844ff28cd507, type: 3}
+  type1: 2
+  type2: 4
+  maxHp: 45
+  attack: 90
+  defense: 20
+  spAttack: 65
+  spDefense: 20
+  speed: 65
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: a063a640354b04f4db8fa579b4cce327, type: 2}
+    level: 5
+  - moveBase: {fileID: 11400000, guid: 1951dc9bb08d37049bc8154ff2d04d5c, type: 2}
+    level: 8

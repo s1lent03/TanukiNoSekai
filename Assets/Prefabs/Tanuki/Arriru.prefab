@@ -147,6 +147,7 @@ MonoBehaviour:
   gravity: 1
   speed: 3
   chaseSpeed: 6
+  tanukiAnimator: {fileID: 0}
   groundCheck: {fileID: 2389961966497469979}
   groundDistance: 0.4
   groundMask:
@@ -154,6 +155,7 @@ MonoBehaviour:
     m_Bits: 8
   stunned: 0
   angry: 0
+  isBeingCaught: 0
 --- !u!143 &7944262355861979129
 CharacterController:
   m_ObjectHideFlags: 0
@@ -218,6 +220,7 @@ MonoBehaviour:
   tanukiUnitData:
     _base: {fileID: 0}
     Level: 0
+    XpPoints: 0
 --- !u!1001 &8229545439653790186
 PrefabInstance:
   m_ObjectHideFlags: 0
