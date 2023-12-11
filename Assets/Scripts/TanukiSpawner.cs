@@ -87,7 +87,7 @@ public class TanukiSpawner : MonoBehaviour
             newTanukiObject.tag = "WildTanuki";
             newTanuki.Level = RandomizeWildTanukiLevels();
 
-            newTanuki.Init();
+            newTanuki.Init(false);
             newTanukiObject.GetComponent<BattleUnit>().tanukiUnitData = newTanuki;
             newTanukiObject.GetComponent<TanukiMovement>().SendCollider(areaCollider);
             

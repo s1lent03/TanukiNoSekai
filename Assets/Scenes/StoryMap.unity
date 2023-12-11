@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1062.588, g: 906.296, b: 865.41174, a: 1}
+  m_IndirectSpecularColor: {r: 1059.2247, g: 913.50793, b: 886.6891, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4012,6 +4012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 1974349552}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}
@@ -9216,6 +9217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 1340896329}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}
@@ -10379,6 +10381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 861122394}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}
@@ -11371,6 +11374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 2094558315}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}
@@ -11746,6 +11750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 785449714}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}
@@ -23909,6 +23914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 1913567752}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}
@@ -25421,6 +25427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 1292684665}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}
@@ -26025,6 +26032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 1218060815}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}
@@ -26805,6 +26813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 1310529390}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}
@@ -30510,6 +30519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 1385023748}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}
@@ -32937,17 +32947,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 89686087}
     m_Modifications:
-    - target: {fileID: 3126840646452902212, guid: bbb5be0741eee2c44867af2c84aa320f,
-        type: 3}
-      propertyPath: tanukiAnimator
-      value: 
-      objectReference: {fileID: 615219086}
-    - target: {fileID: 6931740655159151081, guid: bbb5be0741eee2c44867af2c84aa320f,
-        type: 3}
-      propertyPath: tanukiUnitData._base
-      value: 
-      objectReference: {fileID: 11400000, guid: 992ffb9f925da744daf573e77831f9cb,
-        type: 2}
     - target: {fileID: -8679921383154817045, guid: f3ba94105fca5074d833e7a589c86e84,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -33003,6 +33002,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: NULL
       objectReference: {fileID: 0}
+    - target: {fileID: 3126840646452902212, guid: bbb5be0741eee2c44867af2c84aa320f,
+        type: 3}
+      propertyPath: tanukiAnimator
+      value: 
+      objectReference: {fileID: 615219086}
+    - target: {fileID: 6931740655159151081, guid: bbb5be0741eee2c44867af2c84aa320f,
+        type: 3}
+      propertyPath: tanukiUnitData._base
+      value: 
+      objectReference: {fileID: 11400000, guid: 992ffb9f925da744daf573e77831f9cb,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 9148040270423342267, guid: bbb5be0741eee2c44867af2c84aa320f, type: 3}
@@ -39120,7 +39130,7 @@ MonoBehaviour:
     Level: 11
     XpPoints: 0
   uncommonTanuki:
-    _base: {fileID: 11400000, guid: 13c5cd53a1b7d824e8dab8270f33df89, type: 2}
+    _base: {fileID: 11400000, guid: 992ffb9f925da744daf573e77831f9cb, type: 2}
     Level: 10
     XpPoints: 0
   rareTanuki:
@@ -48134,6 +48144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 832370026}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}
@@ -49038,6 +49049,7 @@ MonoBehaviour:
   playerLevelTxt: {fileID: 1013926775}
   playerHpTxt: {fileID: 98859776}
   playerHpBar: {fileID: 1643159352}
+  playerXpBar: {fileID: 1632423030}
   enemyStatusImage: {fileID: 1193571397}
   enemyNameTxt: {fileID: 122862954}
   enemyLevelTxt: {fileID: 1560601174}
@@ -49535,6 +49547,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 693158702}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}
@@ -53425,18 +53438,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tanukis:
+  - _base: {fileID: 11400000, guid: 992ffb9f925da744daf573e77831f9cb, type: 2}
+    Level: 0
+    XpPoints: 6123.1
+  - _base: {fileID: 11400000, guid: 992ffb9f925da744daf573e77831f9cb, type: 2}
+    Level: 0
+    XpPoints: 1000
   - _base: {fileID: 11400000, guid: 13c5cd53a1b7d824e8dab8270f33df89, type: 2}
-    Level: 10
-    XpPoints: 0
-  - _base: {fileID: 11400000, guid: c0bad7f38560f6144b5a599c2df87244, type: 2}
-    Level: 11
-    XpPoints: 0
-  - _base: {fileID: 11400000, guid: 16680591217b9ee4b89c4b18e36f75f5, type: 2}
-    Level: 13
-    XpPoints: 0
-  - _base: {fileID: 11400000, guid: 16680591217b9ee4b89c4b18e36f75f5, type: 2}
-    Level: 6
-    XpPoints: 0
+    Level: 0
+    XpPoints: 1000
 --- !u!114 &1522200749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56181,6 +56191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 677592185}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}
@@ -56277,6 +56288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 358801447}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}
@@ -56964,6 +56976,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1632423028}
   - component: {fileID: 1632423029}
+  - component: {fileID: 1632423030}
   m_Layer: 0
   m_Name: XpProgress
   m_TagString: Untagged
@@ -57036,12 +57049,29 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 100
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1632423030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632423027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210039fa1c335584baa8e35305b42028, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 0}
+  xp: {fileID: 320424350}
+  greenHp: {r: 0, g: 0, b: 0, a: 0}
+  yellowHp: {r: 0, g: 0, b: 0, a: 0}
+  redHp: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &1635932437
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57570,6 +57600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 354975133}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}
@@ -57628,6 +57659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 1960129271}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}
@@ -61898,6 +61930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 1749442580}
+  xp: {fileID: 0}
   greenHp: {r: 0.57254905, g: 0.8666667, b: 0.34901962, a: 1}
   yellowHp: {r: 0.98039216, g: 0.92156863, b: 0.23529412, a: 1}
   redHp: {r: 0.9254902, g: 0.26666668, b: 0.28627452, a: 1}

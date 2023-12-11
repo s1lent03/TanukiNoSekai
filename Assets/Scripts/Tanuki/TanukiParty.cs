@@ -16,7 +16,7 @@ public class TanukiParty : MonoBehaviour
     {
         foreach (var tanuki in tanukis)
         {
-            tanuki.Init();
+            tanuki.Init(true);
         }
     }
 

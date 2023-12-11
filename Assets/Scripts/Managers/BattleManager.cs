@@ -30,6 +30,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] TMP_Text playerLevelTxt;
     [SerializeField] TMP_Text playerHpTxt;
     [SerializeField] HpBar playerHpBar;
+    [SerializeField] HpBar playerXpBar;
     [Space]
     [SerializeField] Image enemyStatusImage;
     [SerializeField] TMP_Text enemyNameTxt;
@@ -320,6 +321,13 @@ public class BattleManager : MonoBehaviour
             playerLevelTxt.text = "Lvl. " + tanuki.Level;
             playerHpTxt.text = (int)((float)tanuki.Hp / tanuki.MaxHp * 100) + "%";
             playerHpBar.SetHp((float)tanuki.Hp / tanuki.MaxHp);
+
+            float currentLevelXP = Mathf.Pow(tanuki.Level, 3);
+            float nextLevelXP = Mathf.Pow(tanuki.Level + 1, 3);
+            float xpProgress = (tanuki.XpPoints - currentLevelXP) / (nextLevelXP - currentLevelXP);
+
+            xpProgress = Mathf.Clamp01(xpProgress);
+            playerXpBar.SetXp(xpProgress);
         }
         else
         {
@@ -349,6 +357,17 @@ public class BattleManager : MonoBehaviour
 
             _enemyTanuki.HpChanged = false;
         }        
+    }
+
+    public IEnumerator UpdateXP()
+    {
+        float currentLevelXP = Mathf.Pow(_playerTanuki.Level, 3);
+        float nextLevelXP = Mathf.Pow(_playerTanuki.Level + 1, 3);
+        float xpProgress = (_playerTanuki.XpPoints - currentLevelXP) / (nextLevelXP - currentLevelXP);
+
+        xpProgress = Mathf.Clamp01(xpProgress);       
+        yield return playerXpBar.SetXpSmooth(xpProgress);
+        playerXpBar.SetXp(xpProgress);
     }
 
     public void SetPartyData(List<Tanuki> tanukis)

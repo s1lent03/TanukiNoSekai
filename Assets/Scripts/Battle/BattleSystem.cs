@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -49,7 +50,7 @@ public class BattleSystem : MonoBehaviour
         this.playerParty = playerParty;
         this.wildTanuki = wildTanuki;
         /*this.wildTanuki.level = wildLevel;*/
-        this.wildTanuki.Init();
+        this.wildTanuki.Init(false);
         StartCoroutine(SetupBattle());
     }
 
@@ -179,7 +180,7 @@ public class BattleSystem : MonoBehaviour
                 yield return ShowDamageDetails(damageDetails);
             }
 
-            yield return CheckIfFainted(targetUnit, isPlayer);
+            yield return CheckIfFainted(targetUnit, sourceUnit, isPlayer);
         }
         else
         {
@@ -191,10 +192,10 @@ public class BattleSystem : MonoBehaviour
         yield return ShowStatusChanges(sourceUnit.Tanuki);
         yield return gameObject.GetComponent<BattleManager>().UpdateHP();
 
-        yield return CheckIfFainted(sourceUnit, isPlayer);
+        yield return CheckIfFainted(sourceUnit, targetUnit, isPlayer);
     }
 
-    IEnumerator CheckIfFainted(BattleUnit targetUnit, bool isPlayer)
+    IEnumerator CheckIfFainted(BattleUnit targetUnit, BattleUnit playerUnit, bool isPlayer)
     {
         if (targetUnit.Tanuki.Hp <= 0)
         {
@@ -223,6 +224,11 @@ public class BattleSystem : MonoBehaviour
             else //Caso o Tanuki a morrer seja Wild
             {
                 targetUnit.PlayFaintAnimation(targetUnit.gameObject);
+                yield return new WaitForSeconds(1f);
+
+                //Tratar do XP
+                playerUnit.Tanuki.XpPoints += targetUnit.Tanuki.Level * 100 / 7 * Random.Range(1f, 3f);
+                yield return gameObject.GetComponent<BattleManager>().UpdateXP();
                 yield return new WaitForSeconds(1f);
 
                 Destroy(TanukiDetector.GetComponent<TanukiDetection>().WildTanukiDetected);

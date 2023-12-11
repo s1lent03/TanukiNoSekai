@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 [System.Serializable]
@@ -28,8 +29,12 @@ public class Tanuki
     public Queue<string> StatusChanges { get; private set; } = new Queue<string>();
     public bool HpChanged { get; set; }
 
-    public void Init()
+    public void Init(bool isPlayer)
     {
+        //Calcular nivel
+        if (isPlayer)
+            Level = Mathf.FloorToInt(Mathf.Pow(XpPoints, 1f / 3f));
+
         //Generate moves
         Moves = new List<Move>();
         foreach (var move in Base.LearnableMoves)
@@ -42,7 +47,7 @@ public class Tanuki
         }
 
         CalculateStats();
-        Hp = MaxHp;
+        Hp = MaxHp; 
 
         ResetStatBoost();
     }
