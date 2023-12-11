@@ -17,6 +17,7 @@ public class TanukiMovement : MonoBehaviour
     [Header("Booleans")]
     public bool stunned;
     public bool angry;
+    public bool isBeingCaught;
 
     private bool isGrounded;
     private CharacterController characterController;
@@ -35,7 +36,7 @@ public class TanukiMovement : MonoBehaviour
     private void Update()
     {
         // movement
-        if (!stunned)
+        if (!stunned && !isBeingCaught)
         {
             if (angry)
             {

@@ -104,6 +104,10 @@ public class TanukiDetection : MonoBehaviour
 
     public void StartBattle()
     {
+        //Verificar se o tanuki selvagem não desapareceu
+        if (WildTanukiDetected == null)
+            EndBattle();
+
         //Virar o Tanuki em direção ao jogador
         Vector3 tanukiDir = Player.transform.position - WildTanukiDetected.transform.position;
         Quaternion tanukiTargetRot = Quaternion.LookRotation(tanukiDir);

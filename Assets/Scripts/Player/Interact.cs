@@ -30,13 +30,23 @@ public class Interact : MonoBehaviour
         PlayerPrefs.SetInt("CurrentMoney", 500);
     }
 
+    private void Update()
+    {
+        //Mostrar dinheiro atual
+        currentMoneyText.text = PlayerPrefs.GetInt("CurrentMoney") + "$";
+    }
+
     private void FixedUpdate()
     {
         //Criar um ray que segue a direção da camera
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2, 0));
         RaycastHit hit = new RaycastHit();
 
-        if (Physics.Raycast(ray.origin, ray.direction, out hit, interactDistance))
+        //Ignorar o terreno
+        int groundLayer = 3;
+        int layerMask = 1 << groundLayer;
+
+        if (Physics.Raycast(ray.origin, ray.direction, out hit, interactDistance, 1 << 0))
         {
             Debug.DrawLine(ray.origin, hit.point, Color.red);
 
@@ -56,10 +66,7 @@ public class Interact : MonoBehaviour
             //Se o ray atingir um objeto com a tag pretendida e tiver a menos de 1.5 de distancia vai aparecer um texto a indicar que o objeto é interagivel
             else if (otherObject.tag == "Buyable")
             {
-                interactText.text = WhatToDisplay("F", "X", "Square Button", "buy the item");
-
-                //Mostrar dinheiro atual
-                currentMoneyText.text = "Money: " + PlayerPrefs.GetInt("CurrentMoney") + "$";
+                interactText.text = WhatToDisplay("F", "X", "Square Button", "buy the item"); 
 
                 if (lastInfoName != otherObject.name && buyingInfoObject != null)
                 {
@@ -83,9 +90,6 @@ public class Interact : MonoBehaviour
                             //Adicionar mais um item do escolhido e remover dinheiro
                             PlayerPrefs.SetInt("NumberOfBall1", PlayerPrefs.GetInt("NumberOfBall1") + 1);
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 10);
-
-                            //Mostrar dinheiro atual
-                            currentMoneyText.text = "Money: " + PlayerPrefs.GetInt("CurrentMoney") + "$";
                         }
                     }
                     else if (otherObject.name == "BallLevel2Buy")
@@ -95,9 +99,6 @@ public class Interact : MonoBehaviour
                             //Adicionar mais um item do escolhido e remover dinheiro
                             PlayerPrefs.SetInt("NumberOfBall2", PlayerPrefs.GetInt("NumberOfBall2") + 1);
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 25);
-
-                            //Mostrar dinheiro atual
-                            currentMoneyText.text = "Money: " + PlayerPrefs.GetInt("CurrentMoney") + "$";
                         }
                     }
                     else if (otherObject.name == "BallLevel3Buy")
@@ -107,9 +108,6 @@ public class Interact : MonoBehaviour
                             //Adicionar mais um item do escolhido e remover dinheiro
                             PlayerPrefs.SetInt("NumberOfBall3", PlayerPrefs.GetInt("NumberOfBall3") + 1);
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 60);
-
-                            //Mostrar dinheiro atual
-                            currentMoneyText.text = "Money: " + PlayerPrefs.GetInt("CurrentMoney") + "$";
                         }
                     }
                     else if (otherObject.name == "BerryLevel1Buy")
@@ -119,9 +117,6 @@ public class Interact : MonoBehaviour
                             //Adicionar mais um item do escolhido e remover dinheiro
                             PlayerPrefs.SetInt("NumberOfBerry1", PlayerPrefs.GetInt("NumberOfBerry1") + 1);
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 15);
-
-                            //Mostrar dinheiro atual
-                            currentMoneyText.text = "Money: " + PlayerPrefs.GetInt("CurrentMoney") + "$";
                         }
                     }
                     else if (otherObject.name == "BerryLevel2Buy")
@@ -131,9 +126,6 @@ public class Interact : MonoBehaviour
                             //Adicionar mais um item do escolhido e remover dinheiro
                             PlayerPrefs.SetInt("NumberOfBerry2", PlayerPrefs.GetInt("NumberOfBerry2") + 1);
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 35);
-
-                            //Mostrar dinheiro atual
-                            currentMoneyText.text = "Money: " + PlayerPrefs.GetInt("CurrentMoney") + "$";
                         }
                     }
                     else if (otherObject.name == "BerryLevel3Buy")
@@ -143,9 +135,6 @@ public class Interact : MonoBehaviour
                             //Adicionar mais um item do escolhido e remover dinheiro
                             PlayerPrefs.SetInt("NumberOfBerry3", PlayerPrefs.GetInt("NumberOfBerry3") + 1);
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 80);
-
-                            //Mostrar dinheiro atual
-                            currentMoneyText.text = "Money: " + PlayerPrefs.GetInt("CurrentMoney") + "$";
                         }
                     }
                 }
