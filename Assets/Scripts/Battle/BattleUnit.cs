@@ -29,16 +29,22 @@ public class BattleUnit : MonoBehaviour
         newTanuki.transform.Find("ModelObject").transform.DOScale(new Vector3(1, 1, 1), 1);
     }
 
-    public void PlayAttackAnimation(GameObject tanuki)
+    public void PlayAttackAnimation(GameObject tanuki, bool isPlayerTanuki)
     {
         //ANIMAÇÃO DE ATAQUE !!!!!
-        tanuki.GetComponent<TanukiMovement>().tanukiAnimator.SetTrigger(Animator.StringToHash("Attack"));
+        if (isPlayerTanuki)
+            tanuki.GetComponent<TanukiMovement>().tanukiAnimator.SetTrigger(Animator.StringToHash("Attack"));
+        else
+            tanuki.transform.GetChild(0).gameObject.GetComponent<TanukiMovement>().tanukiAnimator.SetTrigger(Animator.StringToHash("Attack"));
     }
 
-    public void PlayHurtAnimation(GameObject tanuki)
+    public void PlayHurtAnimation(GameObject tanuki, bool isPlayerTanuki)
     {
         //ANIMAÇÃO DE HURT !!!!!
-        tanuki.GetComponent<TanukiMovement>().tanukiAnimator.SetTrigger(Animator.StringToHash("Hurt"));
+        if (!isPlayerTanuki)
+            tanuki.GetComponent<TanukiMovement>().tanukiAnimator.SetTrigger(Animator.StringToHash("Hurt"));
+        else
+            tanuki.transform.GetChild(0).gameObject.GetComponent<TanukiMovement>().tanukiAnimator.SetTrigger(Animator.StringToHash("Hurt"));
     }
 
     public IEnumerator PlayHitAnimation(GameObject hitEffect, Transform tanukiPosition)
