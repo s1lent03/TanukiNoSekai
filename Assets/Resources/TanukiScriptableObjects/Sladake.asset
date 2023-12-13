@@ -13,18 +13,20 @@ MonoBehaviour:
   m_Name: Sladake
   m_EditorClassIdentifier: 
   name: Sladake
-  description: yes
-  tanukiModel: {fileID: 7067895223377157501, guid: 13f1821e9ea47bf48a38aecc086959ef,
+  description: 
+  tanukiModel: {fileID: 2291570991437150215, guid: 13f1821e9ea47bf48a38aecc086959ef,
     type: 3}
   tanukiIconSprite: {fileID: 21300000, guid: d24f4c573c65830479c1327ab46e1b5c, type: 3}
   type1: 5
   type2: 0
-  maxHp: 55
-  attack: 68
-  defense: 64
-  spAttack: 45
-  spDefense: 55
-  speed: 31
+  maxHp: 75
+  attack: 89
+  defense: 85
+  spAttack: 55
+  spDefense: 65
+  speed: 36
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: a063a640354b04f4db8fa579b4cce327, type: 2}
-    level: 3
+    level: 5
+  - moveBase: {fileID: 11400000, guid: 5a5148f811fda614b820271522e7d635, type: 2}
+    level: 8
