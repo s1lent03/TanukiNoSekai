@@ -22,9 +22,11 @@ public class TanukiMovement : MonoBehaviour
     public bool angry;
     public bool isBeingCaught;
 
+    [Header("Zone")]
+    public Collider zone;
+
     private bool isGrounded;
     private CharacterController characterController;
-    private Collider zone;
     private float height = 0f;
     private Vector3 startPosition;
     private Vector3 nextPosition;
