@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1997.8938, g: 1699.303, b: 1763.8342, a: 1}
+  m_IndirectSpecularColor: {r: 1994.2551, g: 1696.3811, b: 1760.7463, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10748,6 +10748,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1476893601}
   m_CullTransparentMesh: 1
+--- !u!1001 &1505750753
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1234005636557707225, guid: c48d0f1702b87eb4282f89c60f61e4d7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 492.96774
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234005636557707225, guid: c48d0f1702b87eb4282f89c60f61e4d7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 101.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234005636557707225, guid: c48d0f1702b87eb4282f89c60f61e4d7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 488.31137
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234005636557707225, guid: c48d0f1702b87eb4282f89c60f61e4d7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234005636557707225, guid: c48d0f1702b87eb4282f89c60f61e4d7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234005636557707225, guid: c48d0f1702b87eb4282f89c60f61e4d7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234005636557707225, guid: c48d0f1702b87eb4282f89c60f61e4d7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234005636557707225, guid: c48d0f1702b87eb4282f89c60f61e4d7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234005636557707225, guid: c48d0f1702b87eb4282f89c60f61e4d7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1234005636557707225, guid: c48d0f1702b87eb4282f89c60f61e4d7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754849053363231821, guid: c48d0f1702b87eb4282f89c60f61e4d7,
+        type: 3}
+      propertyPath: m_Name
+      value: Yukioni
+      objectReference: {fileID: 0}
+    - target: {fileID: 8354080633452288743, guid: c48d0f1702b87eb4282f89c60f61e4d7,
+        type: 3}
+      propertyPath: zone
+      value: 
+      objectReference: {fileID: 629898067}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c48d0f1702b87eb4282f89c60f61e4d7, type: 3}
 --- !u!1 &1506471492
 GameObject:
   m_ObjectHideFlags: 0
@@ -13687,3 +13760,4 @@ SceneRoots:
   - {fileID: 2013410475}
   - {fileID: 487943969}
   - {fileID: 1260461397}
+  - {fileID: 1505750753}
