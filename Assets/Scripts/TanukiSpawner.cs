@@ -9,6 +9,7 @@ public class TanukiSpawner : MonoBehaviour
     public Tanuki commonTanuki;
     public Tanuki uncommonTanuki;
     public Tanuki rareTanuki;
+    public Tanuki nightTanuki;
     [SerializeField] Tanuki newTanuki;
 
     [Header("SpawnArea")]

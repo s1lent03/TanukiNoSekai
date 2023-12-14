@@ -10,9 +10,6 @@ public class MainMenuManager : MonoBehaviour
 {
     [Header("MenusGameobjects")]
     public GameObject journeyMenu;
-    public GameObject loadJourneyMenu;
-    public GameObject createJourneyMenu;
-    public GameObject pvpMenu;
     public GameObject settingsMenu;
     public GameObject creditsMenu;
     [Space]
@@ -60,82 +57,15 @@ public class MainMenuManager : MonoBehaviour
         buttonClickSoundFX.Play();
 
         //Fecha outras janelas
-        loadJourneyMenu.SetActive(false);
-        createJourneyMenu.SetActive(false);
-        pvpMenu.SetActive(false);
         settingsMenu.SetActive(false);
         creditsMenu.SetActive(false);
 
         //Abre a janela pretendida
-        journeyMenu.SetActive(true);
-
-        //Escolhe o primeiro butão selecionado deste menu
-        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
-        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(journeyFirstButton);
-    }
-
-    //Fecha o menu de criar ou dar load a uma jornada e abre o menu apenas de dar load
-    public void LoadJourneyButton()
-    {
-        //Toca o sound effect de click
-        buttonClickSoundFX.Play();
-
-        //Fecha outras janelas
-        journeyMenu.SetActive(false);
-        createJourneyMenu.SetActive(false);
-        pvpMenu.SetActive(false);
-        settingsMenu.SetActive(false);
-        creditsMenu.SetActive(false);
-
-        //Abre a janela pretendida
-        loadJourneyMenu.SetActive(true);
-        //Escolhe o primeiro butão selecionado deste menu
-        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
-        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(loadJourneyFirstButton);
-
-    }
-
-    //Fecha o menu de criar ou dar load a uma jornada e abre o menu apenas de criar
-    public void CreateJourneyButton()
-    {
-        //Toca o sound effect de click
-        buttonClickSoundFX.Play();
-
-        //Fecha outras janelas
-        journeyMenu.SetActive(false);
-        loadJourneyMenu.SetActive(false);
-        pvpMenu.SetActive(false);
-        settingsMenu.SetActive(false);
-        creditsMenu.SetActive(false);
-
-        //Abre a janela pretendida
-        createJourneyMenu.SetActive(true);
         SceneManager.LoadScene("StoryMap");
 
         //Escolhe o primeiro butão selecionado deste menu
         eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
-        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(createJourneyFirstButton);
-    }
-
-    //Abre o menu de criar uma arena 1v1
-    public void CreatePvpButton()
-    {
-        //Toca o sound effect de click
-        buttonClickSoundFX.Play();
-
-        //Fecha outras janelas
-        journeyMenu.SetActive(false);
-        loadJourneyMenu.SetActive(false);
-        createJourneyMenu.SetActive(false);
-        settingsMenu.SetActive(false);
-        creditsMenu.SetActive(false);
-
-        //Abre a janela pretendida
-        pvpMenu.SetActive(true);
-
-        //Escolhe o primeiro butão selecionado deste menu
-        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
-        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(pvpFirstButton);
+        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(journeyFirstButton);
     }
 
     //Abre o menu das definições
@@ -146,15 +76,10 @@ public class MainMenuManager : MonoBehaviour
 
         //Fecha outras janelas
         journeyMenu.SetActive(false);
-        loadJourneyMenu.SetActive(false);
-        createJourneyMenu.SetActive(false);
-        pvpMenu.SetActive(false);
         creditsMenu.SetActive(false);
 
         //Abre a janela pretendida
         settingsMenu.SetActive(true);
-
-
     }
 
     //Abre a janela dos creditos de desenvolvimento
@@ -165,9 +90,6 @@ public class MainMenuManager : MonoBehaviour
 
         //Fecha outras janelas
         journeyMenu.SetActive(false);
-        loadJourneyMenu.SetActive(false);
-        createJourneyMenu.SetActive(false);
-        pvpMenu.SetActive(false);
         settingsMenu.SetActive(false);
 
         //Abre a janela pretendida

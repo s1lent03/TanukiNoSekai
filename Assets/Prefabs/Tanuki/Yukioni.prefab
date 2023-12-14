@@ -110,6 +110,7 @@ MonoBehaviour:
   stunned: 0
   angry: 0
   isBeingCaught: 0
+  zone: {fileID: 0}
 --- !u!114 &765313581812552189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,7 +184,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8052807212446537136}
