@@ -6,7 +6,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class TanukiDetection : MonoBehaviour
 {
