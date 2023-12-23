@@ -10,10 +10,13 @@ public class TanukiBase : ScriptableObject
     [SerializeField] string name;
     [TextArea][SerializeField] string description;
     [SerializeField] GameObject tanukiModel;
+    [SerializeField] BattleUnit evolveModel;
     [SerializeField] Sprite tanukiIconSprite;
 
     [SerializeField] TanukiType type1;
     [SerializeField] TanukiType type2;
+
+    [SerializeField] int evolveLevel;
 
     [Header("Base Stats")]
     [SerializeField] int maxHp;
@@ -41,6 +44,11 @@ public class TanukiBase : ScriptableObject
         get { return tanukiModel; }
     }
 
+    public BattleUnit EvolveModel
+    {
+        get { return evolveModel; }
+    }
+
     public Sprite TanukiSprite
     {
         get { return tanukiIconSprite; }
@@ -54,6 +62,11 @@ public class TanukiBase : ScriptableObject
     public TanukiType Type2
     {
         get { return type2; }
+    }
+
+    public int EvolveLevel
+    {
+        get { return evolveLevel; }
     }
 
     public int MaxHp

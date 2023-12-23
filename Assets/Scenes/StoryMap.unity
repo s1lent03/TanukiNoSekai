@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1059.2101, g: 913.506, b: 886.6764, a: 1}
+  m_IndirectSpecularColor: {r: 1838.3792, g: 1567.9651, b: 1619.0881, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6209,13 +6209,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157207112}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1095611, y: 0, z: 0, w: 0.9939801}
+  m_LocalRotation: {x: 0.24446136, y: 0, z: 0, w: 0.96965903}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1447561189}
-  m_LocalEulerAnglesHint: {x: 732.58, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 748.3, y: 0, z: 0}
 --- !u!114 &157207115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49087,6 +49087,7 @@ MonoBehaviour:
   mouseSensitivity: 0.1
   isPlayerInBattle: 0
   currentCameraNumber: 0
+  switchCam: 0
 --- !u!4 &1404675249
 Transform:
   m_ObjectHideFlags: 0
@@ -49320,6 +49321,9 @@ MonoBehaviour:
   isPaused: 0
   doOnceMoves: 0
   doOnceActions: 0
+  EvolveEffect: {fileID: 1932159450451669483, guid: 7537d61dc716b0144958ba23adbc6cf9,
+    type: 3}
+  TimeToEvolve: 5
 --- !u!114 &1404675254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53685,7 +53689,7 @@ MonoBehaviour:
   tanukis:
   - _base: {fileID: 11400000, guid: 16680591217b9ee4b89c4b18e36f75f5, type: 2}
     Level: 0
-    XpPoints: 2800
+    XpPoints: 3300
   - _base: {fileID: 11400000, guid: b22d700d7ccd56e45bb0e648e7920097, type: 2}
     Level: 0
     XpPoints: 6870

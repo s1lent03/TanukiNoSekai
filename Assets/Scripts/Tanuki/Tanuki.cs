@@ -7,7 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class Tanuki
 {
-    [SerializeField] TanukiBase _base;
+    [SerializeField] public TanukiBase _base;
     [SerializeField] public int Level;
     [SerializeField] public float XpPoints;
 
@@ -31,7 +31,7 @@ public class Tanuki
 
     public void Init(bool isPlayer)
     {
-        //Calcular nivel
+        //Calcular nivel 
         if (isPlayer)
             Level = Mathf.FloorToInt(Mathf.Pow(XpPoints, 1f / 3f));
 

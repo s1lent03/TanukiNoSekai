@@ -17,6 +17,7 @@ public class ControllerManager : MonoBehaviour
     private PlayerInput playerInput;
     public bool isPlayerInBattle;
     [SerializeField] private int currentCameraNumber = 0;
+    public bool switchCam = false;
 
     void Start()
     {
@@ -53,7 +54,7 @@ public class ControllerManager : MonoBehaviour
         }
 
         //Se o jogador estiver em batalha trocar para camera de batalha
-        if (playerInput.actions["SwitchBattleCamera"].triggered && isPlayerInBattle)
+        if (playerInput.actions["SwitchBattleCamera"].triggered || switchCam && isPlayerInBattle)
         {
             if (currentCameraNumber == 0)
             {
@@ -70,6 +71,8 @@ public class ControllerManager : MonoBehaviour
             {
                 DefaultCameraValues();
             }
+
+            switchCam = false;
         }
     }
 

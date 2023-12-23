@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
+using DG.Tweening;
+using UnityEditor.Rendering;
 
 public class BattleManager : MonoBehaviour
 {
@@ -86,6 +88,9 @@ public class BattleManager : MonoBehaviour
     [SerializeField] bool doOnceActions = false;
     Tanuki _enemyTanuki;
     Tanuki _playerTanuki;
+
+    [SerializeField] GameObject EvolveEffect;
+    [SerializeField] int TimeToEvolve;
 
     void Start()
     {
@@ -368,6 +373,34 @@ public class BattleManager : MonoBehaviour
         xpProgress = Mathf.Clamp01(xpProgress);       
         yield return playerXpBar.SetXpSmooth(xpProgress);
         playerXpBar.SetXp(xpProgress);
+
+        if (xpProgress == 1)
+            _playerTanuki.Level++;
+
+        playerLevelTxt.text = "Lvl. " + _playerTanuki.Level;
+
+        if (_playerTanuki.Level == _playerTanuki.Base.EvolveLevel)
+        {
+            gameObject.GetComponent<ControllerManager>().switchCam = true;
+
+            BattleUnit playerTanuki = gameObject.GetComponent<BattleSystem>().playerUnit;
+            GameObject EvEffect = Instantiate(EvolveEffect, playerTanuki.transform.GetChild(0).transform.Find("ModelObject").transform.position, Quaternion.identity, playerTanuki.transform);
+
+            EvEffect.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 1.7f);
+            yield return new WaitForSeconds(TimeToEvolve * 1.7f);
+
+            GameObject EvolveTanuki = Instantiate(_playerTanuki.Base.EvolveModel.gameObject, playerTanuki.transform.GetChild(0).transform.Find("ModelObject").transform.position, Quaternion.identity, playerTanuki.transform);
+            EvolveTanuki.GetComponent<TanukiMovement>().stunned = true;
+            EvolveTanuki.transform.Find("ModelObject").DOScale(new Vector3(1, 1, 1), 1);
+            Destroy(playerTanuki.transform.GetChild(0).gameObject);
+
+            yield return new WaitForSeconds(1.7f);
+            EvEffect.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 1.7f);
+            yield return new WaitForSeconds(1.7f);
+            Destroy(EvEffect);
+
+            _playerTanuki._base = _playerTanuki.Base.EvolveModel.tanukiUnitData.Base;
+        }
     }
 
     public void SetPartyData(List<Tanuki> tanukis)

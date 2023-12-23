@@ -11,7 +11,7 @@ public enum BattleAction { Move, SwitchTanuki, Run}
 
 public class BattleSystem : MonoBehaviour
 {
-    [SerializeField] BattleUnit playerUnit;
+    [SerializeField] public BattleUnit playerUnit;
     [SerializeField] public BattleUnit enemyUnit;
     [SerializeField] BattleManager playerHud;
     [SerializeField] BattleManager enemyHud;
