@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1615.8967, g: 1414.3478, b: 1547.2698, a: 1}
+  m_IndirectSpecularColor: {r: 1841.8245, g: 1572.1663, b: 1623.7756, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -56588,6 +56588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quests: []
+  tanukiParty: {fileID: 1522200748}
 --- !u!1001 &1405446877
 PrefabInstance:
   m_ObjectHideFlags: 0
