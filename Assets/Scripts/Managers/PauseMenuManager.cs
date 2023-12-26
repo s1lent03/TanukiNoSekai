@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -35,6 +36,9 @@ public class PauseMenuManager : MonoBehaviour
 
     void Start()
     {
+        //Atualiza os valores dos mixers
+        audioMenu.GetComponent<AudioMenuManager>().UpdateMixersBasedOnFile();
+
         //Dar um valor default às variaveis
         playerInput = GetComponent<PlayerInput>();
 
@@ -78,9 +82,7 @@ public class PauseMenuManager : MonoBehaviour
 
             //Prevenir q os botões percam a seleção
             //eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject = pauseFirstButton;
-        }
-
-        
+        }        
     }
 
     //Volta ao jogo
@@ -108,9 +110,23 @@ public class PauseMenuManager : MonoBehaviour
         //Toca o sound effect de click
         buttonClickSoundFX.Play();
 
+        //Setup à janela dos visuals
+        string path = PlayerPrefs.GetString("SettingsPath");
+        int lineNumber = 0;
+        string[] lines = File.ReadAllLines(path);
+
+        int startOfWord = lines[lineNumber].IndexOf("_");
+        string CurrentQuality = lines[lineNumber].Substring(startOfWord + 1);
+
+        visualsMenu.GetComponent<VisualsMenuManager>().SelectButtonBasedOnQuality(CurrentQuality);
+
         //Esconde o menu pausa e abre o menu dos visuals
         pauseMenu.SetActive(false);
         visualsMenu.SetActive(true);
+
+        //Escolhe o primeiro butão selecionado deste menu
+        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
+        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(visualsFirstButton);
     }
 
     //Abre o menu do audio
@@ -119,9 +135,16 @@ public class PauseMenuManager : MonoBehaviour
         //Toca o sound effect de click
         buttonClickSoundFX.Play();
 
+        //Setup à janela do audio
+        audioMenu.GetComponent<AudioMenuManager>().UpdateSlidersBasedOnFile();
+
         //Esconde o menu pausa e abre o menu dos visuals
         pauseMenu.SetActive(false);
         audioMenu.SetActive(true);
+
+        //Escolhe o primeiro butão selecionado deste menu
+        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
+        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(audioFirstButton);
     }
 
     //Abre o menu dos controls
@@ -133,6 +156,10 @@ public class PauseMenuManager : MonoBehaviour
         //Esconde o menu pausa e abre o menu dos visuals
         pauseMenu.SetActive(false);
         controlsMenu.SetActive(true);
+
+        //Escolhe o primeiro butão selecionado deste menu
+        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
+        eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(controlsFirstButton);
     }
 
     //Abre o menu do audio

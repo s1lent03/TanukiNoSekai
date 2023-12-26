@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1997.387, g: 1709.633, b: 1794.3264, a: 1}
+  m_IndirectSpecularColor: {r: 1995.2971, g: 1698.8147, b: 1764.344, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -936,7 +936,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2147192186}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: CreditsButton
+        m_MethodName: AudioButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7749,6 +7749,94 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c6a5222fcd0774ba4691281cd9b37a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &479845246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 479845247}
+  - component: {fileID: 479845250}
+  - component: {fileID: 479845249}
+  - component: {fileID: 479845248}
+  m_Layer: 0
+  m_Name: LoadingImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &479845247
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479845246}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1235086650}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -500, y: 40}
+  m_SizeDelta: {x: 60, y: 60}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &479845248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479845246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ddcd8d2d04a08c459fc558f6f6bc436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &479845249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479845246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2632f1972be019d45a619922f51048fe, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &479845250
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479845246}
+  m_CullTransparentMesh: 1
 --- !u!1 &486738667
 GameObject:
   m_ObjectHideFlags: 0
@@ -11660,9 +11748,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
-        m_MethodName: BackToPauseMenu
+      - m_Target: {fileID: 2147192186}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: BackButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 750754558}
+        m_TargetAssemblyTypeName: AudioMenuManager, Assembly-CSharp
+        m_MethodName: SaveMixerValues
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12567,6 +12667,7 @@ GameObject:
   - component: {fileID: 750754555}
   - component: {fileID: 750754557}
   - component: {fileID: 750754556}
+  - component: {fileID: 750754558}
   m_Layer: 0
   m_Name: AudioMenu
   m_TagString: Untagged
@@ -12637,6 +12738,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750754554}
   m_CullTransparentMesh: 1
+--- !u!114 &750754558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750754554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc39daa7f1107654386e84b6e2dce591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MusicSlider: {fileID: 1455718560}
+  AmbienceSlider: {fileID: 1282944464}
+  SoundFxSlider: {fileID: 968997256}
+  MusicMixer: {fileID: 24100000, guid: 3905f3493abac704aaabe5924f95a7b9, type: 2}
+  AmbienceMixer: {fileID: 24100000, guid: 0c425120758638c42916a27bc1819bef, type: 2}
+  SoundFxMixer: {fileID: 24100000, guid: dba6ec496ca5b9b428e9a3b22da06669, type: 2}
 --- !u!1 &772894022
 GameObject:
   m_ObjectHideFlags: 0
@@ -13898,7 +14017,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &819978715
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14480,9 +14599,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2147192190}
-        m_TargetAssemblyTypeName: AccountManager, Assembly-CSharp
-        m_MethodName: OpenProfile
+      - m_Target: {fileID: 2147192186}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: CreditsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15732,9 +15851,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
-        m_MethodName: BackToPauseMenu
+      - m_Target: {fileID: 1853591528}
+        m_TargetAssemblyTypeName: VisualsMenuManager, Assembly-CSharp
+        m_MethodName: ChangeQualityToLowButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15897,7 +16016,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.62352943, g: 0.62352943, b: 0.62352943, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -15917,13 +16036,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 2008710854}
   m_HandleRect: {fileID: 1132396630}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 750754558}
+        m_TargetAssemblyTypeName: AudioMenuManager, Assembly-CSharp
+        m_MethodName: OnSoundFxSliderValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &975085647
 GameObject:
   m_ObjectHideFlags: 0
@@ -18303,7 +18434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1126364690
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19609,7 +19740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1226533339
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19702,6 +19833,7 @@ RectTransform:
   - {fileID: 60753486}
   - {fileID: 1028509686}
   - {fileID: 839931790}
+  - {fileID: 479845247}
   m_Father: {fileID: 1661121713}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -20316,9 +20448,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
-        m_MethodName: BackToPauseMenu
+      - m_Target: {fileID: 2147192186}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: BackButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20429,7 +20561,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.62352943, g: 0.62352943, b: 0.62352943, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -20449,13 +20581,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 1960045349}
   m_HandleRect: {fileID: 271756622}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 750754558}
+        m_TargetAssemblyTypeName: AudioMenuManager, Assembly-CSharp
+        m_MethodName: OnAmbienceSliderValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1286374012
 GameObject:
   m_ObjectHideFlags: 0
@@ -22359,7 +22503,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2147192186}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: SettingsButton
+        m_MethodName: VisualsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22983,7 +23127,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -23003,13 +23147,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 800479004}
   m_HandleRect: {fileID: 1324690561}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 750754558}
+        m_TargetAssemblyTypeName: AudioMenuManager, Assembly-CSharp
+        m_MethodName: OnMusicSliderValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1456333248
 GameObject:
   m_ObjectHideFlags: 0
@@ -24982,9 +25138,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
-        m_MethodName: BackToPauseMenu
+      - m_Target: {fileID: 1853591528}
+        m_TargetAssemblyTypeName: VisualsMenuManager, Assembly-CSharp
+        m_MethodName: ChangeQualityToHighButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -27913,6 +28069,7 @@ GameObject:
   - component: {fileID: 1853591525}
   - component: {fileID: 1853591527}
   - component: {fileID: 1853591526}
+  - component: {fileID: 1853591528}
   m_Layer: 0
   m_Name: VisualsMenu
   m_TagString: Untagged
@@ -27986,6 +28143,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853591524}
   m_CullTransparentMesh: 1
+--- !u!114 &1853591528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853591524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c438f00a72a41804b85a4bad1d7195fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HighSelected: {fileID: 1126364689}
+  MediumSelected: {fileID: 819978714}
+  LowSelected: {fileID: 1226533338}
 --- !u!1 &1859419422
 GameObject:
   m_ObjectHideFlags: 0
@@ -28726,9 +28898,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
-        m_MethodName: BackToPauseMenu
+      - m_Target: {fileID: 1853591528}
+        m_TargetAssemblyTypeName: VisualsMenuManager, Assembly-CSharp
+        m_MethodName: ChangeQualityToMediumButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -30197,9 +30369,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
-        m_MethodName: BackToPauseMenu
+      - m_Target: {fileID: 2147192186}
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: BackButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -31828,17 +32000,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f33a99c4c5e27e4ba1a745131e5c96d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  journeyMenu: {fileID: 0}
-  settingsMenu: {fileID: 0}
+  visualsMenu: {fileID: 1853591524}
+  audioMenu: {fileID: 750754554}
   creditsMenu: {fileID: 362467935}
   eventSystemObject: {fileID: 1582860521}
+  loadingImage: {fileID: 479845246}
   mainMenuFirstButton: {fileID: 520182168}
-  journeyFirstButton: {fileID: 0}
-  loadJourneyFirstButton: {fileID: 0}
-  createJourneyFirstButton: {fileID: 0}
-  pvpFirstButton: {fileID: 0}
+  visualsFirstButton: {fileID: 1600221813}
+  audioFirstButton: {fileID: 1455718558}
+  creditsFirstButton: {fileID: 2039363519}
   navegationSoundFX: {fileID: 2147192188}
   buttonClickSoundFX: {fileID: 2147192191}
+  settingsFileName: /SettingsData.txt
 --- !u!4 &2147192187
 Transform:
   m_ObjectHideFlags: 0
