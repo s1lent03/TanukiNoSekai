@@ -183,6 +183,9 @@ public class PauseMenuManager : MonoBehaviour
         //Toca o sound effect de click
         buttonClickSoundFX.Play();
 
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.UnloadSceneAsync(currentScene);
+
         //Dá load à cena do menu principal
         SceneManager.LoadScene("MainMenu");
     }
@@ -191,7 +194,7 @@ public class PauseMenuManager : MonoBehaviour
     public void QuitDesktopButton()
     {
         //Toca o sound effect de click
-        buttonClickSoundFX.Play();
+        buttonClickSoundFX.Play();        
 
         //Dá quit ao jogo
         Application.Quit();

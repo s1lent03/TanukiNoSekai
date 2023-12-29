@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1841.8401, g: 1572.2112, b: 1623.7932, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8364,8 +8364,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 176421970}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09584935, y: 0.5305841, z: -0.06054182, w: 0.8400168}
-  m_LocalPosition: {x: 471.02, y: 103.1, z: 413.85}
+  m_LocalRotation: {x: 0.09584889, y: 0.530585, z: -0.06054167, w: 0.84001625}
+  m_LocalPosition: {x: 679.22, y: 103.1, z: 352.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8402,7 +8402,7 @@ MonoBehaviour:
     LensShift: {x: 0, y: 0}
     GateFit: 2
     FocusDistance: 10
-    m_SensorSize: {x: 100, y: 55}
+    m_SensorSize: {x: 1, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -16826,8 +16826,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410790784}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.026063226, y: -0.77765375, z: 0.03230908, w: 0.62732095}
-  m_LocalPosition: {x: 478.06, y: 102.5, z: 419.29}
+  m_LocalRotation: {x: 0.026063228, y: -0.77765375, z: 0.03230909, w: 0.6273209}
+  m_LocalPosition: {x: 686.26, y: 102.5, z: 357.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21562,7 +21562,7 @@ Transform:
   m_GameObject: {fileID: 516672104}
   serializedVersion: 2
   m_LocalRotation: {x: 0.026065268, y: -0.77765363, z: 0.032311615, w: 0.6273208}
-  m_LocalPosition: {x: 479.45187, y: 103.49801, z: 418.57898}
+  m_LocalPosition: {x: 687.652, y: 103.49802, z: 356.979}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56036,6 +56036,7 @@ GameObject:
   - component: {fileID: 1404675251}
   - component: {fileID: 1404675253}
   - component: {fileID: 1404675254}
+  - component: {fileID: 1404675259}
   - component: {fileID: 1404675250}
   - component: {fileID: 1404675252}
   - component: {fileID: 1404675255}
@@ -56650,6 +56651,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quests: []
   tanukiParty: {fileID: 1522200748}
+--- !u!114 &1404675259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404675247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37fac85c25b483d4eadfb9934d7b3314, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 1522200739}
+  saveFileName: /SaveData.txt
 --- !u!1001 &1405446877
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59740,6 +59755,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1404675259}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SaveData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1404675251}
         m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
         m_MethodName: QuitDesktopButton
@@ -61386,7 +61413,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.35
   m_Height: 2.5982819
   m_Direction: 1
   m_Center: {x: 0, y: 0.015716553, z: 0}
@@ -61399,7 +61426,7 @@ Transform:
   m_GameObject: {fileID: 1522200739}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 476.8, y: 102, z: 416.6}
+  m_LocalPosition: {x: 685, y: 102, z: 355}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -67733,7 +67760,7 @@ Transform:
   m_GameObject: {fileID: 1671576849}
   serializedVersion: 2
   m_LocalRotation: {x: 0.026065268, y: -0.77765363, z: 0.032311615, w: 0.6273208}
-  m_LocalPosition: {x: 479.45187, y: 103.49801, z: 418.57898}
+  m_LocalPosition: {x: 687.652, y: 103.49802, z: 356.979}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -81365,6 +81392,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1404675259}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SaveData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1404675251}
         m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
         m_MethodName: QuitMainMenuButton
