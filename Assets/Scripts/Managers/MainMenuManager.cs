@@ -46,7 +46,7 @@ public class MainMenuManager : MonoBehaviour
                 "SoundFX Value: _-10",
                 "Ambience Value: _-10",
             };
-
+            
             WriteTextToFile(filePath, content);
 
             PlayerPrefs.SetString("SettingsPath", filePath);
