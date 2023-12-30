@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 // Lista com o tipo de quests que podem ser feitas
 public enum TypeOfQuests
@@ -34,9 +35,10 @@ public class Quest
     public string message; // Mensagem que irá aparecer a indicar a quest
     public Rewards reward; // Tipo de recompensa
     public int amount; // Quantidade da recompensa
+    public GameObject questUI; // Painel com a quest
 
     // Construtor
-    public Quest(TypeOfQuests qType, int t, string m, Rewards r, int a)
+    public Quest(TypeOfQuests qType, int t, string m, Rewards r, int a, GameObject ui)
     {
         questType = qType;
         total = t;
@@ -45,14 +47,17 @@ public class Quest
         message = m;
         reward = r;
         amount = a;
+        questUI = ui;
     }
 }
 
 public class QuestManager : MonoBehaviour
 {
-    // Lista com as quests
-    public List<Quest> quests = new List<Quest>();
-    public TanukiParty tanukiParty;
+    // Variáveis
+    public List<Quest> quests = new List<Quest>(); // Lista com as quests
+    public TanukiParty tanukiParty; // Tanukis do jogador
+    public GameObject questsMenu; // Lista das quests no jogo
+    public GameObject questPrefab; // Prefab de um painel para uma quest
 
     // Função para atualizar as quests de um tipo específico
     public void UpdateQuests(TypeOfQuests qType)
@@ -65,6 +70,7 @@ public class QuestManager : MonoBehaviour
             {
                 q.progress += 1;
                 q.percentage = (float)q.progress / (float)q.total;
+                UpdatePanel(q);
             }
         }
     }
@@ -95,14 +101,39 @@ public class QuestManager : MonoBehaviour
         }
     }
 
+    // Função para atualizar o painel de uma quest
+    private void UpdatePanel(Quest q)
+    {
+        // Painel da quest
+        Transform questPanel = q.questUI.transform;
+
+        // Variáveis do painel
+        TMP_Text questDescription = questPanel.Find("Description").GetComponent<TMP_Text>(); // Descrição da quest
+        Transform questProgressBar = questPanel.Find("ProgressBar"); // Barra de progresso
+        RectTransform progressBarSize = questProgressBar.GetComponent<RectTransform>(); // Tamanho da barra de progresso
+        RectTransform questCurrentProgressBar = questProgressBar.Find("CurrentProgressBar").GetComponent<RectTransform>(); // Progresso na barra
+        TMP_Text questProgressText = questProgressBar.Find("ProgressText").GetComponent<TMP_Text>(); // Progresso em texto
+
+        // Atualizar os valores
+        questDescription.text = q.message;
+        questCurrentProgressBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, q.percentage * progressBarSize.rect.width);
+        questProgressText.text = q.progress + "/" + q.total;
+    }
+
     // Função para adicionar uma nova quest
     public void AddQuest(TypeOfQuests qType, int t, string m, Rewards r, int a)
     {
+        // Cria novo painel para a quest
+        GameObject questPanel = Instantiate(questPrefab, questsMenu.transform);
+
         // Cria nova quest
-        Quest newQuest = new Quest(qType, t, m, r, a);
+        Quest newQuest = new Quest(qType, t, m, r, a, questPanel);
 
         // Adiciona a quest à lista
         quests.Add(newQuest);
+
+        // Atualiza o painel
+        UpdatePanel(newQuest);
     }
 
     private void Start()
@@ -119,11 +150,17 @@ public class QuestManager : MonoBehaviour
         // Buscar todas as quests ativas
         foreach (Quest q in quests)
         {
+            // Atualizar ordem da questa na UI
+            q.questUI.transform.SetSiblingIndex(quests.IndexOf(q));
+
             // Se houver quests completas, retira-mos a quest da lista e da-mos a recompensa ao jogador
             if (q.progress >= q.total)
             {
                 // Remove a quest da list
                 quests.Remove(q);
+
+                // Remove a quest do menu das quests
+                Destroy(q.questUI);
 
                 // Dá a recompensa ao jogador
                 GiveRewards(q);
