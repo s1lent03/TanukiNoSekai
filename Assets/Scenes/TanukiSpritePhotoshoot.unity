@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2026.4875, g: 1714.094, b: 1758.6233, a: 1}
+  m_IndirectSpecularColor: {r: 2139.4202, g: 1782.6877, b: 1768.4026, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1293,7 +1293,7 @@ Camera:
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 2
+  m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
   m_Iso: 200
@@ -1848,17 +1848,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f33a99c4c5e27e4ba1a745131e5c96d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  journeyMenu: {fileID: 0}
-  settingsMenu: {fileID: 0}
+  visualsMenu: {fileID: 0}
+  audioMenu: {fileID: 0}
   creditsMenu: {fileID: 0}
   eventSystemObject: {fileID: 0}
+  loadingImage: {fileID: 0}
   mainMenuFirstButton: {fileID: 0}
-  journeyFirstButton: {fileID: 0}
-  loadJourneyFirstButton: {fileID: 0}
-  createJourneyFirstButton: {fileID: 0}
-  pvpFirstButton: {fileID: 0}
+  visualsFirstButton: {fileID: 0}
+  audioFirstButton: {fileID: 0}
+  creditsFirstButton: {fileID: 0}
   navegationSoundFX: {fileID: 2147192188}
   buttonClickSoundFX: {fileID: 2147192191}
+  settingsFileName: 
 --- !u!4 &2147192187
 Transform:
   m_ObjectHideFlags: 0

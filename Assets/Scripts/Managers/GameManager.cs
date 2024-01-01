@@ -14,8 +14,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("dsadas");
-        // Verifica se existe o ficheiro que guarda a save do jogo, se não cria - o
+        //Verifica se existe o ficheiro que guarda a save do jogo, se não cria - o
         string filePath = Application.dataPath + saveFileName;
         if (!File.Exists(filePath))
         {

@@ -9,6 +9,10 @@ using UnityEngine.EventSystems;
 
 public class PlayerHabilities : MonoBehaviour
 {
+    [Header("Lantern")]
+    [SerializeField] GameObject Lantern;
+    bool isLanternOut = false;
+
     [Header("Throw Ball")]
     [SerializeField] List<GameObject> BallVariants;
     [SerializeField] GameObject Ball;
@@ -78,6 +82,20 @@ public class PlayerHabilities : MonoBehaviour
 
     void Update()
     {
+        //Sacar lanterna
+        if (playerInput.actions["Lantern"].triggered && !isLanternOut)
+        {
+            Lantern.SetActive(true);
+            isLanternOut = true;
+            //ANIMAÇÃO DE SACAR LANTERNA
+        }
+        else if (playerInput.actions["Lantern"].triggered && isLanternOut)
+        {
+            Lantern.SetActive(false);
+            isLanternOut = false;
+            //ANIMAÇÃO DE GUARDAR LANTERNA
+        }
+
         //Lançar bola quando primida a devida tecla e caso o jogo não esteja em pausa nem em batalha
         if (!Managers.GetComponent<ControllerManager>().isPlayerInBattle && !Managers.GetComponent<PauseMenuManager>().isPaused && playerInput.actions["ThrowBall"].triggered && canThrowNextBall)
         {

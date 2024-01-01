@@ -18,6 +18,8 @@ public class DayNightCycle : MonoBehaviour
 
     public LensFlareDataSRP FlareData;
 
+    public float timeGoBySpeed;
+
     [Header("Shaders")]
     public Vector3 daySkyMultiplier;
     public Vector3 nightSkyMultiplier;
@@ -34,10 +36,10 @@ public class DayNightCycle : MonoBehaviour
 
     void Update()
     {
-        /*//Timelapse
-        TimeHours += Time.time * 0.0001f;
+        //Timelapse
+        TimeHours += Time.deltaTime * timeGoBySpeed;
         if (TimeHours >= 24)
-            TimeHours = 0;*/
+            TimeHours = 0;
 
 
         DateTime currentTime = DateTime.Now;

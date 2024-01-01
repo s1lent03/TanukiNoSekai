@@ -63,6 +63,18 @@ public class Interact : MonoBehaviour
                     gameObject.GetComponent<PlayerHabilities>().PlayDropBerry(otherObject.gameObject);
                 }
             }
+
+            //Se o ray atingir uma porta vai abri-la ou fechá-la
+            else if(otherObject.tag == "Interactable")
+            {
+                interactText.text = WhatToDisplay("F", "X", "Square Button", "open/close the door");
+
+                if (playerInput.actions["Interact"].triggered && !otherObject.GetComponent<OpenDoor>().isRotating)
+                {
+                    otherObject.GetComponent<OpenDoor>().OpenCloseDoor();
+                }
+            }
+
             //Se o ray atingir um objeto com a tag pretendida e tiver a menos de 1.5 de distancia vai aparecer um texto a indicar que o objeto é interagivel
             else if (otherObject.tag == "Buyable")
             {
