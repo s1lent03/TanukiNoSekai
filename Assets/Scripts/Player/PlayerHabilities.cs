@@ -158,16 +158,7 @@ public class PlayerHabilities : MonoBehaviour
             eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
             eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(PartyMenuRunButtonToSee);
 
-            List<Tanuki> tanukis = gameObject.GetComponent<TanukiParty>().tanukis;
-            for (int i = 0; i < memberSlotsToSee.Length; i++)
-            {
-                if (i < tanukis.Count)
-                {
-                    memberSlotsToSee[i].SetData(tanukis[i]);
-                }                    
-                else
-                    memberSlotsToSee[i].gameObject.SetActive(false);
-            }
+            UpdateToSeeParty();
         }
         else if (Managers.GetComponent<ControllerManager>().isPlayerInBattle && !Managers.GetComponent<PauseMenuManager>().isPaused && playerInput.actions["ShowParty"].triggered && PartyScreenToSee.activeInHierarchy)
         {
@@ -190,6 +181,20 @@ public class PlayerHabilities : MonoBehaviour
             MovesInfoToSeeTxt.text = TanukiPartyMovesInfo(memberSlotsToSee);
             TypesInfoToSeeTxt.text = TanukiPartyTypesInfo(memberSlotsToSee);
         }      
+    }
+
+    public void UpdateToSeeParty()
+    {
+        List<Tanuki> tanukis = gameObject.GetComponent<TanukiParty>().tanukis;
+        for (int i = 0; i < memberSlotsToSee.Length; i++)
+        {
+            if (i < tanukis.Count)
+            {
+                memberSlotsToSee[i].SetData(tanukis[i]);
+            }
+            else
+                memberSlotsToSee[i].gameObject.SetActive(false);
+        }
     }
 
     string TanukiPartyMovesInfo(PartyMemberUI[] memberSlots)

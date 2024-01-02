@@ -19,6 +19,7 @@ public class TanukiDetection : MonoBehaviour
     [Space]
     public GameObject BattleHud;
     public GameObject Managers;
+    public GameObject Quests;
 
     [Header("Values")]
     public bool isInBattle;
@@ -153,6 +154,7 @@ public class TanukiDetection : MonoBehaviour
             HUD.SetActive(false);
             BattleHud.SetActive(true);
             Managers.GetComponent<BattleManager>().BackToActionsButton();
+            Quests.GetComponent<QuestTabAnimations>().TabExitAnimation();
 
             doOnce = true;
             reachedFinalPos = true;
@@ -202,6 +204,7 @@ public class TanukiDetection : MonoBehaviour
         //Desligar o HUD de batalha e ligar o normal
         BattleHud.SetActive(false);
         HUD.SetActive(true);
+        Quests.GetComponent<QuestTabAnimations>().TabEnterAnimation();
 
         //Bloquear o cursor
         Cursor.lockState = CursorLockMode.Locked;
