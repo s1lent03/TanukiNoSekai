@@ -14,6 +14,7 @@ public class TriggerDialog : MonoBehaviour
     public Transform player;
     public TMP_Text notification;
     public CinemachineVirtualCamera dialogueCamera;
+    public Animator animator;
 
     [Header("Variables")]
     [TextArea(4, 6)] public string[] normalDialogueLines;
@@ -65,6 +66,8 @@ public class TriggerDialog : MonoBehaviour
 
         if (didDialogueStart && dialogueCamera.Priority == 11)
             player.GetComponent<PlayerMovement>().isPaused = true;
+
+        animator.SetBool(Animator.StringToHash("Talk"), didDialogueStart);
 
         if (gameObject.tag == "Merchant")
         {

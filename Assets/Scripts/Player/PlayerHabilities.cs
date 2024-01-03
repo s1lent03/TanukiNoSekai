@@ -80,20 +80,34 @@ public class PlayerHabilities : MonoBehaviour
         PlayerPrefs.SetInt("CurrentBerryLevel", 1);      
     }
 
+    IEnumerator ToggleLight()
+    {
+        GetComponent<PlayerMovement>().isPaused = true;
+
+        if (!isLanternOut)
+        {
+            GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("LightsOn"));
+            yield return new WaitForSeconds(0.75f);
+            Lantern.SetActive(true);
+            isLanternOut = true;
+        } else
+        {
+            GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("LightsOff"));
+            yield return new WaitForSeconds(0.75f);
+            isLanternOut = false;
+            Lantern.SetActive(false);
+        }
+
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<PlayerMovement>().isPaused = false;
+    }
+
     void Update()
     {
         //Sacar lanterna
-        if (playerInput.actions["Lantern"].triggered && !isLanternOut)
+        if (playerInput.actions["Lantern"].triggered)
         {
-            Lantern.SetActive(true);
-            isLanternOut = true;
-            //ANIMAÇÃO DE SACAR LANTERNA
-        }
-        else if (playerInput.actions["Lantern"].triggered && isLanternOut)
-        {
-            Lantern.SetActive(false);
-            isLanternOut = false;
-            //ANIMAÇÃO DE GUARDAR LANTERNA
+            StartCoroutine(ToggleLight());
         }
 
         //Lançar bola quando primida a devida tecla e caso o jogo não esteja em pausa nem em batalha
@@ -300,6 +314,11 @@ public class PlayerHabilities : MonoBehaviour
         DropStartPoint = DropPoint.position;
         Vector3 lookAtPosition = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)).direction;
 
+        // Animação
+        GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("Berry"));
+        GetComponent<PlayerMovement>().isPaused = true;
+        yield return new WaitForSeconds(2.3f);
+
         //Criar a berry e fazer com que vá para a boca do tanuki
         GameObject BerryToDrop = Instantiate(Berry, DropStartPoint, Quaternion.identity);
         Transform Mouth = tanuki.gameObject.transform.Find("ModelObject").transform.Find("Model").transform.Find("Armature").transform.Find("Body").transform.Find("Mouth").gameObject.transform;
@@ -308,6 +327,10 @@ public class PlayerHabilities : MonoBehaviour
         //Destruir berry
         StartCoroutine(DestroyBall(BerryToDrop, 1f));
         yield return new WaitForSeconds(1f);
+
+        // Tirar o freeze
+        yield return new WaitForSeconds(0.867f);
+        GetComponent<PlayerMovement>().isPaused = false;
 
         //Apanhar Tanuki
         int currentBerryNum = PlayerPrefs.GetInt("CurrentBerryLevel");
@@ -369,12 +392,21 @@ public class PlayerHabilities : MonoBehaviour
         ThrowStartPoint = ThrowPoint.position;
         Vector3 lookAtPosition = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)).direction;
 
+        // Animação
+        GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("Throw"));
+        GetComponent<PlayerMovement>().isPaused = true;
+        yield return new WaitForSeconds(2f);
+
         //Criar a bola e dar-lhe força para ir na direção criada anteriormente
         GameObject BallToThrow = Instantiate(Ball, ThrowStartPoint, Quaternion.identity);
         BallToThrow.GetComponent<Rigidbody>().AddForce(lookAtPosition * ThrowForce);
 
         //Destruir bola
         StartCoroutine(DestroyBall(BallToThrow, 10f));
+
+        // Tirar o freeze
+        yield return new WaitForSeconds(1f);
+        GetComponent<PlayerMovement>().isPaused = false;
 
         //Esperar algum tempo para mandar outra
         yield return new WaitForSeconds(ThrowCoolDown);

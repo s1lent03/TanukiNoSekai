@@ -102,6 +102,9 @@ public class Interact : MonoBehaviour
                             //Adicionar mais um item do escolhido e remover dinheiro
                             PlayerPrefs.SetInt("NumberOfBall1", PlayerPrefs.GetInt("NumberOfBall1") + 1);
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 10);
+
+                            // Animação
+                            StartCoroutine(PurchaseAnimation());
                         }
                     }
                     else if (otherObject.name == "BallLevel2Buy")
@@ -111,6 +114,9 @@ public class Interact : MonoBehaviour
                             //Adicionar mais um item do escolhido e remover dinheiro
                             PlayerPrefs.SetInt("NumberOfBall2", PlayerPrefs.GetInt("NumberOfBall2") + 1);
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 25);
+
+                            // Animação
+                            StartCoroutine(PurchaseAnimation());
                         }
                     }
                     else if (otherObject.name == "BallLevel3Buy")
@@ -120,6 +126,9 @@ public class Interact : MonoBehaviour
                             //Adicionar mais um item do escolhido e remover dinheiro
                             PlayerPrefs.SetInt("NumberOfBall3", PlayerPrefs.GetInt("NumberOfBall3") + 1);
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 60);
+
+                            // Animação
+                            StartCoroutine(PurchaseAnimation());
                         }
                     }
                     else if (otherObject.name == "BerryLevel1Buy")
@@ -129,6 +138,9 @@ public class Interact : MonoBehaviour
                             //Adicionar mais um item do escolhido e remover dinheiro
                             PlayerPrefs.SetInt("NumberOfBerry1", PlayerPrefs.GetInt("NumberOfBerry1") + 1);
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 15);
+
+                            // Animação
+                            StartCoroutine(PurchaseAnimation());
                         }
                     }
                     else if (otherObject.name == "BerryLevel2Buy")
@@ -138,6 +150,9 @@ public class Interact : MonoBehaviour
                             //Adicionar mais um item do escolhido e remover dinheiro
                             PlayerPrefs.SetInt("NumberOfBerry2", PlayerPrefs.GetInt("NumberOfBerry2") + 1);
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 35);
+
+                            // Animação
+                            StartCoroutine(PurchaseAnimation());
                         }
                     }
                     else if (otherObject.name == "BerryLevel3Buy")
@@ -147,6 +162,9 @@ public class Interact : MonoBehaviour
                             //Adicionar mais um item do escolhido e remover dinheiro
                             PlayerPrefs.SetInt("NumberOfBerry3", PlayerPrefs.GetInt("NumberOfBerry3") + 1);
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 80);
+
+                            // Animação
+                            StartCoroutine(PurchaseAnimation());
                         }
                     }
                     else if (otherObject.name == "Level1PotionBuy")
@@ -156,6 +174,9 @@ public class Interact : MonoBehaviour
                             //Adicionar mais um item do escolhido e remover dinheiro
                             PlayerPrefs.SetInt("NumberOfPotion1", PlayerPrefs.GetInt("NumberOfPotion1") + 1);
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 25);
+
+                            // Animação
+                            StartCoroutine(PurchaseAnimation());
                         }
                     }
                     else if (otherObject.name == "Level2PotionBuy")
@@ -165,6 +186,9 @@ public class Interact : MonoBehaviour
                             //Adicionar mais um item do escolhido e remover dinheiro
                             PlayerPrefs.SetInt("NumberOfPotion2", PlayerPrefs.GetInt("NumberOfPotion2") + 1);
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 50);
+
+                            // Animação
+                            StartCoroutine(PurchaseAnimation());
                         }
                     }
                     else if (otherObject.name == "Level3PotionBuy")
@@ -174,6 +198,9 @@ public class Interact : MonoBehaviour
                             //Adicionar mais um item do escolhido e remover dinheiro
                             PlayerPrefs.SetInt("NumberOfPotion3", PlayerPrefs.GetInt("NumberOfPotion3") + 1);
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 100);
+
+                            // Animação
+                            StartCoroutine(PurchaseAnimation());
                         }
                     }
                 }
@@ -190,6 +217,15 @@ public class Interact : MonoBehaviour
                 buyingInfoObject.transform.Find("Info").gameObject.SetActive(false);
             }
         }
+    }
+
+    // Animação
+    IEnumerator PurchaseAnimation()
+    {
+        GetComponent<PlayerMovement>().isPaused = true;
+        GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("Collect"));
+        yield return new WaitForSeconds(1.25f);
+        GetComponent<PlayerMovement>().isPaused = false;
     }
 
     //Dependendo do que o jogador tiver a utilizar para jogar, vai mostrar o devido texto

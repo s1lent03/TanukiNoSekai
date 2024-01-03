@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     //Parar movimento se o jogo estiver em pausa
     public bool isPaused;
     public GameObject pauseMenu;
+    public Animator animator;
 
     private void Awake()
     {
@@ -68,10 +69,19 @@ public class PlayerMovement : MonoBehaviour
             else
                 speed = normalSpeed;
 
+            animator.SetBool(Animator.StringToHash("Moving"), direction != Vector3.zero);
+            animator.SetBool(Animator.StringToHash("Running"), speed == sprintSpeed);
+            animator.SetBool(Animator.StringToHash("Crouching"), playerInput.actions["Crouch"].IsPressed());
+
             characterController.Move(direction * speed * Time.deltaTime);
 
             Quaternion toRotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-        }       
+        } else
+        {
+            animator.SetBool(Animator.StringToHash("Moving"), false);
+            animator.SetBool(Animator.StringToHash("Running"), false);
+            animator.SetBool(Animator.StringToHash("Crouching"), false);
+        }      
     }
 }
