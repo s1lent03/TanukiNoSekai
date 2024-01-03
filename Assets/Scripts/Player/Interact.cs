@@ -149,6 +149,33 @@ public class Interact : MonoBehaviour
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 80);
                         }
                     }
+                    else if (otherObject.name == "Level1PotionBuy")
+                    {
+                        if (PlayerPrefs.GetInt("CurrentMoney") > 25)
+                        {
+                            //Adicionar mais um item do escolhido e remover dinheiro
+                            PlayerPrefs.SetInt("NumberOfPotion1", PlayerPrefs.GetInt("NumberOfPotion1") + 1);
+                            PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 25);
+                        }
+                    }
+                    else if (otherObject.name == "Level2PotionBuy")
+                    {
+                        if (PlayerPrefs.GetInt("CurrentMoney") > 50)
+                        {
+                            //Adicionar mais um item do escolhido e remover dinheiro
+                            PlayerPrefs.SetInt("NumberOfPotion2", PlayerPrefs.GetInt("NumberOfPotion2") + 1);
+                            PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 50);
+                        }
+                    }
+                    else if (otherObject.name == "Level3PotionBuy")
+                    {
+                        if (PlayerPrefs.GetInt("CurrentMoney") > 100)
+                        {
+                            //Adicionar mais um item do escolhido e remover dinheiro
+                            PlayerPrefs.SetInt("NumberOfPotion3", PlayerPrefs.GetInt("NumberOfPotion3") + 1);
+                            PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 100);
+                        }
+                    }
                 }
             }
         }

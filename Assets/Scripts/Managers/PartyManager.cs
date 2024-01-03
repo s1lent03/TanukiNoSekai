@@ -44,19 +44,8 @@ public class PartyManager : MonoBehaviour
     [SerializeField] bool isSwitching = false;
 
     [Header("Others")]
-    int currentSelectedTanuki = 0;
-    int secondSelectedTanuki = 0;
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] int currentSelectedTanuki = 0;
+    [SerializeField] int secondSelectedTanuki = 0;
 
     public void TanukiActionButton(int currentTanukiIndex)
     {
@@ -277,142 +266,145 @@ public class PartyManager : MonoBehaviour
     //Curar tanuki selecionado com a respetiva poção
     public void HealTanukiPotion1()
     {
-        int CurrentHp = Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].Hp;
-        int MaxHp = Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].MaxHp;
-        GameObject HpBar = null;
-        TMP_Text PercentageText = null;
-
-        if (CurrentHp < MaxHp)
+        if (PlayerPrefs.GetInt("NumberOfPotion1") >= 1)
         {
-            Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].UpdateHp(-aquaPotionHpRegenValue);
+            int CurrentHp = Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].Hp;
+            int MaxHp = Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].MaxHp;
+            GameObject HpBar = null;
+            TMP_Text PercentageText = null;
 
-            switch (currentSelectedTanuki)
+            if (CurrentHp < MaxHp && CurrentHp > 0)
             {
-                case 0:
-                    HpBar = TanukiButton1.transform.parent.Find("HpBar").gameObject;
-                    PercentageText = TanukiButton1.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
-                    break;
-                case 1:
-                    HpBar = TanukiButton2.transform.parent.Find("HpBar").gameObject;
-                    PercentageText = TanukiButton2.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
-                    break;
-                case 2:
-                    HpBar = TanukiButton3.transform.parent.Find("HpBar").gameObject;
-                    PercentageText = TanukiButton3.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
-                    break;
-                case 3:
-                    HpBar = TanukiButton4.transform.parent.Find("HpBar").gameObject;
-                    PercentageText = TanukiButton4.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
-                    break;
-                case 4:
-                    HpBar = TanukiButton5.transform.parent.Find("HpBar").gameObject;
-                    PercentageText = TanukiButton5.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
-                    break;
+                Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].UpdateHp(-aquaPotionHpRegenValue);
 
+                switch (currentSelectedTanuki)
+                {
+                    case 0:
+                        HpBar = TanukiButton1.transform.parent.Find("HpBar").gameObject;
+                        PercentageText = TanukiButton1.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
+                        break;
+                    case 1:
+                        HpBar = TanukiButton2.transform.parent.Find("HpBar").gameObject;
+                        PercentageText = TanukiButton2.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
+                        break;
+                    case 2:
+                        HpBar = TanukiButton3.transform.parent.Find("HpBar").gameObject;
+                        PercentageText = TanukiButton3.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
+                        break;
+                    case 3:
+                        HpBar = TanukiButton4.transform.parent.Find("HpBar").gameObject;
+                        PercentageText = TanukiButton4.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
+                        break;
+                    case 4:
+                        HpBar = TanukiButton5.transform.parent.Find("HpBar").gameObject;
+                        PercentageText = TanukiButton5.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
+                        break;
+                }
+
+                CurrentHp = Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].Hp;
+
+                StartCoroutine(HpBar.GetComponent<HpBar>().SetHpSmooth((float)CurrentHp / MaxHp));
+                PercentageText.text = (int)((float)CurrentHp / (float)MaxHp * 100) + "%";
+
+                PlayerPrefs.SetInt("NumberOfPotion1", PlayerPrefs.GetInt("NumberOfPotion1") - 1);
             }
-
-            StartCoroutine(HpBar.GetComponent<HpBar>().SetHpSmooth((float)CurrentHp / MaxHp));
-            PercentageText.text = (int)((float)CurrentHp / (float)MaxHp * 100) + "%";
-
-            eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
-            eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(firstButtonAction);
-
-            //Remover 1 poção
-        }
+        }        
     }
 
     //Curar tanuki selecionado com a respetiva poção
     public void HealTanukiPotion2()
-    {        
-        int CurrentHp = Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].Hp;
-        int MaxHp = Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].MaxHp;
-        GameObject HpBar = null;
-        TMP_Text PercentageText = null;
-
-        if (CurrentHp < MaxHp)
+    {
+        if (PlayerPrefs.GetInt("NumberOfPotion2") >= 1)
         {
-            Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].UpdateHp(-sunPotionHpRegenValue);
+            int CurrentHp = Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].Hp;
+            int MaxHp = Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].MaxHp;
+            GameObject HpBar = null;
+            TMP_Text PercentageText = null;
 
-            switch (currentSelectedTanuki)
+            if (CurrentHp < MaxHp && CurrentHp > 0)
             {
-                case 0:
-                    HpBar = TanukiButton1.transform.parent.Find("HpBar").gameObject;
-                    PercentageText = TanukiButton1.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
-                    break;
-                case 1:
-                    HpBar = TanukiButton2.transform.parent.Find("HpBar").gameObject;
-                    PercentageText = TanukiButton2.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
-                    break;
-                case 2:
-                    HpBar = TanukiButton3.transform.parent.Find("HpBar").gameObject;
-                    PercentageText = TanukiButton3.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
-                    break;
-                case 3:
-                    HpBar = TanukiButton4.transform.parent.Find("HpBar").gameObject;
-                    PercentageText = TanukiButton4.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
-                    break;
-                case 4:
-                    HpBar = TanukiButton5.transform.parent.Find("HpBar").gameObject;
-                    PercentageText = TanukiButton5.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
-                    break;
+                Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].UpdateHp(-sunPotionHpRegenValue);
 
+                switch (currentSelectedTanuki)
+                {
+                    case 0:
+                        HpBar = TanukiButton1.transform.parent.Find("HpBar").gameObject;
+                        PercentageText = TanukiButton1.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
+                        break;
+                    case 1:
+                        HpBar = TanukiButton2.transform.parent.Find("HpBar").gameObject;
+                        PercentageText = TanukiButton2.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
+                        break;
+                    case 2:
+                        HpBar = TanukiButton3.transform.parent.Find("HpBar").gameObject;
+                        PercentageText = TanukiButton3.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
+                        break;
+                    case 3:
+                        HpBar = TanukiButton4.transform.parent.Find("HpBar").gameObject;
+                        PercentageText = TanukiButton4.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
+                        break;
+                    case 4:
+                        HpBar = TanukiButton5.transform.parent.Find("HpBar").gameObject;
+                        PercentageText = TanukiButton5.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
+                        break;
+                }
+
+                CurrentHp = Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].Hp;
+
+                StartCoroutine(HpBar.GetComponent<HpBar>().SetHpSmooth((float)CurrentHp / MaxHp));
+                PercentageText.text = (int)((float)CurrentHp / (float)MaxHp * 100) + "%";
+
+                PlayerPrefs.SetInt("NumberOfPotion2", PlayerPrefs.GetInt("NumberOfPotion2") - 1);
             }
-
-            StartCoroutine(HpBar.GetComponent<HpBar>().SetHpSmooth((float)CurrentHp / MaxHp));
-            PercentageText.text = (int)((float)CurrentHp / (float)MaxHp * 100) + "%";
-
-            eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
-            eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(firstButtonAction);
-
-            //Remover 1 poção
-        }
+        }        
     }
 
     //Curar tanuki selecionado com a respetiva poção
     public void HealTanukiPotion3()
     {
-        int CurrentHp = Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].Hp;
-        int MaxHp = Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].MaxHp;
-        GameObject HpBar = null;
-        TMP_Text PercentageText = null;
-
-        if (CurrentHp < MaxHp)
+        if (PlayerPrefs.GetInt("NumberOfPotion3") >= 1)
         {
-            Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].UpdateHp(-scarletPotionHpRegenValue);
+            int CurrentHp = Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].Hp;
+            int MaxHp = Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].MaxHp;
+            GameObject HpBar = null;
+            TMP_Text PercentageText = null;
 
-            switch (currentSelectedTanuki)
+            if (CurrentHp < MaxHp && CurrentHp > 0)
             {
-                case 0:
-                    HpBar = TanukiButton1.transform.parent.Find("HpBar").gameObject;
-                    PercentageText = TanukiButton1.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
-                    break;
-                case 1:
-                    HpBar = TanukiButton2.transform.parent.Find("HpBar").gameObject;
-                    PercentageText = TanukiButton2.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
-                    break;
-                case 2:
-                    HpBar = TanukiButton3.transform.parent.Find("HpBar").gameObject;
-                    PercentageText = TanukiButton3.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
-                    break;
-                case 3:
-                    HpBar = TanukiButton4.transform.parent.Find("HpBar").gameObject;
-                    PercentageText = TanukiButton4.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
-                    break;
-                case 4:
-                    HpBar = TanukiButton5.transform.parent.Find("HpBar").gameObject;
-                    PercentageText = TanukiButton5.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
-                    break;
+                Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].UpdateHp(-scarletPotionHpRegenValue);
 
+                switch (currentSelectedTanuki)
+                {
+                    case 0:
+                        HpBar = TanukiButton1.transform.parent.Find("HpBar").gameObject;
+                        PercentageText = TanukiButton1.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
+                        break;
+                    case 1:
+                        HpBar = TanukiButton2.transform.parent.Find("HpBar").gameObject;
+                        PercentageText = TanukiButton2.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
+                        break;
+                    case 2:
+                        HpBar = TanukiButton3.transform.parent.Find("HpBar").gameObject;
+                        PercentageText = TanukiButton3.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
+                        break;
+                    case 3:
+                        HpBar = TanukiButton4.transform.parent.Find("HpBar").gameObject;
+                        PercentageText = TanukiButton4.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
+                        break;
+                    case 4:
+                        HpBar = TanukiButton5.transform.parent.Find("HpBar").gameObject;
+                        PercentageText = TanukiButton5.transform.parent.Find("HpBar").transform.Find("HpPercentage").gameObject.GetComponent<TMP_Text>();
+                        break;
+                }
+
+                CurrentHp = Player.GetComponent<TanukiParty>().tanukis[currentSelectedTanuki].Hp;
+
+                StartCoroutine(HpBar.GetComponent<HpBar>().SetHpSmooth((float)CurrentHp / MaxHp));
+                PercentageText.text = (int)((float)CurrentHp / (float)MaxHp * 100) + "%";
+
+                PlayerPrefs.SetInt("NumberOfPotion3", PlayerPrefs.GetInt("NumberOfPotion3") - 1);
             }
-
-            StartCoroutine(HpBar.GetComponent<HpBar>().SetHpSmooth((float)CurrentHp / MaxHp));
-            PercentageText.text = (int)((float)CurrentHp / (float)MaxHp * 100) + "%";
-
-            eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(null);
-            eventSystemObject.GetComponent<EventSystem>().SetSelectedGameObject(firstButtonAction);
-
-            //Remover 1 poção
-        }
+        }        
     }
 
 }
