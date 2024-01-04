@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2139.4202, g: 1782.6877, b: 1768.4026, a: 1}
+  m_IndirectSpecularColor: {r: 1654.428, g: 1460.7052, b: 1646.6663, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -811,10 +811,9 @@ Transform:
   - {fileID: 1447561189}
   - {fileID: 972854305}
   - {fileID: 1086004550}
-  - {fileID: 923336114}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &923336113
+--- !u!1 &791560304
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -822,51 +821,29 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 923336114}
-  - component: {fileID: 923336115}
+  - component: {fileID: 791560305}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ModelObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &923336114
+--- !u!4 &791560305
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 923336113}
+  m_GameObject: {fileID: 791560304}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.08, y: 0, z: -1.13}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 487943969}
+  m_Father: {fileID: 2003490316}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &923336115
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 923336113}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 1, z: 7}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &972854304
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,6 +1019,7 @@ Transform:
   - {fileID: 2326889938923270265}
   - {fileID: 1803296390}
   - {fileID: 4116912928113712641}
+  - {fileID: 2003490316}
   m_Father: {fileID: 487943969}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1260461396
@@ -1763,10 +1741,43 @@ MonoBehaviour:
   Moon: {fileID: 1288456095}
   SunColor: {r: 1, g: 1, b: 1, a: 1}
   FlareData: {fileID: 11400000, guid: 08232417b6b4fac44907fd1694681459, type: 2}
+  timeGoBySpeed: 0
   daySkyMultiplier: {x: 0.0001, y: 0.0001, z: 0.0001}
   nightSkyMultiplier: {x: 1, y: 1, z: 1}
   waterMaterial: {fileID: 2100000, guid: 4edfd01b9f22f964b831d50e66a910c3, type: 2}
   riverMaterial: {fileID: 2100000, guid: c612dfab1597f25408a484d1169489e1, type: 2}
+--- !u!1 &2003490315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2003490316}
+  m_Layer: 0
+  m_Name: Yokoju
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2003490316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003490315}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 791560305}
+  m_Father: {fileID: 1086004550}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2013410473
 GameObject:
   m_ObjectHideFlags: 1
@@ -2341,6 +2352,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Aobochi
       objectReference: {fileID: 0}
+    - target: {fileID: 4278015739065466010, guid: 4df85b8a494454340a1d305654465b9e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4485490613536976491, guid: 4df85b8a494454340a1d305654465b9e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2395,7 +2411,7 @@ PrefabInstance:
         type: 3}
       propertyPath: zone
       value: 
-      objectReference: {fileID: 923336115}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
