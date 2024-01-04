@@ -82,24 +82,19 @@ public class PlayerHabilities : MonoBehaviour
 
     IEnumerator ToggleLight()
     {
-        GetComponent<PlayerMovement>().isPaused = true;
+        GetComponent<PlayerMovement>().animator.SetBool(Animator.StringToHash("Light"), !isLanternOut);
 
         if (!isLanternOut)
         {
-            GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("LightsOn"));
-            yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSeconds(0.55f);
             Lantern.SetActive(true);
             isLanternOut = true;
         } else
         {
-            GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("LightsOff"));
-            yield return new WaitForSeconds(0.75f);
+            yield return new WaitForSeconds(1.05f);
             isLanternOut = false;
             Lantern.SetActive(false);
         }
-
-        yield return new WaitForSeconds(0.5f);
-        GetComponent<PlayerMovement>().isPaused = false;
     }
 
     void Update()
@@ -316,8 +311,6 @@ public class PlayerHabilities : MonoBehaviour
 
         // Animação
         GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("Berry"));
-        GetComponent<PlayerMovement>().isPaused = true;
-        yield return new WaitForSeconds(2.3f);
 
         //Criar a berry e fazer com que vá para a boca do tanuki
         GameObject BerryToDrop = Instantiate(Berry, DropStartPoint, Quaternion.identity);
@@ -327,10 +320,6 @@ public class PlayerHabilities : MonoBehaviour
         //Destruir berry
         StartCoroutine(DestroyBall(BerryToDrop, 1f));
         yield return new WaitForSeconds(1f);
-
-        // Tirar o freeze
-        yield return new WaitForSeconds(0.867f);
-        GetComponent<PlayerMovement>().isPaused = false;
 
         //Apanhar Tanuki
         int currentBerryNum = PlayerPrefs.GetInt("CurrentBerryLevel");
@@ -394,8 +383,6 @@ public class PlayerHabilities : MonoBehaviour
 
         // Animação
         GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("Throw"));
-        GetComponent<PlayerMovement>().isPaused = true;
-        yield return new WaitForSeconds(2f);
 
         //Criar a bola e dar-lhe força para ir na direção criada anteriormente
         GameObject BallToThrow = Instantiate(Ball, ThrowStartPoint, Quaternion.identity);
@@ -403,10 +390,6 @@ public class PlayerHabilities : MonoBehaviour
 
         //Destruir bola
         StartCoroutine(DestroyBall(BallToThrow, 10f));
-
-        // Tirar o freeze
-        yield return new WaitForSeconds(1f);
-        GetComponent<PlayerMovement>().isPaused = false;
 
         //Esperar algum tempo para mandar outra
         yield return new WaitForSeconds(ThrowCoolDown);

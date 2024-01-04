@@ -104,7 +104,7 @@ public class Interact : MonoBehaviour
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 10);
 
                             // Animação
-                            StartCoroutine(PurchaseAnimation());
+                            GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("Collect"));
                         }
                     }
                     else if (otherObject.name == "BallLevel2Buy")
@@ -116,7 +116,7 @@ public class Interact : MonoBehaviour
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 25);
 
                             // Animação
-                            StartCoroutine(PurchaseAnimation());
+                            GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("Collect"));
                         }
                     }
                     else if (otherObject.name == "BallLevel3Buy")
@@ -128,7 +128,7 @@ public class Interact : MonoBehaviour
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 60);
 
                             // Animação
-                            StartCoroutine(PurchaseAnimation());
+                            GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("Collect"));
                         }
                     }
                     else if (otherObject.name == "BerryLevel1Buy")
@@ -140,7 +140,7 @@ public class Interact : MonoBehaviour
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 15);
 
                             // Animação
-                            StartCoroutine(PurchaseAnimation());
+                            GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("Collect"));
                         }
                     }
                     else if (otherObject.name == "BerryLevel2Buy")
@@ -152,7 +152,7 @@ public class Interact : MonoBehaviour
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 35);
 
                             // Animação
-                            StartCoroutine(PurchaseAnimation());
+                            GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("Collect"));
                         }
                     }
                     else if (otherObject.name == "BerryLevel3Buy")
@@ -164,7 +164,7 @@ public class Interact : MonoBehaviour
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 80);
 
                             // Animação
-                            StartCoroutine(PurchaseAnimation());
+                            GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("Collect"));
                         }
                     }
                     else if (otherObject.name == "Level1PotionBuy")
@@ -176,7 +176,7 @@ public class Interact : MonoBehaviour
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 25);
 
                             // Animação
-                            StartCoroutine(PurchaseAnimation());
+                            GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("Collect"));
                         }
                     }
                     else if (otherObject.name == "Level2PotionBuy")
@@ -188,7 +188,7 @@ public class Interact : MonoBehaviour
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 50);
 
                             // Animação
-                            StartCoroutine(PurchaseAnimation());
+                            GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("Collect"));
                         }
                     }
                     else if (otherObject.name == "Level3PotionBuy")
@@ -200,7 +200,7 @@ public class Interact : MonoBehaviour
                             PlayerPrefs.SetInt("CurrentMoney", PlayerPrefs.GetInt("CurrentMoney") - 100);
 
                             // Animação
-                            StartCoroutine(PurchaseAnimation());
+                            GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("Collect"));
                         }
                     }
                 }
@@ -217,15 +217,6 @@ public class Interact : MonoBehaviour
                 buyingInfoObject.transform.Find("Info").gameObject.SetActive(false);
             }
         }
-    }
-
-    // Animação
-    IEnumerator PurchaseAnimation()
-    {
-        GetComponent<PlayerMovement>().isPaused = true;
-        GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("Collect"));
-        yield return new WaitForSeconds(1.25f);
-        GetComponent<PlayerMovement>().isPaused = false;
     }
 
     //Dependendo do que o jogador tiver a utilizar para jogar, vai mostrar o devido texto

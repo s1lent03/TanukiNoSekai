@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PlayerAvatarMask
+  m_Mask: 00000000000000000000000000000000000000000000000001000000000000000100000000000000000000000000000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature
+    m_Weight: 0
+  - m_Path: Armature/Body
+    m_Weight: 0
+  - m_Path: Armature/Body/Left Side
+    m_Weight: 0
+  - m_Path: Armature/Body/Left Side/Left Leg
+    m_Weight: 0
+  - m_Path: Armature/Body/Left Side/Left Leg/Left Foot
+    m_Weight: 0
+  - m_Path: Armature/Body/Left Side/Left Leg/Left Foot/Front Left Foot
+    m_Weight: 0
+  - m_Path: Armature/Body/Left Side/Left Leg/Left Foot/Front Left Foot/Front Left
+      Foot_end
+    m_Weight: 0
+  - m_Path: Armature/Body/Right Side
+    m_Weight: 0
+  - m_Path: Armature/Body/Right Side/Right Leg
+    m_Weight: 0
+  - m_Path: Armature/Body/Right Side/Right Leg/Right Foot
+    m_Weight: 0
+  - m_Path: Armature/Body/Right Side/Right Leg/Right Foot/Front Right Foot
+    m_Weight: 0
+  - m_Path: Armature/Body/Right Side/Right Leg/Right Foot/Front Right Foot/Front
+      Right Foot_end
+    m_Weight: 0
+  - m_Path: Armature/Body/Top
+    m_Weight: 0
+  - m_Path: Armature/Body/Top/Neck
+    m_Weight: 0
+  - m_Path: Armature/Body/Top/Neck/Head
+    m_Weight: 0
+  - m_Path: Armature/Body/Top/Neck/Head/Head_end
+    m_Weight: 0
+  - m_Path: Armature/Body/Top/Top Left
+    m_Weight: 0
+  - m_Path: Armature/Body/Top/Top Left/Left Arm
+    m_Weight: 0
+  - m_Path: Armature/Body/Top/Top Left/Left Arm/Left Hand
+    m_Weight: 0
+  - m_Path: Armature/Body/Top/Top Left/Left Arm/Left Hand/Left Hand_end
+    m_Weight: 0
+  - m_Path: Armature/Body/Top/Top Right
+    m_Weight: 1
+  - m_Path: Armature/Body/Top/Top Right/Right Arm
+    m_Weight: 1
+  - m_Path: Armature/Body/Top/Top Right/Right Arm/Right Hand
+    m_Weight: 1
+  - m_Path: Armature/Body/Top/Top Right/Right Arm/Right Hand/Right Hand_end
+    m_Weight: 1
+  - m_Path: Boneco.001
+    m_Weight: 0
+  - m_Path: Boneco.002
+    m_Weight: 0
+  - m_Path: Boneco.003
+    m_Weight: 0
+  - m_Path: Cabelo.001
+    m_Weight: 0
+  - m_Path: ChapeuBoneco.001
+    m_Weight: 0
+  - m_Path: Cube
+    m_Weight: 0
