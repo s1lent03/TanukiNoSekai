@@ -39,7 +39,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1947.1428, g: 1655.4397, b: 1704.6292, a: 1}
+  m_IndirectSpecularColor: {r: 1947.0637, g: 1655.508, b: 1705.2542, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9228,7 +9228,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -10985,7 +10985,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 176421970}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.095848896, y: 0.530585, z: -0.06054167, w: 0.84001625}
+  m_LocalRotation: {x: 0.09584889, y: 0.530585, z: -0.06054167, w: 0.84001625}
   m_LocalPosition: {x: 679.22, y: 103.1, z: 352.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -84508,7 +84508,6 @@ Transform:
   - {fileID: 528507076}
   - {fileID: 831724507}
   - {fileID: 1145680724}
-  - {fileID: 7104173948906639509}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &1522200747
@@ -84563,7 +84562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b81f2461149bcbe49a94de50a482c067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Lantern: {fileID: 0}
+  Lantern: {fileID: 7628192036358343215}
   BallVariants:
   - {fileID: 7314593299111692490, guid: 34a9653ea30d2894daaede9b12d88af4, type: 3}
   - {fileID: 3032496693857973176, guid: f82cff673b25e8047a2a6572a5e53732, type: 3}
@@ -117233,6 +117232,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4104291898036086921}
+  - {fileID: 7104173948906639509}
   m_Father: {fileID: 7643983201343070660}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6474454483962289132
@@ -117418,16 +117418,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7628192036358343215}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.4240113, y: -0.74900055, z: 0.012023866}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: -0.5}
+  m_LocalPosition: {x: 0.0003, y: 0.0035, z: -0.0045}
+  m_LocalScale: {x: 0.018181818, y: 0.018181821, z: 0.01818182}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4079813316560233903}
   - {fileID: 3152303171234462906}
   - {fileID: 517929402}
-  m_Father: {fileID: 1522200746}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_Father: {fileID: 6472532228087431916}
+  m_LocalEulerAnglesHint: {x: -180, y: 90, z: 90}
 --- !u!1 &7174299879711500271
 GameObject:
   m_ObjectHideFlags: 0
@@ -117513,7 +117513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7643983201343070660
 Transform:
   m_ObjectHideFlags: 0
