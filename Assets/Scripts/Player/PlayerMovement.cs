@@ -18,6 +18,11 @@ public class PlayerMovement : MonoBehaviour
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
+    [Header("Sons")]
+    public AudioClip[] dirtWalk;
+    public AudioClip[] grassWalk;
+    public AudioClip[] woodWalk;
+
     private PlayerInput playerInput;
     private CharacterController characterController;
     private float height = 0f;
@@ -28,6 +33,12 @@ public class PlayerMovement : MonoBehaviour
     public bool isPaused;
     public GameObject pauseMenu;
     public Animator animator;
+
+    private void obtainSound(AudioClip[] array)
+    {
+        AudioClip sound = array[Random.Range(0, array.Length)];
+        GetComponent<AudioSource>().clip = sound;
+    }
 
     private void Awake()
     {
@@ -69,7 +80,13 @@ public class PlayerMovement : MonoBehaviour
             else
                 speed = normalSpeed;
 
-            animator.SetBool(Animator.StringToHash("Moving"), direction != Vector3.zero);
+            if (move != Vector2.zero && !GetComponent<AudioSource>().isPlaying)
+            {
+                obtainSound(dirtWalk);
+                GetComponent<AudioSource>().Play();
+            }
+
+            animator.SetBool(Animator.StringToHash("Moving"), move != Vector2.zero);
             animator.SetBool(Animator.StringToHash("Running"), speed == sprintSpeed);
             animator.SetBool(Animator.StringToHash("Crouching"), playerInput.actions["Crouch"].IsPressed());
 
