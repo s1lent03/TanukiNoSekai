@@ -88,7 +88,7 @@ public class TanukiDetection : MonoBehaviour
 
     public void EnteredCollider(GameObject Tanuki)
     {
-        if (Tanuki.GetComponent<TanukiMovement>().angry == true && Tanuki.GetComponent<TanukiMovement>().stunned == false)
+        if ((Tanuki.GetComponent<TanukiMovement>().angry == true && Tanuki.GetComponent<TanukiMovement>().stunned == false) || Tanuki.GetComponent<TanukiMovement>().isBoss == true)
         {
             WildTanukiDetected = Tanuki;
             isInBattle = true;
@@ -130,20 +130,24 @@ public class TanukiDetection : MonoBehaviour
 
         Player.transform.position = Vector3.MoveTowards(Player.transform.position, targetPlayerPos, playerTravelSpeed * Time.deltaTime);
 
-        //Colocar a camera a olhar para o centro da batalha
-        Vector3 battleMidPoint = (Player.transform.position + WildTanukiDetected.transform.position) * 0.5f;
-        cameraBattleFollowPoint.position = battleMidPoint;
-
-        ChangeCameraValues(cameraBattleFollowPoint, new Vector3(0, 0, 0), 0.5f, 0.5f);
+        SetupCamera();
 
         //Dar setup ao sistema de batalha
-        if (Player.transform.position == targetPlayerPos && doOnce == false)
+        if (Player.transform.position == targetPlayerPos)
+        {
+            SetupBattle();
+        }
+    }
+
+    public void SetupBattle()
+    {
+        if (doOnce == false)
         {
             //Trocar para a primeira camera de combate
             Managers.GetComponent<ControllerManager>().ChangeToBattleCamera();
             Managers.GetComponent<ControllerManager>().isPlayerInBattle = true;
 
-            var playerParty = Player.GetComponent<TanukiParty>();      
+            var playerParty = Player.GetComponent<TanukiParty>();
 
             BattleUnit enemyTanuki = WildTanukiDetected.GetComponent<BattleUnit>();
             Managers.GetComponent<BattleSystem>().enemyUnit = enemyTanuki;
@@ -158,7 +162,16 @@ public class TanukiDetection : MonoBehaviour
 
             doOnce = true;
             reachedFinalPos = true;
-        }
+        }        
+    }
+
+    public void SetupCamera()
+    {
+        //Colocar a camera a olhar para o centro da batalha
+        Vector3 battleMidPoint = (Player.transform.position + WildTanukiDetected.transform.position) * 0.5f;
+        cameraBattleFollowPoint.position = battleMidPoint;
+
+        ChangeCameraValues(cameraBattleFollowPoint, new Vector3(0, 0, 0), 0.5f, 0.5f);
     }
 
     public int RandomizeWildTanukiLevels(int highestTanukiLevel)

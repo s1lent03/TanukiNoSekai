@@ -21,6 +21,7 @@ public class TanukiMovement : MonoBehaviour
     public bool stunned;
     public bool angry;
     public bool isBeingCaught;
+    public bool isBoss;
 
     [Header("Zone")]
     public Collider zone;
@@ -41,7 +42,7 @@ public class TanukiMovement : MonoBehaviour
     private void Update()
     {
         // movement
-        if (!stunned && !isBeingCaught)
+        if (!stunned && !isBeingCaught && !isBoss)
         {
             if (angry)
             {

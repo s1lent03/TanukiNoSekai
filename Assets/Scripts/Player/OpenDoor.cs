@@ -5,7 +5,8 @@ using UnityEngine;
 public class OpenDoor : MonoBehaviour
 {
     [Header("Main")]
-    [SerializeField] float RotateAmount;
+    [SerializeField] float OpenRotation;
+    [SerializeField] float CloseRotation;
     [SerializeField] float rotationSpeed;
     [SerializeField] bool isOpen = false;
     public bool isRotating = false;
@@ -14,11 +15,11 @@ public class OpenDoor : MonoBehaviour
     {
         if (!isOpen && !isRotating)
         {
-            StartCoroutine(RotateObject(RotateAmount));            
+            StartCoroutine(RotateObject(OpenRotation));            
         }
         else if (!isRotating)
         {
-            StartCoroutine(RotateObject(0));
+            StartCoroutine(RotateObject(CloseRotation));
         }
     }
 
@@ -39,7 +40,7 @@ public class OpenDoor : MonoBehaviour
             yield return null;
         }
 
-        if (finalRot == 0)
+        if (finalRot == CloseRotation)
             isOpen = false;
         else
             isOpen = true;
