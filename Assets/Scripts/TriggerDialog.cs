@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.InputSystem;
 using Cinemachine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class TriggerDialog : MonoBehaviour
 {
@@ -16,9 +17,20 @@ public class TriggerDialog : MonoBehaviour
     public CinemachineVirtualCamera dialogueCamera;
     public Animator animator;
 
+    [Header("Black Screen Vars")]
+    public GameObject TimeManager;
+    public float sleepTime;
+    [Space]
+    public GameObject Player;
+    [Space]
+    public Image BlackScreen;
+    public Color BlackScreenOn;
+    public Color BlackScreenOff;
+
     [Header("Variables")]
     [TextArea(4, 6)] public string[] normalDialogueLines;
     [TextArea(4, 6)] public string[] merchantDialogueLines;
+    [TextArea(4, 6)] public string[] medicDialogueLines;
     public float typingTime;
     public float cooldownTime;
 
@@ -89,6 +101,45 @@ public class TriggerDialog : MonoBehaviour
                     player.GetComponent<PlayerMovement>().isPaused = false;
                     dialogueCamera.Priority = 9;
                     dialoguePanel.DOMoveY(-Screen.height, 0.5f).SetEase(Ease.InOutSine);
+                }
+            }
+
+            if (didDialogueStart && dialogueCamera.Priority == 9)
+            {
+                if (cooldown >= cooldownTime || !isPlayerInRange)
+                {
+                    didDialogueStart = false;
+                    cooldown = 0f;
+                }
+                else
+                {
+                    cooldown += Time.deltaTime;
+                }
+            }
+        }
+        else if (gameObject.tag == "Medic")
+        {
+
+            //Escrever qual tecla usar para interagir
+            if ((isPlayerInRange || didDialogueStart) && player.GetComponent<PlayerInput>().actions["Interact"].IsPressed() && Time.timeScale == 1)
+            {
+                if (!didDialogueStart)
+                {
+                    didDialogueStart = true;
+                    lineIndex = Random.Range(0, medicDialogueLines.Length);
+                    dialogueCamera.Priority = 11;
+                    dialoguePanel.DOAnchorPosY(originalYAxis, 0.5f).SetEase(Ease.InOutSine);
+                    nameText.text = transform.parent.gameObject.name;
+                    StartCoroutine(ShowLine(medicDialogueLines));
+                }
+                else if (dialogueText.text == medicDialogueLines[lineIndex])
+                {
+                    player.GetComponent<PlayerMovement>().isPaused = false;
+                    dialogueCamera.Priority = 9;
+                    dialoguePanel.DOMoveY(-Screen.height, 0.5f).SetEase(Ease.InOutSine);
+
+                    //Passar tempo e curar
+                    StartCoroutine(Heal());                    
                 }
             }
 
@@ -198,5 +249,22 @@ public class TriggerDialog : MonoBehaviour
             dialogueText.text += ch;
             yield return new WaitForSeconds(typingTime);
         }
+    }
+
+    IEnumerator Heal()
+    {
+        BlackScreen.DOColor(BlackScreenOn, 1f);
+        yield return new WaitForSeconds(1f);
+
+        //Passar tempo e curar
+        TimeManager.GetComponent<DayNightCycle>().TimeHours += sleepTime;
+        for (int i = 0; i < Player.GetComponent<TanukiParty>().Tanukis.Count; i++)
+        {
+            Player.GetComponent<TanukiParty>().Tanukis[i].Hp = Player.GetComponent<TanukiParty>().Tanukis[i].MaxHp;
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        BlackScreen.DOColor(BlackScreenOff, 1f);        
     }
 }
