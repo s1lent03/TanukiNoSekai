@@ -231,8 +231,8 @@ public class BattleSystem : MonoBehaviour
                 yield return gameObject.GetComponent<BattleManager>().UpdateXP();
                 yield return new WaitForSeconds(1f);
 
-                // Atualizar quests
-                GetComponent<QuestManager>().UpdateQuests(TypeOfQuests.Defeat);
+                //Atualizar quests
+                GetComponent<QuestManager>().UpdateQuests(TypeOfQuests.Defeat, targetUnit.Tanuki.Base.Name);
 
                 Destroy(TanukiDetector.GetComponent<TanukiDetection>().WildTanukiDetected);
                 TanukiDetector.GetComponent<TanukiDetection>().EndBattle();
