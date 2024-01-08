@@ -10,6 +10,18 @@ public enum TypeOfQuests
     Defeat
 }
 
+// Lista de tanukis a ser derrotados
+public enum TanukiNames
+{
+    None,
+    Aobochi,
+    Kenmaru,
+    Morioju,
+    Sladake,
+    Yukatori,
+    Yukioni
+}
+
 // Lista do tipo de recompensas
 public enum Rewards
 {
@@ -29,6 +41,7 @@ public class Quest
 {
     // Variáveis
     public TypeOfQuests questType; // Tipo de quest
+    public TanukiNames questTanukiName; // Tipo de quest
     public int total; // Número de vezes a repetir a quest
     public int progress; // Progresso feito
     public float percentage; // Percentagem do progresso feito
@@ -38,9 +51,10 @@ public class Quest
     public GameObject questUI; // Painel com a quest
 
     // Construtor
-    public Quest(TypeOfQuests qType, int t, string m, Rewards r, int a, GameObject ui)
+    public Quest(TypeOfQuests qType, TanukiNames qTName, int t, string m, Rewards r, int a, GameObject ui)
     {
         questType = qType;
+        questTanukiName = qTName;
         total = t;
         progress = 0;
         percentage = 0f;
@@ -60,7 +74,7 @@ public class QuestManager : MonoBehaviour
     public GameObject questPrefab; // Prefab de um painel para uma quest
 
     // Função para atualizar as quests de um tipo específico
-    public void UpdateQuests(TypeOfQuests qType)
+    public void UpdateQuests(TypeOfQuests qType, string TanukiName)
     {
         // Buscar todas as quests ativas
         foreach (Quest q in quests)
@@ -68,9 +82,19 @@ public class QuestManager : MonoBehaviour
             // Se existir quests do tipo passado pela função, atualiza-se o progresso
             if (q.questType == qType)
             {
-                q.progress += 1;
-                q.percentage = (float)q.progress / (float)q.total;
-                UpdatePanel(q);
+                if (q.questTanukiName == TanukiNames.None)
+                {
+                    q.progress += 1;
+                    q.percentage = (float)q.progress / (float)q.total;
+                    UpdatePanel(q);
+                }
+                else if (TanukiName == q.questTanukiName.ToString())
+                {
+                    q.progress += 1;
+                    q.percentage = (float)q.progress / (float)q.total;
+                    UpdatePanel(q);
+                }
+                
             }
         }
     }
@@ -121,13 +145,13 @@ public class QuestManager : MonoBehaviour
     }
 
     // Função para adicionar uma nova quest
-    public void AddQuest(TypeOfQuests qType, int t, string m, Rewards r, int a)
+    public void AddQuest(TypeOfQuests qType, TanukiNames qTanukiName, int t, string m, Rewards r, int a)
     {
         // Cria novo painel para a quest
         GameObject questPanel = Instantiate(questPrefab, questsMenu.transform);
 
         // Cria nova quest
-        Quest newQuest = new Quest(qType, t, m, r, a, questPanel);
+        Quest newQuest = new Quest(qType, qTanukiName, t, m, r, a, questPanel);
 
         // Adiciona a quest à lista
         quests.Add(newQuest);
@@ -138,8 +162,8 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
-        AddQuest(TypeOfQuests.Defeat, 5, "Defeat 5 tanukis", Rewards.Experience, 10000);
-        AddQuest(TypeOfQuests.Defeat, 2, "Defeat 2 tanukis", Rewards.Experience, 10000);
+        //AddQuest(TypeOfQuests.Defeat, 5, "Defeat 5 tanukis", Rewards.Experience, 10000);
+        //AddQuest(TypeOfQuests.Defeat, 2, "Defeat 2 tanukis", Rewards.Experience, 10000);
     }
 
     private void Update()

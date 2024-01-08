@@ -29,6 +29,7 @@ public class TriggerDialog : MonoBehaviour
 
     [Header("Dialogue Variables")]
     [TextArea(4, 6)] public string[] normalDialogueLines;
+    [TextArea(4, 6)] public string[] questDialogueLines;
     [TextArea(4, 6)] public string[] merchantDialogueLines;
     [TextArea(4, 6)] public string[] medicDialogueLines;
     public bool multiLine;
@@ -39,6 +40,7 @@ public class TriggerDialog : MonoBehaviour
     public bool addQuest;
     public QuestManager questManager;
     public TypeOfQuests questType;
+    public TanukiNames questTanuki;
     public int questTotal;
     public string questMessage;
     public Rewards questReward;
@@ -65,6 +67,8 @@ public class TriggerDialog : MonoBehaviour
             dialogueLines = merchantDialogueLines;
         else if (gameObject.tag == "Medic")
             dialogueLines = medicDialogueLines;
+        else if (gameObject.tag == "QuestNPC")
+            dialogueLines = questDialogueLines;
         else
             dialogueLines = normalDialogueLines;
     }
@@ -136,7 +140,16 @@ public class TriggerDialog : MonoBehaviour
 
                     if (lineIndex < dialogueLines.Length)
                     {
-                        StartCoroutine(ShowLine());
+                        if (addQuest)
+                        {
+                            questManager.AddQuest(questType, questTanuki, questTotal, questMessage, questReward, questAmount);
+                            addQuest = false;
+                        }
+                        else
+                        {
+                            StartCoroutine(ShowLine());
+                        }
+                        
                     }
                 }
 
@@ -153,7 +166,8 @@ public class TriggerDialog : MonoBehaviour
 
                     if (addQuest)
                     {
-                        questManager.AddQuest(questType, questTotal, questMessage, questReward, questAmount);
+                        questManager.AddQuest(questType, questTanuki, questTotal, questMessage, questReward, questAmount);
+                        npcMov.freezeWhenLoad = false;
                         addQuest = false;
                     }
                 }

@@ -7,6 +7,7 @@ public class NPCMovement : MonoBehaviour
 {
     public BoxCollider zone;
     public bool freeze;
+    public bool freezeWhenLoad;
     public Animator animator;
 
     private NavMeshAgent navMeshAgent;
@@ -28,14 +29,14 @@ public class NPCMovement : MonoBehaviour
     {
         inCoroutine = true;
 
-        while (target == Vector3.zero && !freeze)
+        while (target == Vector3.zero && !freeze && !freezeWhenLoad)
         {
             yield return new WaitForSeconds(0.01f);
             target = CalculatePath();
             navMeshAgent.SetDestination(target);
         }
 
-        if (animator != null)
+        if (animator != null && !freezeWhenLoad)
             animator.SetBool(Animator.StringToHash("Moving"), true);
 
         while ((transform.position.x != target.x) && (transform.position.z != target.z) && !freeze)
@@ -43,7 +44,7 @@ public class NPCMovement : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        if (animator != null)
+        if (animator != null && freezeWhenLoad)
             animator.SetBool(Animator.StringToHash("Moving"), false);
 
         navMeshAgent.SetDestination(transform.position);
