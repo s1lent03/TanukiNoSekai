@@ -17,6 +17,7 @@ public class TriggerDialog : MonoBehaviour
     [Header("Other Objects")]
     public CinemachineVirtualCamera dialogueCamera;
     public Animator animator;
+    public NPCMovement npcMov;
 
     [Header("Black Screen Vars")]
     public GameObject TimeManager;
@@ -80,7 +81,7 @@ public class TriggerDialog : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !didDialogueStart)
         {
             isPlayerInRange = false;
             player = null;
@@ -96,6 +97,18 @@ public class TriggerDialog : MonoBehaviour
 
         if (didDialogueStart && dialogueCamera.Priority == 11)
             player.GetComponent<PlayerMovement>().isPaused = true;
+
+        if (npcMov != null)
+        {
+            npcMov.freeze = didDialogueStart;
+
+            if (didDialogueStart)
+            {
+                Vector3 dir = player.position - npcMov.transform.position;
+                dir.y = 0;
+                npcMov.transform.rotation = Quaternion.LookRotation(dir);
+            }
+        }
 
         animator.SetBool(Animator.StringToHash("Talk"), didDialogueStart);
 

@@ -48,9 +48,11 @@ public class TanukiMovement : MonoBehaviour
             {
                 Vector3 playerPosition = new Vector3(GameObject.Find("Character").transform.position.x, transform.position.y, GameObject.Find("Character").transform.position.z);
                 Vector3 playerDirection = (playerPosition - transform.position).normalized;
+                Vector3 lookDir = playerPosition - transform.position;
+                lookDir.y = 0;
 
                 characterController.Move(playerDirection * chaseSpeed * Time.deltaTime);
-                transform.LookAt(playerPosition);
+                transform.rotation = Quaternion.LookRotation(lookDir);
             } else
             {
                 if (Mathf.Round(transform.position.x) == Mathf.Round(nextPosition.x) && Mathf.Round(transform.position.z) == Mathf.Round(nextPosition.z))
@@ -60,9 +62,11 @@ public class TanukiMovement : MonoBehaviour
 
                 Vector3 lookPosition = nextPosition;
                 lookPosition.y = transform.position.y;
+                Vector3 lookDir = lookPosition - transform.position;
+                lookDir.y = 0;
 
                 characterController.Move((nextPosition - transform.position).normalized * speed * Time.deltaTime);
-                transform.LookAt(lookPosition);
+                transform.rotation = Quaternion.LookRotation(lookDir);
             }
 
             tanukiAnimator.SetBool(Animator.StringToHash("Moving"), true);

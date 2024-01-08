@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class NPCMovement : MonoBehaviour
 {
     public BoxCollider zone;
+    public bool freeze;
+    public Animator animator;
 
     private NavMeshAgent navMeshAgent;
     private bool inCoroutine = false;
@@ -18,7 +20,7 @@ public class NPCMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!inCoroutine)
+        if (!inCoroutine && !freeze)
             StartCoroutine(Patrol());
     }
 
@@ -26,18 +28,25 @@ public class NPCMovement : MonoBehaviour
     {
         inCoroutine = true;
 
-        while (target == Vector3.zero)
+        while (target == Vector3.zero && !freeze)
         {
             yield return new WaitForSeconds(0.01f);
             target = CalculatePath();
             navMeshAgent.SetDestination(target);
         }
 
-        while ((transform.position.x != target.x) && (transform.position.z != target.z))
+        if (animator != null)
+            animator.SetBool(Animator.StringToHash("Moving"), true);
+
+        while ((transform.position.x != target.x) && (transform.position.z != target.z) && !freeze)
         {
             yield return new WaitForSeconds(0.01f);
         }
 
+        if (animator != null)
+            animator.SetBool(Animator.StringToHash("Moving"), false);
+
+        navMeshAgent.SetDestination(transform.position);
         target = Vector3.zero;
         inCoroutine = false;
     }
