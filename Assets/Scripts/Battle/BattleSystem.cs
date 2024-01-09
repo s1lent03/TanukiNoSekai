@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -204,9 +205,9 @@ public class BattleSystem : MonoBehaviour
             if (isPlayer) //Caso o Tanuki a morrer seja do Player
             {
                 if (playerUnit.transform.childCount > 0)
-                {
-                    Transform child = playerUnit.transform.GetChild(0);
-                    playerUnit.PlayFaintAnimation(child.gameObject);
+                {                   
+                    Transform child = targetUnit.transform.GetChild(0);
+                    targetUnit.PlayFaintAnimation(child.gameObject);
                     yield return new WaitForSeconds(1f);
                     Destroy(child.gameObject);
                 }

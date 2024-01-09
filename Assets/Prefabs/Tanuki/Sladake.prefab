@@ -110,6 +110,7 @@ MonoBehaviour:
   stunned: 0
   angry: 0
   isBeingCaught: 0
+  isBoss: 0
   zone: {fileID: 0}
 --- !u!114 &1754938960352668315
 MonoBehaviour:
@@ -127,9 +128,6 @@ MonoBehaviour:
     _base: {fileID: 11400000, guid: 16680591217b9ee4b89c4b18e36f75f5, type: 2}
     Level: 0
     XpPoints: 0
-    EvolveLevel: 0
-    EvolveModel: {fileID: 5432836560353139126, guid: 3e4a6da95813d844aab482c53d1775ce,
-      type: 3}
 --- !u!1 &2378353386172357827
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +154,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5421298218705841506}
@@ -186,8 +184,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2549011698529749498}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9238796, z: -0, w: -0.38268328}
-  m_LocalPosition: {x: 0, y: -0.508, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.762, z: -0.111}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

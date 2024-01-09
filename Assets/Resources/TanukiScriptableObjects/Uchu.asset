@@ -18,14 +18,18 @@ MonoBehaviour:
     type: 3}
   evolveModel: {fileID: 3766837691982903961, guid: 5b7c8a7f71f38374d97bb8d1a755eba1,
     type: 3}
-  tanukiIconSprite: {fileID: 0}
+  tanukiIconSprite: {fileID: 21300000, guid: 64d4062fd049ab6448a1727b32bfc0d0, type: 3}
   type1: 9
   type2: 0
-  evolveLevel: 35
+  evolveLevel: 16
   maxHp: 50
   attack: 50
   defense: 35
   spAttack: 40
   spDefense: 40
   speed: 60
-  learnableMoves: []
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 61d555a3204803840992ada618a6c7fc, type: 2}
+    level: 5
+  - moveBase: {fileID: 11400000, guid: 642438ecebc53a5459aaee2b6da80bce, type: 2}
+    level: 12

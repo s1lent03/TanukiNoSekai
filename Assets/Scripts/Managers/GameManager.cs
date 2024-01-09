@@ -22,18 +22,30 @@ public class GameManager : MonoBehaviour
     [SerializeField] string saveFileName;
     [SerializeField] string questFileName;
 
+    [Header("Time/Audio")]
+    [SerializeField] float timeOfDay;
+    [SerializeField] GameObject TimeManager;
+    [Space]
+    [SerializeField] bool isPlayingDayTheme = false;
+    [SerializeField] bool isPlayingNightTheme = false;
+    [Space]
+    [SerializeField] AudioSource dayAmbinceTheme;
+    [SerializeField] AudioSource nightAmbinceTheme;
+
     void Awake()
     {
         //Verifica se existe o ficheiro que guarda a save do jogo, se não cria - o
         string filePath = Application.dataPath + saveFileName;
         if (!File.Exists(filePath))
         {
+            PlayerPrefs.SetInt("CurrentMoney", 500);
+
             string[] contentFire =
             {
                 "LOCATION:",
                 "X: _692",
-                "Y: _101.67",
-                "Z: _324.25",
+                "Y: _101,67",
+                "Z: _324,25",
                 "ROTATION:",
                 "X: _0",
                 "Y: _-90",
@@ -47,8 +59,8 @@ public class GameManager : MonoBehaviour
             {
                 "LOCATION:",
                 "X: _692",
-                "Y: _101.67",
-                "Z: _324.25",
+                "Y: _101,67",
+                "Z: _324,25",
                 "ROTATION:",
                 "X: _0",
                 "Y: _-90",
@@ -62,8 +74,8 @@ public class GameManager : MonoBehaviour
             {
                 "LOCATION:",
                 "X: _692",
-                "Y: _101.67",
-                "Z: _324.25",
+                "Y: _101,67",
+                "Z: _324,25",
                 "ROTATION:",
                 "X: _0",
                 "Y: _-90",
@@ -108,7 +120,8 @@ public class GameManager : MonoBehaviour
         for (int lineNumber = 1; lineNumber < lines.Length; lineNumber++)
         {
             int startOfWord = lines[lineNumber].IndexOf("_");
-            int endOfWord = lines[lineNumber].IndexOf(" ");
+            int endOfWord = lines[lineNumber].IndexOf("(");
+            int wordLenght = endOfWord - startOfWord - 2;
             string assetsPath = "Assets/Resources/TanukiScriptableObjects/";
 
             if (lines[lineNumber].Contains("_"))
@@ -138,7 +151,7 @@ public class GameManager : MonoBehaviour
                     //TANUKIS
                     //Tanuki1
                     case 9:
-                        tanukiBattleUnit1.tanukiUnitData._base = AssetDatabase.LoadAssetAtPath<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, endOfWord - 1) + ".asset");
+                        tanukiBattleUnit1.tanukiUnitData._base = AssetDatabase.LoadAssetAtPath<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, wordLenght) + ".asset");
                         break;
                     case 10:
                         tanukiBattleUnit1.tanukiUnitData.XpPoints = float.Parse(lines[lineNumber].Substring(startOfWord + 1));
@@ -148,7 +161,7 @@ public class GameManager : MonoBehaviour
                         break;
                     //Tanuki2
                     case 11:
-                        tanukiBattleUnit2.tanukiUnitData._base = AssetDatabase.LoadAssetAtPath<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, endOfWord - 1) + ".asset");
+                        tanukiBattleUnit2.tanukiUnitData._base = AssetDatabase.LoadAssetAtPath<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, wordLenght) + ".asset");
                         break;
                     case 12:
                         tanukiBattleUnit2.tanukiUnitData.XpPoints = float.Parse(lines[lineNumber].Substring(startOfWord + 1));
@@ -158,7 +171,7 @@ public class GameManager : MonoBehaviour
                         break;
                     //Tanuki3
                     case 13:
-                        tanukiBattleUnit3.tanukiUnitData._base = AssetDatabase.LoadAssetAtPath<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, endOfWord - 1) + ".asset");
+                        tanukiBattleUnit3.tanukiUnitData._base = AssetDatabase.LoadAssetAtPath<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, wordLenght) + ".asset");
                         break;
                     case 14:
                         tanukiBattleUnit3.tanukiUnitData.XpPoints = float.Parse(lines[lineNumber].Substring(startOfWord + 1));
@@ -168,7 +181,7 @@ public class GameManager : MonoBehaviour
                         break;
                     //Tanuki4
                     case 15:
-                        tanukiBattleUnit4.tanukiUnitData._base = AssetDatabase.LoadAssetAtPath<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, endOfWord - 1) + ".asset");
+                        tanukiBattleUnit4.tanukiUnitData._base = AssetDatabase.LoadAssetAtPath<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, wordLenght - 2) + ".asset");
                         break;
                     case 16:
                         tanukiBattleUnit4.tanukiUnitData.XpPoints = float.Parse(lines[lineNumber].Substring(startOfWord + 1));
@@ -178,7 +191,7 @@ public class GameManager : MonoBehaviour
                         break;
                     //Tanuki5
                     case 17:
-                        tanukiBattleUnit5.tanukiUnitData._base = AssetDatabase.LoadAssetAtPath<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, endOfWord - 1) + ".asset");
+                        tanukiBattleUnit5.tanukiUnitData._base = AssetDatabase.LoadAssetAtPath<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, wordLenght) + ".asset");
                         break;
                     case 18:
                         tanukiBattleUnit5.tanukiUnitData.XpPoints = float.Parse(lines[lineNumber].Substring(startOfWord + 1));
@@ -215,17 +228,19 @@ public class GameManager : MonoBehaviour
 
         int start = lines[0].IndexOf("(");
         int end = lines[0].IndexOf(")");
-        int numOfQuests = int.Parse(lines[0].Substring(start + 1, end - start - 1));        
+        int numOfQuests = int.Parse(lines[0].Substring(start + 1, end - start - 1));
         
         for (int i = 0; i < numOfQuests; i++)
         {
+            int j = 0;
             for (int lineNumber = 1 + (5 * i); lineNumber < 6 + (5 * i); lineNumber++)
             {
+                j++;
                 int startOfWord = lines[lineNumber].IndexOf("_");
 
                 if (lines[lineNumber].Contains("_"))
                 {
-                    switch (lineNumber)
+                    switch (j)
                     {
                         case 1:
                             questTanuki = (TanukiNames)Enum.Parse(typeof(TanukiNames), lines[lineNumber].Substring(startOfWord + 1));
@@ -255,7 +270,22 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        timeOfDay = TimeManager.GetComponent<DayNightCycle>().TimeHours;
+
+        if (((timeOfDay > 0 && timeOfDay < 6.7f) || (timeOfDay > 19.7 && timeOfDay < 24)) && !isPlayingNightTheme)
+        {
+            dayAmbinceTheme.Stop();
+            nightAmbinceTheme.Play();
+            isPlayingDayTheme = false;
+            isPlayingNightTheme = true;         
+        }
+        else if (timeOfDay > 6.7f && timeOfDay < 19.7 && !isPlayingDayTheme)
+        {
+            nightAmbinceTheme.Stop();
+            dayAmbinceTheme.Play();
+            isPlayingDayTheme = true;
+            isPlayingNightTheme = false;
+        }
     }
 
     void WriteTextToFile(string fileName, string[] content)
@@ -292,6 +322,11 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < Tanukis.Count; i++)
         {
+            if (Tanukis[i].XpPoints < 1)
+            {
+                Tanukis[i].XpPoints = Mathf.Pow(Tanukis[i].Level, 3f);
+            }
+
             saveDataContentList.Add("Tanuki" + i + ": _" + Tanukis[i].Base.ToString());
             saveDataContentList.Add("Tanuki" + i + ": _" + Tanukis[i].XpPoints.ToString());
         }

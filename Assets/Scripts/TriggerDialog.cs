@@ -208,7 +208,13 @@ public class TriggerDialog : MonoBehaviour
         TimeManager.GetComponent<DayNightCycle>().TimeHours += sleepTime;
         for (int i = 0; i < player.GetComponent<TanukiParty>().Tanukis.Count; i++)
         {
-            player.GetComponent<TanukiParty>().Tanukis[i].Hp = player.GetComponent<TanukiParty>().Tanukis[i].MaxHp;
+            Tanuki tanukiToHeal = player.GetComponent<TanukiParty>().Tanukis[i];
+            tanukiToHeal.Hp = tanukiToHeal.MaxHp;
+            
+            for (int j = 0; j < tanukiToHeal.Moves.Count; j++)
+            {
+                tanukiToHeal.Moves[j].Pp = tanukiToHeal.Moves[j].Base.Pp;
+            }
         }
 
         yield return new WaitForSeconds(1f);

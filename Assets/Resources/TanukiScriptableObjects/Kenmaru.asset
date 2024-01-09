@@ -16,9 +16,11 @@ MonoBehaviour:
   description: Sword fish
   tanukiModel: {fileID: 3140581890707304031, guid: 65fad9672dfad7e48aa9621278e7f610,
     type: 3}
+  evolveModel: {fileID: 0}
   tanukiIconSprite: {fileID: 21300000, guid: a95833cae545ff844a6f7bb2b43142c1, type: 3}
   type1: 2
   type2: 4
+  evolveLevel: 0
   maxHp: 45
   attack: 90
   defense: 20
@@ -26,7 +28,11 @@ MonoBehaviour:
   spDefense: 20
   speed: 65
   learnableMoves:
-  - moveBase: {fileID: 11400000, guid: a063a640354b04f4db8fa579b4cce327, type: 2}
-    level: 5
   - moveBase: {fileID: 11400000, guid: 1951dc9bb08d37049bc8154ff2d04d5c, type: 2}
-    level: 8
+    level: 3
+  - moveBase: {fileID: 11400000, guid: ea113e993121caa4da2588a2f833882e, type: 2}
+    level: 7
+  - moveBase: {fileID: 11400000, guid: 54394e8bdea37ea42840c0ce4431a117, type: 2}
+    level: 10
+  - moveBase: {fileID: 11400000, guid: a46eedb550124c747b9c9d027fb8c859, type: 2}
+    level: 13

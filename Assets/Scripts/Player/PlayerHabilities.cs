@@ -21,6 +21,8 @@ public class PlayerHabilities : MonoBehaviour
     [SerializeField] float ThrowForce;
     [SerializeField] float ThrowCoolDown;
     bool canThrowNextBall = true;
+    [Space]
+    [SerializeField] AudioSource throwVoosh;
 
     [Header("Ball Sprites")]
     [SerializeField] Image BallSprite;
@@ -44,6 +46,8 @@ public class PlayerHabilities : MonoBehaviour
     [SerializeField] float DropForce;
     [SerializeField] float DropCoolDown;
     bool canDropNextBerry = true;
+    [Space]
+    [SerializeField] AudioSource eatSound;
 
     [Header("Party")]
     [SerializeField] GameObject eventSystemObject;
@@ -317,6 +321,9 @@ public class PlayerHabilities : MonoBehaviour
         Transform Mouth = tanuki.gameObject.transform.Find("ModelObject").transform.Find("Model").transform.Find("Armature").transform.Find("Body").transform.Find("Mouth").gameObject.transform;
         BerryToDrop.transform.DOMove(new Vector3(Mouth.position.x, Mouth.position.y, Mouth.position.z), 1f);
 
+        //Som
+        eatSound.Play();
+
         //Destruir berry
         StartCoroutine(DestroyBall(BerryToDrop, 1f));
         yield return new WaitForSeconds(1f);
@@ -380,6 +387,9 @@ public class PlayerHabilities : MonoBehaviour
         //Criar variaveis para guardar os dados de onde a bola vai sair e em que direção ela vai
         ThrowStartPoint = ThrowPoint.position;
         Vector3 lookAtPosition = mainCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)).direction;
+
+        //Som
+        throwVoosh.Play();
 
         // Animação
         GetComponent<PlayerMovement>().animator.SetTrigger(Animator.StringToHash("Throw"));

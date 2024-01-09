@@ -17,7 +17,7 @@ MonoBehaviour:
   tanukiModel: {fileID: 4222020107086462508, guid: 2b167a187cb014140a2221c4164f9809,
     type: 3}
   evolveModel: {fileID: 0}
-  tanukiIconSprite: {fileID: 0}
+  tanukiIconSprite: {fileID: 21300000, guid: 9766048701c5a404ab1af8349d0bcdc0, type: 3}
   type1: 3
   type2: 4
   evolveLevel: 0
@@ -27,4 +27,12 @@ MonoBehaviour:
   spAttack: 80
   spDefense: 40
   speed: 40
-  learnableMoves: []
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: 7afc11e90647f6f489ee85d45dbee8e5, type: 2}
+    level: 3
+  - moveBase: {fileID: 11400000, guid: e911f59e562ab6e49af74dfab6a08723, type: 2}
+    level: 8
+  - moveBase: {fileID: 11400000, guid: ea113e993121caa4da2588a2f833882e, type: 2}
+    level: 11
+  - moveBase: {fileID: 11400000, guid: 77eda772f16eebb40b0ac20ca0e32e64, type: 2}
+    level: 13

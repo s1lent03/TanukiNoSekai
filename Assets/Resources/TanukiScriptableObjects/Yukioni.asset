@@ -16,9 +16,11 @@ MonoBehaviour:
   description: Snow demon
   tanukiModel: {fileID: 1754849053363231821, guid: c48d0f1702b87eb4282f89c60f61e4d7,
     type: 3}
+  evolveModel: {fileID: 0}
   tanukiIconSprite: {fileID: 21300000, guid: 0bc0a883b329bdf48bdc6b3556876d9e, type: 3}
   type1: 10
   type2: 7
+  evolveLevel: 0
   maxHp: 70
   attack: 100
   defense: 65
@@ -26,5 +28,11 @@ MonoBehaviour:
   spDefense: 85
   speed: 100
   learnableMoves:
-  - moveBase: {fileID: 11400000, guid: a063a640354b04f4db8fa579b4cce327, type: 2}
-    level: 5
+  - moveBase: {fileID: 11400000, guid: adeaccead58b6074cb37e35a12cec583, type: 2}
+    level: 3
+  - moveBase: {fileID: 11400000, guid: 6560616128194a540b5f301d83c8369d, type: 2}
+    level: 7
+  - moveBase: {fileID: 11400000, guid: c147872321e32e149b53717f11e23597, type: 2}
+    level: 10
+  - moveBase: {fileID: 11400000, guid: 6b8bae2f91d3d824f8bc8f567395150c, type: 2}
+    level: 14

@@ -25,9 +25,6 @@ public class Interact : MonoBehaviour
     {
         playerInput = GetComponent<PlayerInput>();
         lastInfoName = "";
-
-        //REMOVERRRRRRRRRRRRRRRRRRRRRRRRR
-        PlayerPrefs.SetInt("CurrentMoney", 500);
     }
 
     private void Update()

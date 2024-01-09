@@ -20,6 +20,13 @@ public class HpBar : MonoBehaviour
     public void SetXp(float xpNormalized)
     {
         gameObject.GetComponent<Slider>().value = xpNormalized;
+
+        if (xpNormalized >= 0.5f && xpNormalized <= 1)
+            health.GetComponent<Image>().color = greenHp;
+        else if (xpNormalized > 0.2f && xpNormalized < 0.5f)
+            health.GetComponent<Image>().color = yellowHp;
+        else if (xpNormalized >= 0 && xpNormalized <= 0.2f)
+            health.GetComponent<Image>().color = redHp;
     }
 
     public IEnumerator SetXpSmooth(float newXp)
