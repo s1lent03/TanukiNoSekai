@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee531c2d196e60489996cc7dd35b9ed, type: 3}
+  m_Name: Suimi
+  m_EditorClassIdentifier: 
+  name: Suimi
+  description: 
+  tanukiModel: {fileID: 6946216122478825098, guid: 8feffe224e8b4b14d80016b939eca3b1,
+    type: 3}
+  evolveModel: {fileID: 0}
+  tanukiIconSprite: {fileID: 0}
+  type1: 2
+  type2: 12
+  evolveLevel: 0
+  maxHp: 100
+  attack: 85
+  defense: 80
+  spAttack: 85
+  spDefense: 80
+  speed: 60
+  learnableMoves: []

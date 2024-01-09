@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         string filePath = Application.dataPath + saveFileName;
         if (!File.Exists(filePath))
         {
-            string[] content =
+            string[] contentFire =
             {
                 "LOCATION:",
                 "X: _692",
@@ -38,7 +38,56 @@ public class GameManager : MonoBehaviour
                 "X: _0",
                 "Y: _-90",
                 "Z: _0",
+                "TANUKIS:",
+                "Tanuki0: _Madsung (TanukiBase)",
+                "Tanuki0: _125",
             };
+
+            string[] contentWater =
+            {
+                "LOCATION:",
+                "X: _692",
+                "Y: _101.67",
+                "Z: _324.25",
+                "ROTATION:",
+                "X: _0",
+                "Y: _-90",
+                "Z: _0",
+                "TANUKIS:",
+                "Tanuki0: _Namiro (TanukiBase)",
+                "Tanuki0: _125",
+            };
+
+            string[] contentGrass =
+            {
+                "LOCATION:",
+                "X: _692",
+                "Y: _101.67",
+                "Z: _324.25",
+                "ROTATION:",
+                "X: _0",
+                "Y: _-90",
+                "Z: _0",
+                "TANUKIS:",
+                "Tanuki0: _Sladake (TanukiBase)",
+                "Tanuki0: _125",
+            };
+
+            string[] content = contentFire;
+
+            int rand = UnityEngine.Random.Range(1, 4);
+            switch (rand)
+            {
+                case 1:
+                    content = contentFire;
+                    break;
+                case 2:
+                    content = contentWater;
+                    break;
+                case 3:
+                    content = contentGrass;
+                    break;
+            }
      
             WriteTextToFile(filePath, content);
 

@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Madsung
   description: yes
-  tanukiModel: {fileID: 8373006536148629002, guid: 06596a7a03c84d340be2d9fda54e6240,
+  tanukiModel: {fileID: 8733690869521553229, guid: 47ad37eabb1a8094faab3adcb7dbf804,
+    type: 3}
+  evolveModel: {fileID: 2872098726142450591, guid: 7ff4a74f8fd215b43a58991c4fff8099,
     type: 3}
   tanukiIconSprite: {fileID: 21300000, guid: c9dc9ae0f97b112439de4fa423d26574, type: 3}
   type1: 3
   type2: 0
+  evolveLevel: 12
   maxHp: 65
   attack: 63
   defense: 45

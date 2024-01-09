@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee531c2d196e60489996cc7dd35b9ed, type: 3}
+  m_Name: Kaiyo
+  m_EditorClassIdentifier: 
+  name: Kaiyo
+  description: 
+  tanukiModel: {fileID: 3091622820489755371, guid: 1349a57d9955319439bccee0a91e18a5,
+    type: 3}
+  evolveModel: {fileID: 0}
+  tanukiIconSprite: {fileID: 0}
+  type1: 2
+  type2: 6
+  evolveLevel: 0
+  maxHp: 70
+  attack: 80
+  defense: 65
+  spAttack: 80
+  spDefense: 60
+  speed: 90
+  learnableMoves: []

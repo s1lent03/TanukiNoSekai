@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee531c2d196e60489996cc7dd35b9ed, type: 3}
+  m_Name: Kensei
+  m_EditorClassIdentifier: 
+  name: Kensei
+  description: 
+  tanukiModel: {fileID: 8426921340996155255, guid: 287d0dd373ce43c45be417be058c2ceb,
+    type: 3}
+  evolveModel: {fileID: 0}
+  tanukiIconSprite: {fileID: 0}
+  type1: 4
+  type2: 7
+  evolveLevel: 0
+  maxHp: 75
+  attack: 70
+  defense: 110
+  spAttack: 40
+  spDefense: 65
+  speed: 35
+  learnableMoves: []

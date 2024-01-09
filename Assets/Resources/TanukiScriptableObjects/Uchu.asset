@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee531c2d196e60489996cc7dd35b9ed, type: 3}
+  m_Name: Uchu
+  m_EditorClassIdentifier: 
+  name: Uchu
+  description: 
+  tanukiModel: {fileID: 2383800014844812873, guid: 4c95a31b6a188ee4e8b9763450cce3fe,
+    type: 3}
+  evolveModel: {fileID: 3766837691982903961, guid: 5b7c8a7f71f38374d97bb8d1a755eba1,
+    type: 3}
+  tanukiIconSprite: {fileID: 0}
+  type1: 9
+  type2: 0
+  evolveLevel: 35
+  maxHp: 50
+  attack: 50
+  defense: 35
+  spAttack: 40
+  spDefense: 40
+  speed: 60
+  learnableMoves: []

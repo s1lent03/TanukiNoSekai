@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fee531c2d196e60489996cc7dd35b9ed, type: 3}
+  m_Name: Yami
+  m_EditorClassIdentifier: 
+  name: Yami
+  description: 
+  tanukiModel: {fileID: 1082918575336314562, guid: d245d5fea0b0f0c46b11253492e1ff99,
+    type: 3}
+  evolveModel: {fileID: 0}
+  tanukiIconSprite: {fileID: 0}
+  type1: 7
+  type2: 11
+  evolveLevel: 0
+  maxHp: 85
+  attack: 80
+  defense: 80
+  spAttack: 40
+  spDefense: 40
+  speed: 40
+  learnableMoves: []
