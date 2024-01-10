@@ -204,15 +204,18 @@ public class PlayerHabilities : MonoBehaviour
             if (i < tanukis.Count)
             {
                 memberSlotsToSee[i].SetData(tanukis[i]);
+                memberSlotsToSee[i].gameObject.SetActive(true);
             }
             else
+            {
                 memberSlotsToSee[i].gameObject.SetActive(false);
+            }                
         }
     }
 
     string TanukiPartyMovesInfo(PartyMemberUI[] memberSlots)
     {
-        //Procurar informações sobre o tanuki selecionado no party selection
+        //Procurar informações sobre o tanuki selecionado no party selection 
         GameObject currentTanukiSelected = eventSystemObject.GetComponent<EventSystem>().currentSelectedGameObject.transform.parent.gameObject;
 
         //Descobrir os moves do tanuki selecionado

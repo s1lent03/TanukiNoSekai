@@ -41,6 +41,10 @@ public class TanukiDetection : MonoBehaviour
     int minSpawnLevel;
     int maxSpawnLevel;
 
+    [Header("Music")]
+    [SerializeField] AudioSource battleMusic;
+    [SerializeField] AudioSource bossBattleMusic;
+
     [Header("Others")]
     private bool doOnce = false;
     bool reachedFinalPos = false;
@@ -154,6 +158,16 @@ public class TanukiDetection : MonoBehaviour
 
             Managers.GetComponent<BattleSystem>().StartBattle(playerParty, enemyTanuki.tanukiUnitData/*, RandomizeWildTanukiLevels(playerParty.GetHighestLevelTanuki())*/);
 
+            //Musica
+            if (enemyTanuki.name.Contains("Yukatori"))
+            {
+                bossBattleMusic.Play();
+            }
+            else
+            {
+                battleMusic.Play();
+            }
+
             //Ligar o HUD de Batalha e desligar o normal
             HUD.SetActive(false);
             BattleHud.SetActive(true);
@@ -213,6 +227,10 @@ public class TanukiDetection : MonoBehaviour
         //Colocar a camera com os seus valores normais
         ChangeCameraValues(Player.transform, new Vector3(0, 1.5f, 0), 0.35f, 0.45f);
         thirdPersonCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance = 3f;
+
+        //Musica
+        bossBattleMusic.Stop();
+        battleMusic.Stop();
 
         //Desligar o HUD de batalha e ligar o normal
         BattleHud.SetActive(false);

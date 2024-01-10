@@ -3,9 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEditor;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -39,6 +37,9 @@ public class GameManager : MonoBehaviour
         if (!File.Exists(filePath))
         {
             PlayerPrefs.SetInt("CurrentMoney", 500);
+            PlayerPrefs.SetInt("NumberOfBerry1", 5);
+            PlayerPrefs.SetInt("NumberOfBall1", 10);
+            PlayerPrefs.SetInt("NumberOfPotion1", 5);
 
             string[] contentFire =
             {
@@ -122,7 +123,7 @@ public class GameManager : MonoBehaviour
             int startOfWord = lines[lineNumber].IndexOf("_");
             int endOfWord = lines[lineNumber].IndexOf("(");
             int wordLenght = endOfWord - startOfWord - 2;
-            string assetsPath = "Assets/Resources/TanukiScriptableObjects/";
+            string assetsPath = "TanukiScriptableObjects/";
 
             if (lines[lineNumber].Contains("_"))
             {
@@ -151,7 +152,7 @@ public class GameManager : MonoBehaviour
                     //TANUKIS
                     //Tanuki1
                     case 9:
-                        tanukiBattleUnit1.tanukiUnitData._base = AssetDatabase.LoadAssetAtPath<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, wordLenght) + ".asset");
+                        tanukiBattleUnit1.tanukiUnitData._base = Resources.Load<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, wordLenght));
                         break;
                     case 10:
                         tanukiBattleUnit1.tanukiUnitData.XpPoints = float.Parse(lines[lineNumber].Substring(startOfWord + 1));
@@ -161,7 +162,7 @@ public class GameManager : MonoBehaviour
                         break;
                     //Tanuki2
                     case 11:
-                        tanukiBattleUnit2.tanukiUnitData._base = AssetDatabase.LoadAssetAtPath<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, wordLenght) + ".asset");
+                        tanukiBattleUnit2.tanukiUnitData._base = Resources.Load<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, wordLenght));
                         break;
                     case 12:
                         tanukiBattleUnit2.tanukiUnitData.XpPoints = float.Parse(lines[lineNumber].Substring(startOfWord + 1));
@@ -171,7 +172,7 @@ public class GameManager : MonoBehaviour
                         break;
                     //Tanuki3
                     case 13:
-                        tanukiBattleUnit3.tanukiUnitData._base = AssetDatabase.LoadAssetAtPath<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, wordLenght) + ".asset");
+                        tanukiBattleUnit3.tanukiUnitData._base = Resources.Load<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, wordLenght));
                         break;
                     case 14:
                         tanukiBattleUnit3.tanukiUnitData.XpPoints = float.Parse(lines[lineNumber].Substring(startOfWord + 1));
@@ -181,7 +182,7 @@ public class GameManager : MonoBehaviour
                         break;
                     //Tanuki4
                     case 15:
-                        tanukiBattleUnit4.tanukiUnitData._base = AssetDatabase.LoadAssetAtPath<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, wordLenght - 2) + ".asset");
+                        tanukiBattleUnit4.tanukiUnitData._base = Resources.Load<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, wordLenght));
                         break;
                     case 16:
                         tanukiBattleUnit4.tanukiUnitData.XpPoints = float.Parse(lines[lineNumber].Substring(startOfWord + 1));
@@ -191,7 +192,7 @@ public class GameManager : MonoBehaviour
                         break;
                     //Tanuki5
                     case 17:
-                        tanukiBattleUnit5.tanukiUnitData._base = AssetDatabase.LoadAssetAtPath<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, wordLenght) + ".asset");
+                        tanukiBattleUnit5.tanukiUnitData._base = Resources.Load<TanukiBase>(assetsPath + lines[lineNumber].Substring(startOfWord + 1, wordLenght));
                         break;
                     case 18:
                         tanukiBattleUnit5.tanukiUnitData.XpPoints = float.Parse(lines[lineNumber].Substring(startOfWord + 1));

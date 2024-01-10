@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class TerrainSurface
 {
@@ -86,6 +87,10 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private AudioClip[] currentGround;
 
+    private bool canPlaySound = true;
+    public float walkTimeBetweenSteps;
+    public float runTimeBetweenSteps;
+
     [Header("Others")]
     //Parar movimento se o jogo estiver em pausa
     public bool isPaused;
@@ -108,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
-        Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -170,8 +175,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (move != Vector2.zero && !GetComponent<AudioSource>().isPlaying)
             {
-                obtainSound(currentGround);
-                GetComponent<AudioSource>().Play();
+                StartCoroutine(PlaySound());
             }
 
             animator.SetBool(Animator.StringToHash("Moving"), move != Vector2.zero);
@@ -183,5 +187,27 @@ public class PlayerMovement : MonoBehaviour
             Quaternion toRotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
             transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }     
+    }
+
+    IEnumerator PlaySound()
+    {
+        if (canPlaySound && playerInput.actions["Sprint"].IsPressed())
+        {
+            obtainSound(currentGround);
+            GetComponent<AudioSource>().Play();
+
+            canPlaySound = false;
+            yield return new WaitForSeconds(runTimeBetweenSteps);
+            canPlaySound = true;
+        }
+        else if (canPlaySound && !playerInput.actions["Sprint"].IsPressed())
+        {
+            obtainSound(currentGround);
+            GetComponent<AudioSource>().Play();
+
+            canPlaySound = false;
+            yield return new WaitForSeconds(walkTimeBetweenSteps);
+            canPlaySound = true;
+        }    
     }
 }
