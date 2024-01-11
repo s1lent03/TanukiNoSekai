@@ -82,6 +82,10 @@ public class BattleManager : MonoBehaviour
     [SerializeField] float criticalOpacityAnim;
     [SerializeField] float criticalAnimSpeed;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource xpCountSoundFX;
+    [SerializeField] AudioSource lvlUpSoundFX;
+
     [Header("Others")]
     public bool isPaused = false;
     [SerializeField] bool doOnceMoves = false;
@@ -370,12 +374,16 @@ public class BattleManager : MonoBehaviour
         float nextLevelXP = Mathf.Pow(_playerTanuki.Level + 1, 3);
         float xpProgress = (_playerTanuki.XpPoints - currentLevelXP) / (nextLevelXP - currentLevelXP);
 
-        xpProgress = Mathf.Clamp01(xpProgress);       
+        xpProgress = Mathf.Clamp01(xpProgress);   
+        xpCountSoundFX.Play();
         yield return playerXpBar.SetXpSmooth(xpProgress);
         playerXpBar.SetXp(xpProgress);
 
         if (xpProgress == 1)
+        {
             _playerTanuki.Level++;
+            lvlUpSoundFX.Play();
+        }
 
         playerLevelTxt.text = "Lvl. " + _playerTanuki.Level;
 

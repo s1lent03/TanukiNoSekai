@@ -35,6 +35,7 @@ public class HpBar : MonoBehaviour
         float timer = 0f;
         float startValue = xpSlider.value;
 
+
         while (timer < duration)
         {
             xpSlider.value = Mathf.Lerp(startValue, newXp, timer / duration);

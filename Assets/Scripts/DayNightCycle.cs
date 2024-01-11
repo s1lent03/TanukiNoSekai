@@ -26,6 +26,10 @@ public class DayNightCycle : MonoBehaviour
     public Material waterMaterial;
     public Material riverMaterial;
 
+    [Header("Trailer Vars")]
+    [SerializeField] float moonLightIntensity;
+    [SerializeField] bool stopTime;
+
     void Start()
     {
         sunLightData = Sun.GetComponent<HDAdditionalLightData>();
@@ -37,8 +41,10 @@ public class DayNightCycle : MonoBehaviour
     void Update()
     {
         //Timelapse
-        TimeHours += Time.deltaTime * timeGoBySpeed;
-        if (TimeHours >= 24)
+        if (!stopTime)
+            TimeHours += Time.deltaTime * timeGoBySpeed;
+
+        if (TimeHours >= 24 )
             TimeHours = 0;
 
 
@@ -57,7 +63,7 @@ public class DayNightCycle : MonoBehaviour
             sunLightData.EnableShadows(false);
 
             moonLightData.EnableShadows(true);
-            moonLightData.intensity = 0.5f;
+            moonLightData.intensity = moonLightIntensity;
             moonLightData.SetColor(SunColor, 20000f);
 
             //gameObject.GetComponent<Exposure>().active = true;

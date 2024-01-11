@@ -11,15 +11,21 @@ public class OpenDoor : MonoBehaviour
     [SerializeField] bool isOpen = false;
     public bool isRotating = false;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource openDoorSoundFx;
+    [SerializeField] AudioSource closeDoorSoundFx;
+
     public void OpenCloseDoor()
     {
         if (!isOpen && !isRotating)
         {
-            StartCoroutine(RotateObject(OpenRotation));            
+            StartCoroutine(RotateObject(OpenRotation));
+            openDoorSoundFx.Play();
         }
         else if (!isRotating)
         {
             StartCoroutine(RotateObject(CloseRotation));
+            closeDoorSoundFx.Play();
         }
     }
 

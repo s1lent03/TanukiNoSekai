@@ -54,6 +54,9 @@ public class TriggerDialog : MonoBehaviour
     private int lineIndex = 0;
     private float cooldown = 0f;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource healingSoundFX;
+
     private void Awake()
     {
         nameText.text = string.Empty;
@@ -201,6 +204,7 @@ public class TriggerDialog : MonoBehaviour
 
     IEnumerator Heal()
     {
+        healingSoundFX.Play();
         BlackScreen.DOColor(BlackScreenOn, 1f);
         yield return new WaitForSeconds(1f);
 

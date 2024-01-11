@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 4817113980672939276}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.231, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -124,7 +124,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.62, z: -0.09}
+  m_Center: {x: 0, y: 0.71, z: -0.09}
 --- !u!136 &2096378039089803001
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -145,9 +145,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.8245278
-  m_Height: 1.6490557
+  m_Height: 1.6591464
   m_Direction: 1
-  m_Center: {x: -2.6160407e-11, y: 0.6131083, z: -0.12611836}
+  m_Center: {x: 0, y: 0.6585168, z: -0.12611836}
 --- !u!114 &321297603593454202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
   chaseSpeed: 6
   tanukiAnimator: {fileID: 4388598910642099077}
   groundCheck: {fileID: 2902981400020210099}
-  groundDistance: 0.4
+  groundDistance: 0
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -217,7 +217,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7640149654293760511}
   m_Father: {fileID: 3568964781508283742}
@@ -248,7 +248,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 601b1d3703a556044ab7cc6aafd34f55,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9990483
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 601b1d3703a556044ab7cc6aafd34f55,
         type: 3}
@@ -258,7 +258,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 601b1d3703a556044ab7cc6aafd34f55,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.043619405
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 601b1d3703a556044ab7cc6aafd34f55,
         type: 3}
@@ -273,7 +273,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 601b1d3703a556044ab7cc6aafd34f55,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 601b1d3703a556044ab7cc6aafd34f55,
         type: 3}

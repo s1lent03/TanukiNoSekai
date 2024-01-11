@@ -17,6 +17,9 @@ public class Interact : MonoBehaviour
     [Header("Buying")]
     [SerializeField] TMP_Text currentMoneyText;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource buyingSoundFX;
+
     [Header("Others")]
     GameObject buyingInfoObject;
     string lastInfoName;
@@ -92,6 +95,8 @@ public class Interact : MonoBehaviour
                 //Se o jogador clicar no botão pretendido, irá ao script do objeto que faz com que o VFX seja ativado
                 if (playerInput.actions["Interact"].triggered)
                 {
+                    buyingSoundFX.Play();
+
                     if (otherObject.name == "BallLevel1Buy")
                     {
                         if (PlayerPrefs.GetInt("CurrentMoney") > 10)
