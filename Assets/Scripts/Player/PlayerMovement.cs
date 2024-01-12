@@ -94,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Others")]
     //Parar movimento se o jogo estiver em pausa
     public bool isPaused;
+    public bool chatCooldown;
     public GameObject pauseMenu;
     public Animator animator;
 
@@ -111,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        chatCooldown = false;
         characterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;

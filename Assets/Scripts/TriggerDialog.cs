@@ -88,16 +88,18 @@ public class TriggerDialog : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") && !didDialogueStart)
+        if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
-            player = null;
+
+            if (!player.GetComponent<PlayerMovement>().chatCooldown)
+                player = null;
         }
     }
 
     private void Update()
     {
-        if (didDialogueStart || !isPlayerInRange)
+        if (didDialogueStart || !isPlayerInRange || (player != null && player.GetComponent<PlayerMovement>().chatCooldown))
             notification.transform.DOScaleY(0, 0.25f);
         else
             notification.transform.DOScaleY(1, 0.25f);
@@ -109,20 +111,26 @@ public class TriggerDialog : MonoBehaviour
         {
             npcMov.freeze = didDialogueStart;
 
-            if (didDialogueStart)
+            if (player != null)
             {
                 Vector3 dir = player.position - npcMov.transform.position;
                 dir.y = 0;
-                npcMov.transform.rotation = Quaternion.LookRotation(dir);
+
+                if (!npcMov.freeze)
+                    notification.transform.parent.rotation = Quaternion.LookRotation(-dir);
+
+                if (didDialogueStart)
+                    npcMov.transform.rotation = Quaternion.LookRotation(dir);
             }
         }
 
         animator.SetBool(Animator.StringToHash("Talk"), didDialogueStart);
 
-        if ((isPlayerInRange || didDialogueStart) && player.GetComponent<PlayerInput>().actions["Interact"].IsPressed() && Time.timeScale == 1)
+        if (((isPlayerInRange && !player.GetComponent<PlayerMovement>().chatCooldown) || didDialogueStart) && player.GetComponent<PlayerInput>().actions["Interact"].IsPressed() && Time.timeScale == 1)
         {
             if (!didDialogueStart)
             {
+                player.GetComponent<PlayerMovement>().chatCooldown = true;
                 didDialogueStart = true;
                 dialogueCamera.Priority = 11;
                 dialoguePanel.DOAnchorPosY(150, 0.5f).SetEase(Ease.InOutSine);
@@ -182,7 +190,11 @@ public class TriggerDialog : MonoBehaviour
             if (cooldown >= cooldownTime || !isPlayerInRange)
             {
                 didDialogueStart = false;
+                player.GetComponent<PlayerMovement>().chatCooldown = false;
                 cooldown = 0f;
+
+                if (!isPlayerInRange)
+                    player = null;
             }
             else
             {
