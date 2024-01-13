@@ -216,6 +216,8 @@ public class TriggerDialog : MonoBehaviour
 
     IEnumerator Heal()
     {
+        player.GetComponent<PlayerMovement>().isPaused = true;
+
         healingSoundFX.Play();
         BlackScreen.DOColor(BlackScreenOn, 1f);
         yield return new WaitForSeconds(1f);
@@ -236,5 +238,7 @@ public class TriggerDialog : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         BlackScreen.DOColor(BlackScreenOff, 1f);
+
+        player.GetComponent<PlayerMovement>().isPaused = false;
     }
 }
