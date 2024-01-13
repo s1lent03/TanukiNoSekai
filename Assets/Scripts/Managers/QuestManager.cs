@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 // Lista com o tipo de quests que podem ser feitas
 public enum TypeOfQuests
@@ -61,6 +62,7 @@ public class Quest
     public float percentage; // Percentagem do progresso feito
     public string message; // Mensagem que irá aparecer a indicar a quest
     public Rewards reward; // Tipo de recompensa
+    public Image rewardIcon; // Icon de recompensa
     public int amount; // Quantidade da recompensa
     public GameObject questUI; // Painel com a quest
 
@@ -83,6 +85,7 @@ public class QuestManager : MonoBehaviour
 {
     // Variáveis
     public List<Quest> quests = new List<Quest>(); // Lista com as quests
+    public List<Sprite> rewardSprites = new List<Sprite>(); // Lista com os rewards sprites
     public TanukiParty tanukiParty; // Tanukis do jogador
     public GameObject questsMenu; // Lista das quests no jogo
     public GameObject questPrefab; // Prefab de um painel para uma quest
@@ -151,11 +154,29 @@ public class QuestManager : MonoBehaviour
         RectTransform progressBarSize = questProgressBar.GetComponent<RectTransform>(); // Tamanho da barra de progresso
         RectTransform questCurrentProgressBar = questProgressBar.Find("CurrentProgressBar").GetComponent<RectTransform>(); // Progresso na barra
         TMP_Text questProgressText = questProgressBar.Find("ProgressText").GetComponent<TMP_Text>(); // Progresso em texto
+        Image questReward = questPanel.Find("Reward").GetComponent<Image>();
 
         // Atualizar os valores
         questDescription.text = q.message;
         questCurrentProgressBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, q.percentage * progressBarSize.rect.width);
         questProgressText.text = q.progress + "/" + q.total;
+
+        if (q.reward == Rewards.NumberOfBall1)
+            questReward.sprite = rewardSprites[0];
+        else if (q.reward == Rewards.NumberOfBall2)
+            questReward.sprite = rewardSprites[1];
+        else if (q.reward == Rewards.NumberOfBall3)
+            questReward.sprite = rewardSprites[2];
+        else if (q.reward == Rewards.NumberOfBerry1)
+            questReward.sprite = rewardSprites[3];
+        else if (q.reward == Rewards.NumberOfBerry2)
+            questReward.sprite = rewardSprites[4];
+        else if (q.reward == Rewards.NumberOfBerry3)
+            questReward.sprite = rewardSprites[5];
+        else if (q.reward == Rewards.CurrentMoney)
+            questReward.sprite = rewardSprites[6];
+        else if (q.reward == Rewards.Experience)
+            questReward.sprite = rewardSprites[7];
     }
 
     // Função para adicionar uma nova quest
