@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930a721c296a8d243b12ec38d5f5ff76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: 1
+  gravity: 5
   speed: 3
   chaseSpeed: 6
   tanukiAnimator: {fileID: 5466163825663904906}
@@ -230,11 +230,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7941034480467543829}
     m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: e561e888db266a44fa8f5b447381b85e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e561e888db266a44fa8f5b447381b85e,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -310,12 +305,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 89.98
       objectReference: {fileID: 0}
-    - target: {fileID: 4993247010217307183, guid: e561e888db266a44fa8f5b447381b85e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: e561e888db266a44fa8f5b447381b85e,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6c3a2d543b45ae84cb80cb8713b790cc, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 4d0e29584e9ca394d9c9e8436d096001,
         type: 3}
       propertyPath: m_Controller
       value: 

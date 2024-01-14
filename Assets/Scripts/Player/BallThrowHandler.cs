@@ -10,6 +10,7 @@ public class BallThrowHandler : MonoBehaviour
 
     [SerializeField] Transform raycastOrigin;
     [SerializeField] float raycastDistance;
+    [SerializeField] GameObject particleEffect;
 
     void Update()
     {
@@ -35,6 +36,8 @@ public class BallThrowHandler : MonoBehaviour
         if (enemyTanuki.tag == "WildTanuki" && !hasHitGround && !hasHitTanuki)
         {
             hasHitTanuki = true;
+
+            Instantiate(particleEffect, collision.transform.position, Quaternion.identity, collision.transform);
 
             enemyTanuki.GetComponent<TanukiMovement>().angry = true;
 

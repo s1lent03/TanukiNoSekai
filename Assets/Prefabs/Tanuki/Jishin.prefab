@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930a721c296a8d243b12ec38d5f5ff76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: 1
+  gravity: 5
   speed: 3
   chaseSpeed: 6
   tanukiAnimator: {fileID: 1394800991782015541}
@@ -285,6 +285,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Model
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 4d4928ba4862a9b408b4574641e01529,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: d277f0a1f7b318d48ad0ebddb30c7a34, type: 2}
     - target: {fileID: 6905609870639353253, guid: 4d4928ba4862a9b408b4574641e01529,
         type: 3}
       propertyPath: m_Name

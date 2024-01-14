@@ -235,6 +235,11 @@ public class BattleSystem : MonoBehaviour
                 //Atualizar quests
                 GetComponent<QuestManager>().UpdateQuests(TypeOfQuests.Defeat, targetUnit.Tanuki.Base.Name);
 
+                if(targetUnit.gameObject.name == "YukatoriWat")
+                {
+                    Debug.Log("teste");
+                }
+
                 Destroy(TanukiDetector.GetComponent<TanukiDetection>().WildTanukiDetected);
                 TanukiDetector.GetComponent<TanukiDetection>().EndBattle();
             }

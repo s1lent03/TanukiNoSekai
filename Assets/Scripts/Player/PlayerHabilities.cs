@@ -48,6 +48,7 @@ public class PlayerHabilities : MonoBehaviour
     bool canDropNextBerry = true;
     [Space]
     [SerializeField] AudioSource eatSound;
+    [SerializeField] GameObject particleEffect;
 
     [Header("Party")]
     [SerializeField] GameObject eventSystemObject;
@@ -338,6 +339,8 @@ public class PlayerHabilities : MonoBehaviour
 
         if (rand <= currentBerryNum * 2)
         {
+            Instantiate(particleEffect, tanuki.transform.position, Quaternion.identity, tanuki.transform);
+
             if (gameObject.GetComponent<TanukiParty>().Tanukis.Count == 5)
             {
                 //Impedir o tanuki de atacar
