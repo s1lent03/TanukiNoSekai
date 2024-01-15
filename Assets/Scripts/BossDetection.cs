@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BossDetection : MonoBehaviour
 {
+    [SerializeField] Vector3 newRotation;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.name == "Character")
@@ -17,5 +19,10 @@ public class BossDetection : MonoBehaviour
         {
             Destroy(gameObject.transform.parent.transform.Find("YukatoriPsy(Clone)").gameObject);
         }
+    }
+
+    void Update()
+    {
+        transform.rotation = Quaternion.Euler(newRotation);
     }
 }

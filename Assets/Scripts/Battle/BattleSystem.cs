@@ -237,7 +237,23 @@ public class BattleSystem : MonoBehaviour
 
                 if(targetUnit.gameObject.name == "YukatoriWat")
                 {
-                    Debug.Log("teste");
+                    PlayerPrefs.SetString("HasBeenDefeated1", "True");
+                }
+                else if (targetUnit.gameObject.name == "YukatoriFir")
+                {
+                    PlayerPrefs.SetString("HasBeenDefeated2", "True");
+                }
+                else if (targetUnit.gameObject.name == "YukatoriGra")
+                {
+                    PlayerPrefs.SetString("HasBeenDefeated3", "True");
+                }
+                else if (targetUnit.gameObject.name == "YukatoriPsy")
+                {
+                    PlayerPrefs.SetString("HasBeenDefeated4", "True");
+                }
+                else if (targetUnit.gameObject.name == "YukatoriLit")
+                {
+                    PlayerPrefs.SetString("HasBeenDefeated5", "True");
                 }
 
                 Destroy(TanukiDetector.GetComponent<TanukiDetection>().WildTanukiDetected);
