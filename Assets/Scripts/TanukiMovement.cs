@@ -31,6 +31,7 @@ public class TanukiMovement : MonoBehaviour
     private float height = 0f;
     private Vector3 startPosition;
     private Vector3 nextPosition;
+    private float timeToGetToPoint = 0f;
 
     private void Awake()
     {
@@ -55,9 +56,10 @@ public class TanukiMovement : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(lookDir);
             } else
             {
-                if (Mathf.Round(transform.position.x) == Mathf.Round(nextPosition.x) && Mathf.Round(transform.position.z) == Mathf.Round(nextPosition.z))
+                if ((Mathf.Round(transform.position.x) == Mathf.Round(nextPosition.x) && Mathf.Round(transform.position.z) == Mathf.Round(nextPosition.z)) || timeToGetToPoint > 5)
                 {
                     NewPosition();
+                    timeToGetToPoint = 0f;
                 }
 
                 Vector3 lookPosition = nextPosition;
@@ -67,6 +69,7 @@ public class TanukiMovement : MonoBehaviour
 
                 characterController.Move((nextPosition - transform.position).normalized * speed * Time.deltaTime);
                 transform.rotation = Quaternion.LookRotation(lookDir);
+                timeToGetToPoint += Time.deltaTime;
             }
 
             tanukiAnimator.SetBool(Animator.StringToHash("Moving"), true);
