@@ -34,12 +34,19 @@ public class GameManager : MonoBehaviour
     {
         //Verifica se existe o ficheiro que guarda a save do jogo, se não cria - o
         string filePath = Application.dataPath + saveFileName;
+        Debug.Log(filePath);
         if (!File.Exists(filePath))
-        {
+        {            
             PlayerPrefs.SetInt("CurrentMoney", 500);
             PlayerPrefs.SetInt("NumberOfBerry1", 5);
             PlayerPrefs.SetInt("NumberOfBall1", 10);
             PlayerPrefs.SetInt("NumberOfPotion1", 5);
+
+            PlayerPrefs.SetString("HasBeenDefeated1", "False");
+            PlayerPrefs.SetString("HasBeenDefeated2", "False");
+            PlayerPrefs.SetString("HasBeenDefeated3", "False");
+            PlayerPrefs.SetString("HasBeenDefeated4", "False");
+            PlayerPrefs.SetString("HasBeenDefeated5", "False");
 
             string[] contentFire =
             {

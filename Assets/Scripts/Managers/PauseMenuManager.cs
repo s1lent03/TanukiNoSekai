@@ -30,7 +30,7 @@ public class PauseMenuManager : MonoBehaviour
     public AudioSource buttonClickSoundFX;
 
     [Header("Others")]
-    private PlayerInput playerInput;
+    public PlayerInput playerInput;
     public GameObject Player;
     public bool isPaused = false;
 
@@ -40,7 +40,7 @@ public class PauseMenuManager : MonoBehaviour
         audioMenu.GetComponent<AudioMenuManager>().UpdateMixersBasedOnFile();
 
         //Dar um valor default às variaveis
-        playerInput = GetComponent<PlayerInput>();
+        //playerInput = GetComponent<PlayerInput>();
 
         if (lastSelectedObject == null)
         {
@@ -53,7 +53,7 @@ public class PauseMenuManager : MonoBehaviour
         //Parar o jogo ou recomeçar
         if (playerInput.actions["Pause"].triggered && !isPaused && !Player.GetComponentInChildren<TanukiDetection>().isInBattle && !gameObject.GetComponent<ControllerManager>().isPlayerInBattle)
         {
-            //Abre o menu
+            //Abre o menu 
             pauseMenu.SetActive(true);
             isPaused = true;
             Player.GetComponent<PlayerMovement>().isPaused = isPaused;

@@ -17,6 +17,9 @@ public class AudioMenuManager : MonoBehaviour
     [SerializeField] AudioMixer AmbienceMixer;
     [SerializeField] AudioMixer SoundFxMixer;
 
+    [Header("Others")]
+    [SerializeField] string settingsFileName;
+
     public void OnMusicSliderValueChanged()
     {
         MusicMixer.SetFloat("MusicVolume", MusicSlider.value);
@@ -34,7 +37,7 @@ public class AudioMenuManager : MonoBehaviour
 
     public void UpdateSlidersBasedOnFile()
     {
-        string path = PlayerPrefs.GetString("SettingsPath");
+        string path = Application.dataPath + settingsFileName;
         string[] lines = File.ReadAllLines(path);
 
         for (int lineNumber = 2; lineNumber <= 4; lineNumber++)
@@ -63,7 +66,7 @@ public class AudioMenuManager : MonoBehaviour
 
     public void UpdateMixersBasedOnFile()
     {
-        string path = PlayerPrefs.GetString("SettingsPath");
+        string path = Application.dataPath + settingsFileName;
         string[] lines = File.ReadAllLines(path);
 
         for (int lineNumber = 2; lineNumber <= 4; lineNumber++)
@@ -92,7 +95,7 @@ public class AudioMenuManager : MonoBehaviour
 
     public void SaveMixerValues()
     {
-        string path = PlayerPrefs.GetString("SettingsPath");
+        string path = Application.dataPath + settingsFileName;
         string[] lines = File.ReadAllLines(path);
 
         for (int lineNumber = 2; lineNumber <= 4; lineNumber++)
