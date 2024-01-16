@@ -105,7 +105,7 @@ public class PlayerHabilities : MonoBehaviour
     void Update()
     {
         //Sacar lanterna
-        if (playerInput.actions["Lantern"].triggered)
+        if (playerInput.actions["Lantern"].triggered && !Managers.GetComponent<ControllerManager>().isPlayerInBattle)
         {
             StartCoroutine(ToggleLight());
         }

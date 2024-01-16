@@ -53,26 +53,29 @@ public class ControllerManager : MonoBehaviour
             Cursor.visible = false;
         }
 
-        //Se o jogador estiver em batalha trocar para camera de batalha
-        if (playerInput.actions["SwitchBattleCamera"].triggered || switchCam && isPlayerInBattle)
+        //Se o jogador estiver em batalha trocar para camera de batalha 
+        if (playerInput.actions["SwitchBattleCamera"].triggered || switchCam)
         {
-            if (currentCameraNumber == 0)
+            if (isPlayerInBattle)
             {
-                ChangeToBattleCamera();
-            }
-            else if (currentCameraNumber == 1)
-            {
-                currentCameraNumber = 2;
-                thirdPersonCamera.Priority = 5;
-                BattleCamera1.Priority = 5;
-                BattleCamera2.Priority = 10;
-            }
-            else if (currentCameraNumber == 2)
-            {
-                DefaultCameraValues();
-            }
+                if (currentCameraNumber == 0)
+                {
+                    ChangeToBattleCamera();
+                }
+                else if (currentCameraNumber == 1)
+                {
+                    currentCameraNumber = 2;
+                    thirdPersonCamera.Priority = 5;
+                    BattleCamera1.Priority = 5;
+                    BattleCamera2.Priority = 10;
+                }
+                else if (currentCameraNumber == 2)
+                {
+                    DefaultCameraValues();
+                }
 
-            switchCam = false;
+                switchCam = false;
+            }            
         }
     }
 
