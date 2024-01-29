@@ -1,6 +1,8 @@
 # Tanuki No Sekai
 
+
+
 ## Trailer
 
-https://github.com/s1lent03/TanukiNoSekai/assets/100197427/ef031c0a-c4a1-443a-8780-0d89358de82d
+https://github.com/s1lent03/TanukiNoSekai/assets/100197427/29abf396-00b0-4a6f-b173-3ba5a3a5dba1
 
