@@ -1,6 +1,6 @@
 # Tanuki No Sekai
 
-
+Tanuki no Sekai (translated to Tanuki World) is a creature catching, RPG & Turn-based Strategy game, where the main objective is to liberate all 5 towns from the evil alien Tanukis.
 
 ## Trailer
 
