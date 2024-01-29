@@ -20,5 +20,5 @@ To battle a wild Tanuki the player either hits it with a Catching Ball and it do
 
 ### Day-night Cycle
 
-![2024-01-29 16-01-13](https://github.com/s1lent03/TanukiNoSekai/assets/100197427/7f27253c-bc34-4998-9c3a-c1615c04cab0)
 The day-night cycle works with an in-game timer, but it can also work with the user's system current time.
+![2024-01-29 16-01-13](https://github.com/s1lent03/TanukiNoSekai/assets/100197427/7f27253c-bc34-4998-9c3a-c1615c04cab0)
